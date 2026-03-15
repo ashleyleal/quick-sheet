@@ -84,110 +84,195 @@ def order_blocks(notes_data: dict, exam_topic_ranking: list[tuple[str, int]]) ->
 
 # ── Prompt ───────────────────────────────────────────────────────────────────
 
-LATEX_SYSTEM_PROMPT = """You are a LaTeX typesetter producing a university exam cheatsheet.
+# Document wrapper
+LATEX_HEADER = r"""\documentclass[8pt]{extarticle}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[paper=letterpaper,landscape,top=0.3in,bottom=0.3in,left=0.3in,right=0.3in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath,amssymb,textcomp}
+\DeclareUnicodeCharacter{03D5}{$\phi$}
+\DeclareUnicodeCharacter{03C6}{$\phi$}
+\DeclareUnicodeCharacter{03B1}{$\alpha$}
+\DeclareUnicodeCharacter{03B2}{$\beta$}
+\DeclareUnicodeCharacter{03B3}{$\gamma$}
+\DeclareUnicodeCharacter{03B4}{$\delta$}
+\DeclareUnicodeCharacter{03B5}{$\epsilon$}
+\DeclareUnicodeCharacter{03B7}{$\eta$}
+\DeclareUnicodeCharacter{03B8}{$\theta$}
+\DeclareUnicodeCharacter{03BB}{$\lambda$}
+\DeclareUnicodeCharacter{03BC}{$\mu$}
+\DeclareUnicodeCharacter{03C1}{$\rho$}
+\DeclareUnicodeCharacter{03C3}{$\sigma$}
+\DeclareUnicodeCharacter{03C8}{$\psi$}
+\DeclareUnicodeCharacter{03C9}{$\omega$}
+\DeclareUnicodeCharacter{03A3}{$\Sigma$}
+\DeclareUnicodeCharacter{03A0}{$\Pi$}
+\setlength{\columnsep}{0.15in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\raggedright
+\begin{document}
+\scriptsize
+"""
 
-You will receive a list of CONTENT BLOCKS tagged as [Topic] (type): content.
+LATEX_FOOTER = r"""
+\end{multicols}
+\end{document}
+"""
 
-YOUR ONLY JOB: convert every single block into compact LaTeX. Do NOT skip, merge, or omit any block.
-Every block must appear in the output. If it is a formula put it in math mode. If it is a definition or concept keep it to one tight line.
-
-DOCUMENT SETUP — use exactly this header:
-\\documentclass[7pt]{{extarticle}}
-\\usepackage[letterpaper,landscape,top=0.25in,bottom=0.25in,left=0.25in,right=0.25in]{{geometry}}
-\\usepackage{{multicol,amsmath,amssymb}}
-\\setlength{{\\columnsep}}{{0.15in}}
-\\setlength{{\\parskip}}{{0pt}}
-\\setlength{{\\parindent}}{{0pt}}
-\\pagestyle{{empty}}
-\\begin{{document}}
-\\scriptsize
-\\begin{{multicols}}{{{columns}}}
-
-FORMATTING RULES:
-- Group consecutive blocks sharing the same topic under one bold header: \\textbf{{Topic}}\\newline
-- Do NOT repeat a topic header if consecutive blocks share it
-- Formulas: always use $...$ inline math — never plain text for math symbols
-- One line per block — no blank lines between blocks within a topic
-- Between topic groups: \\vspace{{2pt}} before the next bold header
-- Do NOT add content that was not in the input
-- Do NOT skip any block no matter how minor
-
-END the document with:
-\\end{{multicols}}
-\\end{{document}}
-
-OUTPUT: raw LaTeX only — no markdown fences, no explanation, nothing before \\documentclass."""
-
-# ── Step 3: Build LLM prompt ──────────────────────────────────────────────────
-
-# Prompt for converting a batch of blocks into LaTeX column content
-CHUNK_PROMPT = r"""\
-Convert the content blocks below into raw LaTeX lines for a dense cheatsheet column.
+# ── Chunk prompt ──────────────────────────────────────────────────────────────
+# NOTE: Rules carefully prevent the "$formula$\Word" class of errors seen in the log:
+#   - Every block MUST end with \\
+#   - After a closing $, always insert a space or \\ before any word
+#   - No text may immediately follow a closing $ on the same line
+CHUNK_PROMPT = r"""Convert the content blocks below into raw LaTeX lines for a dense cheatsheet column.
 Output ONLY LaTeX — no markdown fences, no explanation, nothing else.
 
 STRICT RULES:
-- Include EVERY block — do not skip any
-- Topic headers: \vspace{2pt}\textbf{Topic Name}\\
-- Do NOT repeat a topic header if consecutive blocks share the same topic
-- Formulas: use $...$ inline math — all math symbols must be inside $...$
-- Plain text must NOT contain unescaped special chars:
-  - Underscores outside math: \_{}  e.g. self\_conv1
-  - Curly braces outside math: \{ and \}
-  - Percent: \%   Ampersand: \&   Hash: \#
-  - Caret outside math: \^{}   Tilde: \textasciitilde{}
-- Code/identifiers: wrap in \texttt{...}, escape underscores inside
-- Each block ends with \\
-- No \section, \begin, \end, \documentclass — raw column content only
+1. Include EVERY block — do not skip any.
+2. Topic headers: \vspace{{2pt}}\textbf{{Topic Name}}\\
+   - Do NOT repeat a topic header if consecutive blocks share the same topic.
+   - Always close \textbf with exactly one closing brace: \textbf{{...}}
+3. Each block MUST end with \\ on the same line — no exceptions.
+4. CRITICAL — math/text boundary: after a closing $ there MUST be either a space
+   or \\ before any following word. NEVER write $formula$\Word or $formula$Word.
+   Correct: $formula$ word here\\
+   Wrong:   $formula$\Word or $formula$Word
+5. Formulas: use $...$ inline math — all math symbols must be inside $...$
+6. Plain text must NOT contain unescaped special chars:
+   - Underscores outside math: \_  e.g. self\_conv1
+   - Curly braces outside math: \{{ and \}}
+   - Percent: \%   Ampersand: \&   Hash: \#
+   - Caret outside math: \^{{}}   Tilde: \textasciitilde{{}}
+7. Code/identifiers: wrap in \texttt{{...}}, escape underscores inside.
+8. No \section, \begin, \end, \documentclass — raw column content only.
+9. Braces must be balanced — every \textbf{{ must have a matching }}.
 
 Blocks:
 {blocks}
 """
 
-# Document wrapper
-LATEX_HEADER = """\\documentclass[8pt]{{extarticle}}
-\\usepackage[paper=letterpaper,landscape,top=0.3in,bottom=0.3in,left=0.3in,right=0.3in]{{geometry}}
-\\usepackage{{multicol}}
-\\usepackage{{amsmath,amssymb}}
-\\setlength{{\\columnsep}}{{0.15in}}
-\\setlength{{\\parindent}}{{0pt}}
-\\begin{{document}}
-\\scriptsize
-\\begin{{multicols}}{{{columns}}}
-"""
-
-LATEX_FOOTER = """\\end{{multicols}}
-\\end{{document}}
-"""
 
 def sanitize_for_latex(text: str) -> str:
-    """
-    Escape characters that break LaTeX when appearing in plain text context.
-    Math content (detected by $ delimiters) is left untouched.
-    """
-    # Split on $ to alternate between text and math regions
+    """Normalize Unicode and escape LaTeX special chars in plain text regions."""
+
+    # Unicode normalization — replace chars pdflatex cannot handle
+    replacements = [
+        ("\u202f", " "),           # narrow no-break space
+        ("\u00a0", " "),           # non-breaking space
+        ("\u2013", "--"),           # en dash
+        ("\u2014", "---"),          # em dash
+        ("\u2011", "-"),            # non-breaking hyphen
+        ("\u2010", "-"),            # hyphen
+        ("\u2018", "`"),            # left single quote
+        ("\u2019", "'"),            # right single quote
+        ("\u201c", "``"),           # left double quote
+        ("\u201d", "''"),           # right double quote
+        ("\u2022", r"\textbullet{}"),
+        ("\u2026", r"\ldots{}"),
+        ("\u2192", r"$\rightarrow$"),
+        ("\u2190", r"$\leftarrow$"),
+        ("\u21d2", r"$\Rightarrow$"),
+        ("\u21d0", r"$\Leftarrow$"),
+        ("\u00d7", r"$\times$"),
+        ("\u00f7", r"$\div$"),
+        ("\u2260", r"$\neq$"),
+        ("\u2264", r"$\leq$"),
+        ("\u2265", r"$\geq$"),
+        ("\u221e", r"$\infty$"),
+        ("\u2208", r"$\in$"),
+        ("\u2209", r"$\notin$"),
+        ("\u2207", r"$\nabla$"),
+        ("\u2211", r"$\sum$"),
+        ("\u220f", r"$\prod$"),
+        ("\u03b1", r"$\alpha$"),
+        ("\u03b2", r"$\beta$"),
+        ("\u03b3", r"$\gamma$"),
+        ("\u03b4", r"$\delta$"),
+        ("\u03b5", r"$\epsilon$"),
+        ("\u03b7", r"$\eta$"),
+        ("\u03b8", r"$\theta$"),
+        ("\u03bb", r"$\lambda$"),
+        ("\u03bc", r"$\mu$"),
+        ("\u03c1", r"$\rho$"),
+        ("\u03c3", r"$\sigma$"),
+        # FIX: both phi codepoints (U+03C6 lowercase, U+03D5 phi symbol)
+        ("\u03c6", r"$\phi$"),
+        ("\u03d5", r"$\phi$"),
+        ("\u03c8", r"$\psi$"),
+        ("\u03c9", r"$\omega$"),
+        ("\u03a3", r"$\Sigma$"),
+        ("\u03a0", r"$\Pi$"),
+    ]
+    for uni, latex in replacements:
+        text = text.replace(uni, latex)
+
+    # If the text contains unbalanced $ signs, it's likely already-formed LaTeX
+    # or has inline math we can't safely split — skip plain-text escaping
+    dollar_count = text.count("$")
+    if dollar_count % 2 != 0:
+        # Unbalanced: just escape the bare minimum that breaks LaTeX outside math
+        text = text.replace("%", r"\%")
+        return text
+
+    # Split on $ to alternate text/math regions
     parts = text.split("$")
     result = []
     for i, part in enumerate(parts):
         if i % 2 == 1:
-            # Inside math — leave untouched, just wrap back in $
+            # Inside math — leave completely untouched, ^ ~ _ are valid here
             result.append("$" + part + "$")
         else:
-            # Plain text — escape LaTeX special chars
-            part = part.replace("\\", "\\textbackslash{}")  # must be first
-            part = part.replace("%",  "\\%")
-            part = part.replace("&",  "\\&")
-            part = part.replace("#",  "\\#")
-            part = part.replace("^",  "\\^{}")
-            part = part.replace("~",  "\\textasciitilde{}")
-            # Curly braces only if not already LaTeX commands
-            # Replace lone { and } that aren't part of \cmd{
-            import re
-            part = re.sub(r'(?<!\\)\{', '\\{', part)
-            part = re.sub(r'(?<!\\)\}', '\\}', part)
-            # Underscore outside math
-            part = re.sub(r'(?<!\\)_', '\\_{}', part)
+            # Plain text — escape chars that break LaTeX
+            part = part.replace("%",  r"\%")
+            part = part.replace("&",  r"\&")
+            part = part.replace("#",  r"\#")
+            # ^ and ~ only safe to escape in text mode, NOT in math
+            part = part.replace("^",  r"\textasciicircum{}")
+            part = part.replace("~",  r"\textasciitilde{}")
+            # Underscores in plain text
+            part = part.replace("_",  r"\_")
             result.append(part)
     return "".join(result)
+
+
+def clean_llm_latex(text: str) -> str:
+    r"""Fix common LLM output mistakes that cause pdflatex errors."""
+    import re
+
+    # FIX 1: "$formula$\Word" → "$formula$ \Word" (the root cause of most log errors)
+    # After closing $, if next char is \ followed by letters (not a known LaTeX cmd
+    # starter like \\, \vspace, \textbf, \newline), insert a space.
+    # Strategy: insert space between $ and \ when \ starts a capitalized word-like token
+    text = re.sub(r'\$([^$\n]+\$)(\\)([A-Z][a-zA-Z]*)', r'$\1 \3', text)
+    # Also handle: $formula$Word (no backslash, just plain word immediately after $)
+    text = re.sub(r'(\$[^$\n]+\$)([A-Za-z])', r'\1 \2', text)
+
+    # FIX 2: math broken across lines: "$\\\npsi$" -> "$\psi$"
+    text = re.sub(r'\$\s*\\\\\s*\n\s*([a-zA-Z])', r'$\\\1', text)
+
+    # FIX 3: double-backslash inside $...$: $\\cmd$ -> $\cmd$
+    def fix_math_escapes(m):
+        inner = m.group(1)
+        inner = re.sub(r'\\\\([a-zA-Z])', r'\\\1', inner)
+        return '$' + inner + '$'
+    text = re.sub(r'\$([^$\n]+)\$', fix_math_escapes, text)
+
+    # FIX 4: double braces: \end{{multicols}} -> \end{multicols}
+    text = re.sub(r'\\(begin|end)\{\{(\w+)\}\}', r'\\\1{\2}', text)
+
+    # FIX 5: lone \\ on its own line (causes "no line to end" error)
+    text = re.sub(r'^\s*\\\\\s*$', '', text, flags=re.MULTILINE)
+
+    # FIX 6: unclosed \textbf{ — detect \textbf{...} that never closes before \\
+    # Replace \textbf{content\\ with \textbf{content}\\
+    text = re.sub(r'(\\textbf\{[^}\\]*)(\\\\)', r'\1}\2', text)
+
+    # FIX 7: \textbf{{double braces}} -> \textbf{single}
+    text = re.sub(r'\\textbf\{\{([^}]*)\}\}', r'\\textbf{\1}', text)
+
+    return text
 
 
 def blocks_to_lines(ordered_blocks: list) -> list[str]:
@@ -260,8 +345,7 @@ def call_llm(system_prompt: str, user_prompt: str) -> str:
             break
 
         if finish == "stop":
-            # Model stopped but no \end{document} — likely a formatting issue, not truncation
-            print("  [llm] WARNING: finished without \\\\end{document} — appending closing tags")
+            print("  [llm] WARNING: finished without \\end{document} — appending closing tags")
             full_content += "\n\\end{multicols}\n\\end{document}\n"
             break
 
@@ -383,12 +467,11 @@ def main():
     chunks    = chunk_lines(all_lines, chunk_words=500)
     print(f"  {len(all_lines)} input lines → {len(chunks)} chunk(s)")
 
-    system_prompt = CHUNK_PROMPT.format(columns=args.columns) if "{columns}" in CHUNK_PROMPT else CHUNK_PROMPT
     body_parts = []
 
     for i, chunk in enumerate(chunks, start=1):
         block_text = "\n".join(chunk)
-        user_msg   = CHUNK_PROMPT.replace("{blocks}", block_text).replace("{columns}", str(args.columns))
+        user_msg   = CHUNK_PROMPT.format(blocks=block_text, columns=args.columns)
         word_count = len(user_msg.split())
         print(f"  chunk {i}/{len(chunks)}: {len(chunk)} lines, {word_count} words...", end=" ", flush=True)
 
@@ -402,13 +485,14 @@ def main():
         finish    = response.choices[0].finish_reason
         # Strip any accidental fences
         raw_chunk = raw_chunk.replace("```latex", "").replace("```tex", "").replace("```", "").strip()
+        raw_chunk = clean_llm_latex(raw_chunk)
         body_parts.append(raw_chunk)
         print(f"{len(raw_chunk)} chars (finish: {finish})")
 
     # Assemble final document
-    header = LATEX_HEADER.format(columns=args.columns)
+    multicols_begin = f"\\begin{{multicols}}{{{args.columns}}}\n"
     body   = "\n\n".join(body_parts)
-    latex  = header + "\n" + body + "\n" + LATEX_FOOTER
+    latex  = LATEX_HEADER + multicols_begin + "\n" + body + "\n" + LATEX_FOOTER
     print(f"  Total LaTeX: {len(latex)} chars across {len(body_parts)} chunk(s)")
 
     # ── Save to COURSE_DIR/generated/ ────────────────────────────────────────

@@ -1,0 +1,1157 @@
+\documentclass[8pt]{extarticle}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[paper=letterpaper,landscape,top=0.3in,bottom=0.3in,left=0.3in,right=0.3in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath,amssymb,textcomp}
+\DeclareUnicodeCharacter{03D5}{$\phi$}
+\DeclareUnicodeCharacter{03C6}{$\phi$}
+\DeclareUnicodeCharacter{03B1}{$\alpha$}
+\DeclareUnicodeCharacter{03B2}{$\beta$}
+\DeclareUnicodeCharacter{03B3}{$\gamma$}
+\DeclareUnicodeCharacter{03B4}{$\delta$}
+\DeclareUnicodeCharacter{03B5}{$\epsilon$}
+\DeclareUnicodeCharacter{03B7}{$\eta$}
+\DeclareUnicodeCharacter{03B8}{$\theta$}
+\DeclareUnicodeCharacter{03BB}{$\lambda$}
+\DeclareUnicodeCharacter{03BC}{$\mu$}
+\DeclareUnicodeCharacter{03C1}{$\rho$}
+\DeclareUnicodeCharacter{03C3}{$\sigma$}
+\DeclareUnicodeCharacter{03C8}{$\psi$}
+\DeclareUnicodeCharacter{03C9}{$\omega$}
+\DeclareUnicodeCharacter{03A3}{$\Sigma$}
+\DeclareUnicodeCharacter{03A0}{$\Pi$}
+\setlength{\columnsep}{0.15in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\raggedright
+\begin{document}
+\scriptsize
+\begin{multicols}{4}
+
+\vspace{2pt}\textbf{Training}\\
+Training alternates between updating the discriminator and updating the generator.\\
+GAN training curves are noisy; losses of generator and discriminator tend to bounce up and down because both models change simultaneously.\\
+Hyperparameter tuning is more difficult for GANs because traditional supervised learning training curves are less informative.\\
+\vspace{2pt}\textbf{Attention}\\
+$c_i = \sum_{j} \alpha_{ij} h_j$\Words within the tweet are weighted using a softmax; each embedding is multiplied by its normalized score and summed to produce a context vector.\\
+The network is trained end-to-end together with the classifier.\\
+\vspace{2pt}\textbf{Attention Mechanism}\\
+$e_{ij} = \texttt{NN}(h_i, h_j)$\\
+$\alpha_{ij} = \frac{\exp(e_{ij})}{\sum_{k \in N_i} \exp(e_{ik})}$\\
+$h_i = \sigma\left( \sum_{j \in N_i} \alpha_{ij} W h_j \right)$\Attention is a mechanism where the network learns an attention score indicating the importance of different parts of the data, allowing the model to focus on salient regions.\\
+Human visual attention focuses on high-resolution regions while paying less attention to surrounding areas, analogous to attention scores in models.\\
+\vspace{2pt}\textbf{Autoencoder}\\
+An autoencoder consists of an encoder that converts inputs to a lower-dimensional representation (encoding) and a decoder that reconstructs the original data from this encoding. The number of outputs equals the number of inputs, forming a bottleneck layer.\\
+\vspace{2pt}\textbf{Confusion Matrix}\\
+Tabular representation that displays counts of True Positive (TP), False Positive (FP), True Negative (TN), and False Negative (FN) predictions of a classification model.\\
+Accuracy is only reliable for balanced class distributions; for unbalanced datasets, other metrics such as F1 Score should be used.\\
+\vspace{2pt}\textbf{Encoder}\\
+The encoder converts the inputs to an internal representation, performing dimensionality reduction.\\
+\vspace{2pt}\textbf{Graph}\\
+Graph: a mathematical structure consisting of nodes (vertices) and edges (connections) that represent relationships or connections between the nodes.\\
+\vspace{2pt}\textbf{Loss Function}\\
+Computes how bad predictions are compared to the ground truth labels. A large loss means the network's predictions differ from the ground truth; a small loss means the predictions match the ground truth. Typically calculated as the average error over all training samples.\\
+Binary Cross-Entropy loss: \texttt{BCE} = -[y·log(p) + (1-y)·log(1-p)], where y is the true label and p is the predicted probability.\\
+Loss Function\\
+\vspace{2pt}\textbf{Loss function}\\
+A loss function quantifies reconstruction error between the input and output.\\
+\vspace{2pt}\textbf{Loss Function}\\
+The discriminator learns weights to maximize the probability of correctly labeling real images as real and generated images as fake.\\
+Since the discriminator outputs a binary decision, the optimal loss function for it is Binary Cross-Entropy.\\
+\vspace{2pt}\textbf{Loss functions}\\
+Loss functions are used to determine the accuracy of a model by comparing model outputs with target values.\\
+\vspace{2pt}\textbf{Mode Collapse}\\
+A failure mode where the generator produces a limited variety of outputs (e.g., the same digit repeatedly) because the discriminator can be fooled by a narrow set of generated samples, especially if the discriminator is trapped in a local optimum.\\
+
+The discriminator may become highly effective at detecting specific categories but not others, allowing the generator to exploit this weakness by repeatedly generating a single type of data.\\
+Newer GAN variants mitigate mode collapse by feeding the discriminator a small batch of real or fake samples instead of a single sample, enabling the discriminator to assess the diversity of the set as a feature for real/fake determination.\\
+\vspace{2pt}\textbf{Parameter Counting}\\
+$441 = (20*10 + 10) + (10*10 + 10) + (10*10 + 10) + (10*1 + 1)$\Number of weights for a fully-connected layer = Input size $\times$ Number of neurons + Bias term (one bias per neuron).\\
+\vspace{2pt}\textbf{Scaled Dot-Product Attention}\\
+$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{Q K\textasciicircum{}{T}}{\sqrt{d\_k}}\right) V$\Self-attention in Transformers is defined as scaled dot-product attention, which computes attention weights using the dot product of queries and keys, scales by the square root of the key dimension, applies a softmax, and then multiplies by the values.\\
+\vspace{2pt}\textbf{Self-Attention}\\
+Computes attention of the input with respect to itself; for a given token, attention weights are computed for all other tokens in the same sequence (also called intra-attention).\\
+\vspace{2pt}\textbf{Stride}\\
+Stride: the distance between two consecutive positions of the kernel during convolution. Stride controls the spatial resolution of the output feature map.\\
+\vspace{2pt}\textbf{2D Projections}\\
+Visualization methods like PCA and t-SNE that project high-dimensional data into 2D to reveal class clusters and assess model performance.\\
+\vspace{2pt}\textbf{Activation Function}\\
+The activation function determines how the output changes with the sum of all weight-input products.\\
+\vspace{2pt}\textbf{Activation Functions}\\
+$\text{ReLU}(x) = (x)^{+} = \max(0, x)$\\
+$\text{LeakyReLU}(x) = \{\, x \text{ if } x \ge 0; \text{negative slope}\cdot x \text{ otherwise } \}$\\
+$\text{PReLU}(x) = \{\, x \text{ if } x \ge 0; a\cdot x \text{ otherwise } \}$\\
+$\text{SiLU}(x) = x\cdot\sigma(x) = \frac{x}{1 + e^{-x}}$\\
+$\text{SoftPlus}(x) = \frac{1}{\beta}\,\log\!\bigl(1 + e^{\beta x}\bigr)$\ReLU introduces non-linearity and helps with the vanishing gradient problem.\\
+Leaky ReLU addresses potential issues of inactive neurons during training.\\
+ReLU derivatives are 0 or 1; use 0 at x = 0.\\
+Continuous approximations like SiLU and SoftPlus mitigate vanishing gradient, dead neurons, lack of smoothness, and noise sensitivity, offering improved stability and optimization dynamics.\\
+All activation functions used in modern neural networks trained with backpropagation are both differentiable and non-linear.\\
+\vspace{2pt}\textbf{Adam}\\
+Adam (Adaptive Moment Estimation): Combines adaptive learning rates for each parameter and momentum-like behavior. Use when training deep neural networks with diverse architectures. Pros: Fast convergence, adaptive learning rates, well-suited for complex models.\\
+\vspace{2pt}\textbf{Adaptive Moment Estimation (Adam)}\\
+$\alpha$:\ Learning rate\\
+$\nabla J(\theta\_t)$:\ Gradient of the cost (loss) function J with respect to the parameters $\theta$ at time step t\\
+$\theta\_{t+1}$:\ Updated parameters at time step t+1\\
+$\theta\_t$:\ Parameters at time step t\\
+
+Adaptive Moment Estimation: a popular optimization algorithm used for tuning the parameters of a model during training. It combines concepts from both Adaptive Gradient Algorithm (AdaGrad) and Root Mean Square Propagation (RMSProp) to adaptively adjust learning rates for each parameter. This helps achieve efficient and stable convergence by individually adapting the learning rates while also incorporating momentum-based updates.\\
+Adaptive learning rates $\rightarrow$ each weight has its own rate\\
+Incorporates momentum and adaptive learning rate: rapid convergence, requires minimal tuning, commonly used optimizer\\
+\vspace{2pt}\textbf{Adjacency Matrix}\\
+Adjacency matrix is a binary matrix where 1 indicates a connection between nodes and 0 indicates no connection.\\
+\vspace{2pt}\textbf{Adversarial Attack Concepts}\\
+The perturbation $\epsilon$ is treated as the set of parameters to be optimized for creating adversarial examples.\\
+\vspace{2pt}\textbf{Adversarial Attacks}\\
+$f(x + \epsilon) \neq \text{true label of } x$\Adversarial Attack: a deliberate manipulation of input data, typically to machine learning models, with the goal of causing the model to make incorrect predictions or classifications. These manipulations are often small, imperceptible changes designed to exploit vulnerabilities in the model's decision boundaries and undermine its accuracy and reliability.\\
+Goal of an adversarial attack: choose a small perturbation $\epsilon$ on an image $ x$ so that a neural network $ f$ misclassifies $ x+\epsilon$.\\
+\vspace{2pt}\textbf{Aggregation Functions}\\
+Various aggregation functions (sum, mean, max, attention) lead to different GNN models such as convolutional, attentional, and message-passing.\\
+\vspace{2pt}\textbf{AlexNet}\\
+Architecture improvements: many convolutional layers (deeper model), ReLU activation functions instead of sigmoids, dropout, and data augmentation.\\
+Training details: \textasciitilde{}60 million parameters, trained on 2 Nvidia GTX 580 GPUs for 5--6 days over 90 epochs, optimized with SGD + momentum, using weight decay, dropout, and data augmentation. Learning rate was decreased three times during training.\\
+\vspace{2pt}\textbf{Applications}\\
+Feature extraction, unsupervised pre-training, dimensionality reduction, generation of new data, anomaly detection (autoencoders are bad at reconstructing outliers).\\
+\vspace{2pt}\textbf{Artificial Intelligence}\\
+AI is the field of developing computer systems that can perform tasks normally requiring human intelligence; the term was coined in 1956.\\
+Artificial Intelligence (AI): broad and poorly defined concept of developing computer systems that can perform tasks normally only humans could do.\\
+AI encompasses subfields such as Machine Learning (ML), Computer Vision (CV), and Natural Language Processing (NLP).\\
+\vspace{2pt}\textbf{Artificial Neural Networks}\\
+Artificial Neural Networks (ANNs): Computational models inspired by the brain's structure and function.\\
+Neurons: Processing units in ANNs that apply weights to inputs and pass them through activation functions.\\
+Activation Functions: Introduce non-linearity to neuron outputs, enabling complex pattern capturing.\\
+Loss Function: Measures the discrepancy between predicted and actual outputs.\\
+Training: Process of adjusting weights to minimize the loss function.\\
+Gradient Descent: Optimization algorithm that updates weights in the direction of loss reduction.\\
+Simple Fully Connected Network: Architecture where neurons in one layer are connected to all neurons in the next layer; input passes through hidden layers to produce output.\\
+
+Hyperparameters: Settings chosen prior to training, such as learning rate, batch size, and network architecture.\\
+Optimizers: Algorithms that control weight updates during training (e.g., SGD, Adam).\\
+Normalization: Techniques like Batch Normalization and Layer Normalization that stabilize training by normalizing input or activation distributions.\\
+Regularization: Techniques such as Dropout and Weight Decay that prevent overfitting by adding constraints or penalties to the loss.\\
+\vspace{2pt}\textbf{Artificial Neural Networks (ANNs)}\\
+Neuron\\
+Activation Function\\
+Training Neural\\
+\vspace{2pt}\textbf{Artificial Neuron}\\
+$y = f(w \cdot x + b)$\xi is the input (e.g., a pixel), wi is the weight for input xi that is learned, b is the bias (a weight learned with no input), and f is the activation function that determines how the output changes with the sum of all weight-input products.\\
+The neuron computes the weighted sum of all inputs, adds the bias term, and passes the result through the activation function; the activation function's output is the neuron's output y.\\
+Vector representation of the neuron shows inputs and weights as vectors, with the bias added before applying the activation function.\\
+\vspace{2pt}\textbf{Attention in Transformers}\\
+$attention(q, k, v) = \sum_i similarity(q, k_i) \times v_i$\\
+$Q = X W_Q \quad (X \in \mathbb{R}^{n\times i},\; W_Q \in \mathbb{R}^{i\times k},\; Q \in \mathbb{R}^{n\times k})$\\
+$K = X W_K \quad (X \in \mathbb{R}^{n\times i},\; W_K \in \mathbb{R}^{i\times k},\; K \in \mathbb{R}^{n\times k})$\\
+$V = X W_V \quad (X \in \mathbb{R}^{n\times i},\; W_V \in \mathbb{R}^{i\times v},\; V \in \mathbb{R}^{n\times v})$\Transformers are a class of deep models based on self-attention where attention is modeled as a neural dictionary: it retrieves a value $v_i$ for a query $ q$ based on a key $ k_i$. Values, queries, and keys are d-dimensional embeddings. Instead of retrieving a single value, a soft retrieval is performed, retrieving all values and weighting them by similarity to the query.\\
+Attention mechanisms in transformers allow the context of a sentence to define the meaning and embedding of a word.\\
+\vspace{2pt}\textbf{Autoencoders}\\
+Neural network architectures designed for unsupervised learning. They consist of an encoder that compresses the input into a latent representation and a decoder that reconstructs the original input from that representation.\\
+Autoencoders\\
+Autoencoders\\
+\vspace{2pt}\textbf{Autoencoding}\\
+Encoder: data $\rightarrow$ embedding\\
+Decoder: embedding $\rightarrow$ data\\
+Autoencoders can be used to learn an embedding space with an encoder mapping data to an embedding and a decoder mapping the embedding back to data.\\
+\vspace{2pt}\textbf{Autoencoding Methods}\\
+Autoencoding Methods in Contrastive Learning: Reconstruct input, compute the loss in output space, compress all the ...\\
+\vspace{2pt}\textbf{Auxiliary Loss}\\
+Auxiliary Loss refers to an additional loss function incorporated into a model's training process alongside the main objective. It provides auxiliary supervision to intermediate layers, helping the network learn relevant features and improve convergence.\\
+
+In deep Inception networks, vanishing gradients are mitigated by adding intermediate classifiers; the final loss is a combination of intermediate losses and the final loss.\\
+\vspace{2pt}\textbf{Average Pooling}\\
+A pooling operator used to downsample the spatial dimensions of input data by dividing the input into non-overlapping regions and calculating the average value of the elements within each region.\\
+Usually less effective than max pooling for preserving salient features.\\
+\vspace{2pt}\textbf{Backpropagation}\\
+Backpropagation is a method in training neural networks where the network adjusts its internal parameters (weights and biases) by computing the gradient of the loss function with respect to these parameters, allowing the network to learn and improve its predictions over time.\\
+Backpropagation uses a dynamic programming-like approach to calculate gradients and adjust weights. The combination of gradient descent and dynamic programming is called backpropagation, propagating error information backward through the layers to optimize performance.\\
+\vspace{2pt}\textbf{Backward Pass}\\
+Also known as backpropagation, this step follows the forward pass. It calculates the gradients of the loss function with respect to the network's parameters, indicating how each parameter should be adjusted to reduce prediction errors. The gradients are then used to update the parameters via optimization algorithms. Used only for training.\\
+\vspace{2pt}\textbf{Batch Normalization}\\
+A technique used to normalize the activations of a layer by adjusting them to have zero mean and unit variance across a mini-batch of training examples. This improves training stability, speeds up convergence, and enables higher learning rates by reducing the internal covariate shift problem.\\
+Batch normalization combats the internal covariate shift problem by normalizing the inputs of each layer within a mini-batch during training.\\
+During training, Batch Normalization computes the mean and standard deviation of each feature within a mini-batch of data, normalizes the features, and then scales and shifts them based on learnable parameters.\\
+During inference time, the model processes individual examples or small batches using stored statistics rather than batch-specific statistics.\\
+\vspace{2pt}\textbf{Batch Size}\\
+Batch size: Number of training examples used per optimization ``step''. Set batch size close to GPU memory to use as much memory as possible.\\
+Too small a batch size leads to optimizing a possibly very different loss function at each iteration.\\
+\vspace{2pt}\textbf{Beam Search}\\
+$ \max p(t_1, t_2, \dots, t_n) = \max p(t_1) \cdot p(t_2 \mid t_1) \cdot \dots \cdot p(t_n \mid t_{n-1}, \dots, t_2, t_1) $\Beam Search: looks for a sequence of tokens with the highest probability within a window.\\
+\vspace{2pt}\textbf{BERT}\\
+Bidirectional Encoder Representations from Transformers (BERT) is a Transformer model trained with two self-supervised tasks (masked word prediction and next sentence prediction), achieving state-of-the-art results on many NLP tasks and used in Google Search for query and document representation.\\
+\vspace{2pt}\textbf{Bias}\\
+Bias refers to the error introduced by approximating a real-world problem with a simplified model. In machine learning it is the error due to overly simplistic assumptions in the learning algorithm. High bias means the model does not capture underlying patterns, leading to systematic errors (underfitting).\\
+
+\vspace{2pt}\textbf{Bias in Models}\\
+Machine learning models learn and reflect biases present in the training data; the distance between embeddings is influenced by these biases.\\
+\vspace{2pt}\textbf{Bias Term}\\
+A constant value added to the weighted sum of inputs in a neuron or model, allowing the neuron to shift its activation.\\
+\vspace{2pt}\textbf{Bias term}\\
+Bias term is learnable during training, adjusting the neuron's decision boundary up or down, similar to the weights associated with the inputs.\\
+\vspace{2pt}\textbf{Bias-Variance Tradeoff}\\
+Balancing model complexity to achieve better generalization by managing bias (under-fitting) and variance (over-fitting).\\
+The bias-variance tradeoff states that increasing model complexity generally reduces bias but increases variance, while decreasing complexity reduces variance but increases bias. The goal is to find a complexity level that minimizes both, yielding good generalization.\\
+\vspace{2pt}\textbf{Bidirectional RNN}\\
+Bidirectional RNN: a type of neural network architecture that processes input sequences in both forward and reverse directions simultaneously. This allows them to capture information from past and future time steps, making them particularly useful for tasks.\\
+Bidirectional RNN utilizes context from both directions, essential for tasks such as natural language understanding and speech recognition.\\
+\vspace{2pt}\textbf{Binary activation function}\\
+The first artificial neurons (1943-1970s) used a simple binary activation function based on which side of the hyperplane the input lies.\\
+\vspace{2pt}\textbf{Binary Cross Entropy}\\
+$ \text{BCE} = -\frac{1}{N} \sum_{n=1}^{N} \big[ y_{\text{actual},n} \cdot \log\big(y_{\text{predicted},n}\big) + (1 - y_{\text{actual},n}) \cdot \log\big(1 - y_{\text{predicted},n}\big) \big] $\Binary Cross Entropy (BCE) is mostly used for binary classification problems.\\
+Binary Cross Entropy is a loss function used for binary classification tasks.\\
+\vspace{2pt}\textbf{Binary Neural Network Classifier}\\
+Example code defines a \texttt{MLP} with layers: \texttt{Linear(20,10)}, \texttt{Linear(10,10)}, \texttt{Linear(10,1)} and uses \texttt{ReLU} activations.\\
+\vspace{2pt}\textbf{Biological Neuron}\\
+Simplified Biological Neuron: Dendrites receive information from other neurons, the cell body consolidates this information, the axon transmits it to other neurons, and the synapse is the connection point between an axon and a dendrite.\\
+Neurons fire on stimuli such as edges, lines, angles, movements, and familiar faces, regardless of scale, rotation, and translation.\\
+\vspace{2pt}\textbf{Bottleneck layer}\\
+The hourglass shape creates a bottleneck layer that lowers the dimensional representation, forcing the autoencoder to learn the most important features.\\
+\vspace{2pt}\textbf{CBOW}\\
+Continuous Bag-of-Words (CBOW) predicts the target (center) word from its context; surrounding words are input and the center word is output.\\
+\vspace{2pt}\textbf{Challenges of Supervised Learning}\\
+Supervised learning requires large amounts of labeled data, which is expensive to obtain (e.g., hiring annotators, specialist medical reviews, time-consuming wet-lab tests). Additionally, there is often far more unlabeled data available (e.g., internet data) that remains unused.\\
+\vspace{2pt}\textbf{Classification Metrics}\\
+$ \text{Accuracy} = \frac{\text{Number of Correct Predictions}}{\text{Total Number of Predictions}} $\\
+$ \text{Precision} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}} $\\
+$ \text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}} $\\
+
+Accuracy: metric that measures the proportion of correct predictions made by a classification model; it gives an overall view of the model's correctness across all classes.\\
+Precision: metric that measures the proportion of positive predictions that were actually correct; it measures the model's ability to avoid false positives.\\
+Recall (True Positive Rate): metric that quantifies the proportion of actual positive instances that were correctly predicted by the model; it helps identify the model's ability to capture all instances of the positive class, minimizing false negatives.\\
+\vspace{2pt}\textbf{CNN Architecture}\\
+CNN models contain two distinct parts: Convolutional Layers (learn filters across spatial and channel dimensions, acting as an encoder) and Fully-connected Layers (learn to classify images based on the learned visual features, acting as a classifier). The intersection of these parts is an embedding.\\
+\vspace{2pt}\textbf{CNN Feature Extraction}\\
+A learned lower-dimensional set of visual features (the embedding) represents an image; this embedding encodes everything needed to classify objects. All layers before the embedding perform general, universal feature extraction, while the classifier layer is problem-specific.\\
+\vspace{2pt}\textbf{CNN Filters}\\
+CNN filters (feature maps) can be visualized to see what patterns the network has learned; examples are shown in figures.\\
+\vspace{2pt}\textbf{CNN Layer Design}\\
+As a CNN progresses layer by layer, the filter depth (number of kernels) increases to learn higher-level features, while the kernel size generally remains fixed and the feature-map height and width decrease.\\
+\vspace{2pt}\textbf{CNNs and RNNs}\\
+CNNs work well on images; RNNs work well on sequences (one-dimensional); both operate on Euclidean spaces in $R^{n}$ .\\
+\vspace{2pt}\textbf{CNNs Intuition}\\
+The intuition of how CNNs work is based on Deformable Parts Models.\\
+\vspace{2pt}\textbf{CNNs vs Hand-crafted Features}\\
+CNNs are outperformed on most tasks by using hand-crafted computer vision features and other ML classifiers such as random forests (decision trees) or SVM.\\
+\vspace{2pt}\textbf{CNNs vs ViT}\\
+While ViTs excel on large datasets, Convolutional Neural Networks remain competitive or superior on ImageNet when considering model complexity or size.\\
+\vspace{2pt}\textbf{Computer Vision}\\
+Making computers capable of seeing.\\
+Section 7.6 addresses computer vision tasks and related neural network architectures.\\
+\vspace{2pt}\textbf{Computing Attention Score}\\
+Dot-product score: $ \text{score}(a, b) = a^{T} b $\Cosine similarity score: $ \text{score}(a, b) = \frac{a^{T} b}{\|a\| \cdot \|b\|} $\Bilinear score: $ \text{score}(a, b) = a^{T} W b $\MLP score: $ \text{score}(a, b) = \sigma\big( W [a; b] \big) $\\
+\vspace{2pt}\textbf{Conditional GANs}\\
+Pass a specific class label as an additional input to both the generator and discriminator so that the GAN learns to produce images of that class (e.g., generating only a chosen digit from MNIST).\\
+\vspace{2pt}\textbf{Connectionist Approach}\\
+Neural-network-based AI that models brain-inspired networks for pattern recognition and adaptive learning.\\
+The connectionist (neural network) approach draws inspiration from the brain's structure and function, building artificial neural networks of inter-connected neurons that process information in parallel and learn patterns from data by adjusting connection weights.\\
+Strengths: adaptability and pattern recognition; Weaknesses: limited interpretability and risk of overfitting.\\
+
+Simulate the learning of a baby.\\
+Parallel Distributed Processing: Information is processed simultaneously across interconnected nodes, producing emergent properties.\\
+Learning from Data: Networks learn patterns from large datasets via supervised, unsupervised, or reinforcement learning.\\
+Feature Extraction: Networks automatically learn relevant features from raw data, reducing the need for manual engineering.\\
+\vspace{2pt}\textbf{Context Vector}\\
+A fixed-size representation that summarizes the information from the entire input sequence processed by the RNN. It captures the context or relevant information from past time steps and serves as an input to subsequent parts of the network.\\
+\vspace{2pt}\textbf{Contextual Embeddings}\\
+RNNs/Transformers learn contextual embeddings, meaning the embedding of a word changes according to the sentence in which it appears.\\
+\vspace{2pt}\textbf{Continuous Bag of Words (CBOW) Model}\\
+Predicts the center word from a fixed window of context words using one-hot representations.\\
+Trains faster than Skip-Gram, captures better syntactic relationships, and represents more frequent words effectively.\\
+\vspace{2pt}\textbf{Contrastive Learning}\\
+Contrastive Learning: a self-supervised learning technique in machine learning and deep learning, where a neural network is trained to differentiate between pairs of data points, typically by maximizing the similarity (or minimizing the distance) between positive pairs (similar data points) and minimizing the similarity (or maximizing the distance) between negative pairs (dissimilar data points). This approach is often used for feature learning and representation learning, where it helps the network learn meaningful and discriminative representations of data without the need for labeled data.\\
+Contrast pair of positive/negative samples; compute the loss in embedding space; compress relevant information; requires lots of negative examples.\\
+\vspace{2pt}\textbf{Convolution}\\
+$y[m, n] = I[m, n] * K[m, n] = \sum_{i=-\infty}^{\infty} \sum_{j=-\infty}^{\infty} I[i, j] \cdot K[m-i, n-j]$\Convolution of an image is applying a kernel to the image while sliding the kernel across the image.\\
+Convolution is local: the model may miss long-range dependencies because elements that are far apart in a sequence can still be highly dependent for context.\\
+\vspace{2pt}\textbf{Convolution in 2D for Images}\\
+Application of the convolution operator on two-dimensional image data using kernels/filters to extract spatial features.\\
+To apply convolution to a 2-D image I with filter kernel K: (1) multiply each pixel under the kernel by the corresponding kernel element, (2) sum all products and store the result in a new 2-D array, (3) slide the kernel across the image until reaching the edges, (4) repeat horizontally after reaching an edge.\\
+\vspace{2pt}\textbf{Convolution in 3D for RGB input}\\
+Extension of 2D convolution to three dimensions to process multi-channel (e.g., RGB) image data, treating channels as an additional dimension.\\
+\vspace{2pt}\textbf{Convolution in 3D for RGB Input}\\
+In 3D, the kernel becomes a 3D tensor applied to an RGB input image (e.g., dimensions $3\times28\times28$).\\
+\vspace{2pt}\textbf{Convolution Kernels}\\
+Trainable weights = 5 $\times$ 3 $\times$ 8 $\times$ 8 = 960 (weights) + 5 (biases) = 965 total parameters\\
+Input channels: 3, because the RGB input image has depth 3.\\
+
+Output channels: 5, because 5 kernels are applied in parallel.\\
+\vspace{2pt}\textbf{Convolution Operator}\\
+$(f \ast g)(t) = \int_{\tau = -\infty}^{\infty} f(\tau)\cdot g(t-\tau)$\Convolution is a mathematical operation on two functions f and g that expresses how the shape of one is modified by the other. The function f is the input function and the function g is known as the kernel.\\
+Fundamental operation that combines two functions to produce a third function expressing how the shape of one is modified by the other.\\
+\vspace{2pt}\textbf{Convolutional Autoencoders}\\
+Convolutional Autoencoders: a type of artificial neural network designed for unsupervised learning that uses convolutional layers to encode and decode input data efficiently. Primarily used for feature extraction and dimensionality reduction in tasks such as image reconstruction and denoising.\\
+Convolutional Autoencoders\\
+Encoder learns visual embeddings using convolutional layers; Decoder up-samples the learned visual embedding to match the original image size.\\
+\vspace{2pt}\textbf{Convolutional Filters}\\
+Introduce convolutional filters into neural networks so that we don\textquotesingle t have to hand-craft the features; the neural network learns the kernel values (weights).\\
+\vspace{2pt}\textbf{Convolutional Neural Networks}\\
+Convolutional Neural Network: a type of deep learning model specifically designed for processing and analyzing grid-like data, such as images and sequences. It uses layers of learnable filters (kernels) to perform convolutions on the input data, enabling the network to automatically learn and extract hierarchical features. CNNs are highly effective for tasks like image recognition, object detection, and image generation due to their ability to capture local patterns and spatial relationships within the data.\\
+Deep learning architecture that stacks convolutional layers, activation functions, and pooling to learn hierarchical image representations.\\
+\vspace{2pt}\textbf{Convolutional Neural Networks (CNNs)}\\
+3 Convolutional Neural Networks (CNNs)\\
+CNNs address the limitations of fully connected networks by exploiting local connectivity and weight sharing, allowing models to handle varying image sizes and preserve spatial relationships.\\
+\vspace{2pt}\textbf{Credit Assignment Problem}\\
+The challenge of determining how to adjust the weights of neurons in layers beyond the first, i.e., how to train a neural network with more than one layer.\\
+Neural networks up until the 1970s were not very useful because (1) it was unclear how to train networks with more than one layer (credit assignment problem) and (2) a single-layer network cannot represent complex functions, whereas two or more layers can represent any function in theory given infinite width.\\
+The credit assignment problem involves determining how much each neuron in a network contributed to the final prediction, identifying which parts of the network were most responsible for the outcome and how changes in individual neurons affect overall performance.\\
+\vspace{2pt}\textbf{Cross Entropy}\\
+$CE = -\frac{1}{N} \sum_{n=1}^{N} \sum_{k=1}^{K} y_{\text{actual},n,k} \cdot \log\bigl(y_{\text{predicted},n,k}\bigr)$\Cross Entropy (CE) is mostly used for multi-class classification problems.\\
+\vspace{2pt}\textbf{Cross-Attention}\\
+Considers interactions between elements from two different sequences. Example: one sequence in language 1 and another in language 2 for a translator.\\
+\vspace{2pt}\textbf{CycleGAN}\\
+
+(concept) Cycle loss is a reconstruction loss that measures the difference between the original input and the output after a forward-and-backward cycle through two GANs, enforcing consistency between domains.\\
+\vspace{2pt}\textbf{Data Augmentation}\\
+(definition) Data Augmentation refers to the technique of artificially increasing the diversity of a training dataset by applying various transformations, modifications, or perturbations to the original data, producing augmented samples that improve a model's ability to generalize to unseen data.\\
+(concept) Typical augmentations apply class-preserving transformations to inputs, increasing the effective training data size and helping the model learn internal representations of those transformations, thereby enhancing generalization.\\
+\vspace{2pt}\textbf{Data Splitting}\\
+(concept) To evaluate and train models, the dataset should be split into separate subsets for training, validation, and testing.\\
+\vspace{2pt}\textbf{DataLoader \& Dataset}\\
+(concept) Dense implementation batching is done by creating a diagonal matrix of adjacency matrices, which can cause out-of-memory errors for large-scale graph datasets.\\
+(concept) Sparse implementation uses an index vector that maps each node to its respective graph in the batch, providing a very simple and efficient batching strategy.\\
+\vspace{2pt}\textbf{Dataset Splits}\\
+(concept) Training data is used to fit model parameters, validation data is used for assessing performance and making decisions about model selection and hyper-parameter tuning, and testing (holdout) data must not be seen during training to avoid overfitting and ensure good generalization.\\
+(concept) Overfitting to the test data occurs when the model sees the testing set during training, leading to poor generalization on new data.\\
+\vspace{2pt}\textbf{Dataset Splitting}\\
+(concept) Dividing data into training, validation, and testing sets to evaluate and select models effectively.\\
+\vspace{2pt}\textbf{Debugging Tips}\\
+(concept) 1) Ensure the model can overfit training data (loss decreases). 2) Verify loss is decreasing during training as a sanity check. 3) Check variable names to rule out programming bugs. 4) Use confusion matrix and 2D data projections for further analysis.\\
+\vspace{2pt}\textbf{Decision boundary}\\
+(concept) The hyperplane or threshold that separates the classes in a binary classification problem.\\
+\vspace{2pt}\textbf{Decoder}\\
+(definition) The decoder converts the internal representation back to the outputs, acting as a generative network.\\
+\vspace{2pt}\textbf{Decoder (RNN)}\\
+(concept) The decoder generates tokens one at a time; its hidden state is a representation of all the tokens to be generated.\\
+\vspace{2pt}\textbf{Deep \& Bidirectional RNNs}\\
+(concept) Deep \& Bidirectional Recurrent Neural Networks\\
+\vspace{2pt}\textbf{Deep Learning}\\
+(definition) A subset of Machine Learning that uses multi-level (deep) neural network architectures to learn hierarchical abstractions.\\
+(definition) Deep learning is a subset of machine learning that allows multiple levels of representation, obtained by composing simple but non-linear modules that each transform the representation at one level (starting with the raw input) into a representation at a higher, slightly more abstract level. (LeCun et al. 2015)\\
+(definition) Deep Learning (DL): a machine learning method that learns multiple levels of abstractions over data end-to-end.\\
+(concept) Excels at translation, image generation, and gaming; challenges include interpretability and bias.\\
+(concept) Dominates fields such as ML, CV, and NLP; uses neural networks to learn hierarchical representations.\\
+
+Deep Learning is the latest version of Artificial Neural Networks (\texttt{ANN}), also known as Connectionism, an older \texttt{ML} method. Neural networks were inspired by the brain.\\
+Differentiated from vanilla neural networks by (1) much larger training datasets (e.g., \texttt{ImageNet}), (2) vastly increased compute/\texttt{GPU} acceleration, and (3) much larger model sizes with more layers, enabled by the first two factors.\\
+\vspace{2pt}\textbf{Deep Learning Applications}\\
+Successes of deep learning include: Machine Translation (\texttt{Google Translate}), Drug Discovery (antibiotics), Speech Recognition (auto-generated subtitles), Image Generation from prompts, \texttt{AlphaFold} (protein structures), \texttt{AlphaGo}, Mathematics (pattern discovery), Code Generation, Language Modelling, and Simulators.\\
+\vspace{2pt}\textbf{Deep Learning Limitations}\\
+Caveats of deep learning: Interpretability (black-box nature), Adversarial Examples (small perturbations can fool models), and Causality (models excel at pattern identification but may not capture causal relationships).\\
+\vspace{2pt}\textbf{Deep RNN}\\
+Deep RNN: a type of recurrent neural network architecture that consists of multiple recurrent layers stacked on top of each other. These additional layers enable the network to capture more complex hierarchical features and representations from sequential data, making them suitable for tasks that require a deep understanding of temporal dependencies and context.\\
+Stacking RNN layers allows learning more abstract representations; representations in first layers are better for syntactic (low-level) tasks while representations in last layers perform better on semantic (high-level) tasks.\\
+\vspace{2pt}\textbf{Deep Sets}\\
+Section 8.2 presents Deep Sets, a framework for learning functions on sets with permutation invariance.\\
+When predicting the likelihood of a set of items to be purchased, the model must be invariant to the order of the items because order is not essential and can confuse the model.\\
+Learn embeddings for each item using a shared neural network $\psi$ (e.g., \texttt{MLP}, \texttt{Transformer}) to project each item to a shared space.\\
+Aggregate item embeddings into a single set embedding using an order-invariant aggregation function such as sum, mean, or max.\\
+Project the aggregated set embedding to the final space using another neural network $\phi$ (e.g., \texttt{MLP}).\\
+\vspace{2pt}\textbf{Deformable Parts Models}\\
+Deformable Parts Models: a class of object detection models in computer vision that incorporate flexible part structures within an object to improve accuracy in recognizing complex objects with varying appearances and poses.\\
+They recognize using parts and locations of parts, allowing some deformation of part location to account for differences in facial structure among populations.\\
+They are hard to extend to many different types of objects and do not work well for different viewing angles.\\
+\vspace{2pt}\textbf{Delta Rule}\\
+$E = (y - t)\textasciicircum{}2$\\
+$f(x) = \frac{1}{1 + e\textasciicircum{}{-x}}$\\
+$a = \sum_{p} w_{p} x_{p} + b$\\
+$\frac{dE}{dy} = 2 (y - t)$\\
+$\frac{dy}{da} = (1 - y) y$\\
+$\frac{da}{dw_{p}} = x_{p}$\\
+$\frac{dE}{dw_{p}} = 2 x_{p} (y - t) (1 - y) y$\The Delta Rule computes the weight update for a single weight/training example using the gradient of the error with respect to that weight.\\
+The chain rule is applied: $\frac{dE}{dw_{p}} = \frac{dE}{dy}\cdot\frac{dy}{da}\cdot\frac{da}{dw_{p}}$\\
+
+\vspace{2pt}\textbf{Denoising Autoencoders}\\
+Denoising autoencoders add noise to input images and train the model to recover the original noise-free inputs, acting as regularization and preventing trivial copying.\\
+Two common ways to denoise autoencoders: adding Gaussian noise (salt and pepper effect) and randomly masking inputs (dropout for pixels).\\
+Randomly masking inputs (pixel dropout) forces the network to infer missing information, improving robustness.\\
+\vspace{2pt}\textbf{Dense vs Sparse GNNs}\\
+Dense GNNs assume dense connectivity and involve interactions between all nodes.\\
+Sparse GNNs take advantage of the sparsity of the graph and only consider interactions between connected nodes, which is more efficient for sparsely connected graphs.\\
+\vspace{2pt}\textbf{Dense vs Sparse Representation}\\
+Most graphs are sparse, but a dense implementation uses O(N\textasciicircum{}2) space for the adjacency matrix, which is inefficient for sparse graphs.\\
+\vspace{2pt}\textbf{Discriminative Model}\\
+Discriminative Model: a model that learns to model the decision boundary between different classes or categories in the data. It's primarily used for classification tasks, aiming to distinguish between different classes based on input features. Examples include Logistic Regression, Support Vector Machines (SVMs), and Convolutional Neural Networks (CNNs) for image classification.\\
+\vspace{2pt}\textbf{Discriminator}\\
+Discriminator model: tries to distinguish between real and fake images.\\
+Discriminator network -- Input: an image; Output: a binary label (real vs fake).\\
+\vspace{2pt}\textbf{Distance Measures}\\
+$D(\vec{X},\vec{Y}) = \|\vec{X}-\vec{Y}\| = \sqrt{\sum_{i=0}^{d} (x_i - y_i)^2}$\\
+$\text{Similarity}(\vec{X},\vec{Y}) = \cos(\theta) = \frac{\tilde{X}\cdot\tilde{Y}}{\|\tilde{X}\|\;\|\tilde{Y}\|} = \frac{\sum_{i=0}^{d} x_i y_i}{\sqrt{\sum_{i=0}^{d} x_i^{2}} \; \sqrt{\sum_{i=0}^{d} y_i^{2}}}$\Distance Measures\\
+\vspace{2pt}\textbf{Dropout}\\
+During training: drop activations with probability $p$ (multiply neuron output by $0$ with probability $ p$, by $1$ with probability $1-p$). During inference: multiply weights by $(1-p)$ to keep the same distribution.\\
+Dropout involves randomly deactivating (dropping out) a proportion of neurons during each training iteration. This helps prevent overfitting by encouraging the network to learn more robust and independent features, improving its generalization on new data.\\
+Forces a neural network to learn more robust features by learning the underlying distribution of the data rather than memorizing it; a straightforward and efficient way to regularize deep models.\\
+\vspace{2pt}\textbf{Early Stopping}\\
+Technique that prevents overfitting by stopping training when validation loss starts to increase; uses a patience counter to wait a fixed number of iterations before stopping.\\
+\vspace{2pt}\textbf{Early Stopping with Patience}\\
+Early Stopping with Patience monitors the model's performance on a validation set during training and halts the training process when performance stops improving for a specified number of consecutive epochs (the patience parameter).\\
+\vspace{2pt}\textbf{Embedding Interpolation}\\
+Generate new images by computing low-dimensional embeddings of two images, interpolating between the embeddings, and decoding the interpolated codes.\\
+Interpolated codings produce images that lie between the two original images in visual appearance.\\
+The embedding space should map similar images to similar codes, enabling smooth transitions via interpolation.\\
+\vspace{2pt}\textbf{Embeddings}\\
+Embeddings: the process of representing objects (e.g., words, images, entities) in a lower-dimensional space where their relationships and characteristics are preserved, capturing semantic or contextual information for tasks such as similarity measurement, classification, and recommendation.\\
+\vspace{2pt}\textbf{Encoder (RNN)}\\
+
+\vspace{2pt}\textbf{Encoder/Decoder}\\
+The encoder processes tokens one at a time; its hidden state represents all the tokens read thus far.\\
+\vspace{2pt}\textbf{End-to-end network}\\
+Encoder maps a word (or its one-hot embedding) to a low-dimensional embedding; Decoder maps the low-dimensional embedding to a target representation such as nearby words.\\
+\vspace{2pt}\textbf{Ensemble Learning}\\
+In a model that combines convolutional and fully-connected layers, the CNN part acts as an encoder that extracts features, and the FC part acts as a classifier. All weights are jointly optimized via the loss function, avoiding the multi-stage training problems of earlier approaches.\\
+\vspace{2pt}\textbf{Epoch}\\
+Figure 3.38 references ensemble learning, indicating its relevance to improving model performance.\\
+\vspace{2pt}\textbf{Evaluation and Debugging}\\
+Epoch: Number of times all the training data is used once to update the parameters. Example: with 1000 samples and batch size 10, one epoch contains 100 iterations.\\
+\vspace{2pt}\textbf{Expanding Feature Maps}\\
+2.12 Evaluation and Debugging\\
+\vspace{2pt}\textbf{Exploding and Vanishing Gradients}\\
+Applying multiple kernels in parallel extracts multiple features simultaneously, with each kernel producing its own output feature map.\\
+\vspace{2pt}\textbf{F1 Score}\\
+Phenomena where gradients become excessively large (exploding) or shrink towards zero (vanishing) during backpropagation through many time steps, hindering learning.\\
+$Depth = \text{Length of sequence}$ (formula linking RNN depth to sequence length).\\
+\vspace{2pt}\textbf{Facial Feature Search}\\
+Metric that combines precision and recall; recommended for evaluating models on unbalanced datasets.\\
+\vspace{2pt}\textbf{Failed Defenses}\\
+An intuitive way of recognizing a face is searching for facial features, but this can misidentify faces if parts are in wrong locations.\\
+\vspace{2pt}\textbf{Failing to Converge}\\
+Failed defenses against adversarial attacks include adding noise at test time, averaging many models, weight decay, adding noise at training time, adding adversarial noise at training time, and dropout.\\
+\vspace{2pt}\textbf{Fairness and Bias}\\
+Training vanilla GANs is difficult due to the MinMax optimization process, making it hard to numerically determine whether the training is progressing toward equilibrium.\\
+The adversarial nature of GAN training can lead to instability and non-convergence, requiring careful balancing of generator and discriminator updates.\\
+\vspace{2pt}\textbf{Families of Deep Generative Models}\\
+Bias: refers to systematic and consistent errors or inaccuracies in the predictions or outcomes produced by a machine learning model. These biases can arise from various sources and can significantly impact the model's performance and fairness. Bias in deep learning can occur at different stages of the model development process, including data collection, preprocessing, algorithm design, and decision-making.\\
+Example: A 2016 arXiv paper claimed to predict whether someone was a convicted criminal solely from a driver's license-style photo with 90\% accuracy. The data were biased---criminal images were collected from government IDs, while non-criminal images were gathered from the internet.\\
+\vspace{2pt}\textbf{Feature Clustering}\\
+Major families include Autoregressive Models, Variational Autoencoders (VAEs), Generative Adversarial Networks (GANs), Flow-Based Generative Models (not covered), and Diffusion Models (not covered).\\
+\vspace{2pt}\textbf{Feature Engineering}\\
+Patterns or clusters of similar features can reveal substantial information about the data before any labels are assigned.\\
+
+\vspace{2pt}\textbf{Feature Learning}\\
+Before deep learning, kernels were hand-crafted over years. Classic computer vision relied on multi-stage feature (kernel) engineering, where successive kernels were designed to extract increasingly abstract representations.\\
+\vspace{2pt}\textbf{Feature Map}\\
+Neural networks act as feature learners, extracting hierarchical representations from raw data without manual engineering, enabling end-to-end learning.\\
+\vspace{2pt}\textbf{Features and Detection}\\
+Feature Map: a 2D or 3D array of values representing the activations of specific features detected within an input data volume, produced by applying filters through convolutional operations in CNNs.\\
+\vspace{2pt}\textbf{Feed-Forward Network}\\
+Feature: something in the image, like an edge, blob, or shape. Detecting: the output (activation) is high if the feature is present.\\
+\vspace{2pt}\textbf{Fine-tuning}\\
+Information only flows forward from one layer to a later layer, from the input to the output without any loops or cycles. It's designed to make predictions or classifications based on the input data without internal feedback connections.\\
+\vspace{2pt}\textbf{Forward Pass}\\
+Often improves performance by training some or all of the original model's weights on the new task at a lower learning rate, allowing the pretrained features to adapt to the new domain; this process is commonly called fine-tuning.\\
+\vspace{2pt}\textbf{Fully Connected vs Convolutional}\\
+The forward pass is the initial step that produces predictions based on input data. Input data is fed into a neural network, flows through the layers using weights and biases, generating predictions or output values. Used for both training and inference.\\
+\vspace{2pt}\textbf{Fully-Connected Network}\\
+Fully-connected networks require preprocessing of the input, whereas convolutional neural networks apply convolution directly to image tensors, allowing the network to learn and extract both low-level and high-level features.\\
+\vspace{2pt}\textbf{Fully-Connected Networks}\\
+Neurons between adjacent layers are fully connected. Each neuron in a given layer is connected to every neuron in the subsequent layer. This creates a dense and interconnected structure that enables information to flow freely between all layers.\\
+For an image of 200$\times$ 200 pixels (40,000 inputs) with hidden layers of 500 and 200 neurons: Weights = 40,000$\times$ 500 + 500$\times$ 200; Biases = 500 + 200; Total parameters = 20,100,700.\\
+For layers defined as self.fc1 = nn.Linear(16, 100) and self.fc2 = nn.Linear(32, 100): Weights = 16$\times$ 100 + 32$\times$ 100; Biases = 100 + 100; Total parameters = 5,000.\\
+\vspace{2pt}\textbf{GAN Applications}\\
+Face generation (e.g., "This Person Does Not Exist") using GANs to synthesize realistic human faces.\\
+Grayscale-to-color translation using a conditional generator that receives the grayscale image as input and outputs a colorized version.\\
+\vspace{2pt}\textbf{GAN Training Problems}\\
+Common issues in GAN training include vanishing gradients, mode collapse, and failure to converge, each stemming from the adversarial MinMax objective and the interplay between generator and discriminator capacities.\\
+\vspace{2pt}\textbf{GAN Training Techniques}\\
+Use LeakyReLU activations instead of ReLU to improve gradient flow during GAN training.\\
+Apply Batch Normalization to stabilize training and reduce internal covariate shift.\\
+Regularize discriminator weights and add noise to discriminator inputs to prevent overfitting and improve robustness.\\
+\vspace{2pt}\textbf{GANs}\\
+
+Problems of Training GANs\\
+Applications of GANs\\
+Adversarial Attacks\\
+\vspace{2pt}\textbf{Gated Recurrent Unit (GRU)}\\
+Gated Recurrent Unit: a type of recurrent neural network (RNN) architecture that is designed for modeling sequential data. It simplifies the architecture of Long Short-Term Memory (\texttt{LSTM}) networks by using fewer gates but still effectively captures and manages information over time. GRUs have gate mechanisms that control the flow of information, helping them mitigate the vanishing gradient problem and enabling the modeling of long-term dependencies in sequential data, making them suitable for various tasks such as natural language processing and time series analysis.\\
+GRUs are more efficient than LSTMs while having similar performance.\\
+GRUs combine forget and input gates into an update gate.\\
+GRUs merge cell state and hidden state.\\
+\vspace{2pt}\textbf{Gating Mechanism}\\
+f(x) = X · $\sigma$(X) (using sigmoid or tanh to gate X).\\
+f(x) = X · NN(X) (using a neural network to gate X).\\
+Gating Mechanism: a set of learnable components that regulate the flow of information through the network's hidden states, allowing selective update, forget, or pass of information from previous time steps, aiding long-term dependencies and mitigating vanishing gradients.\\
+Soft skip-connections: approximating skip-connections to all previous states by learning to weight previous states differently.\\
+Gates can learn to update the context selectively.\\
+Gating mechanism controls how much information flows through.\\
+\vspace{2pt}\textbf{Gaussian Distribution}\\
+Gaussian Distribution, also known as a normal distribution, is a probability distribution characterized by its bell-shaped curve. It is defined by two parameters: the mean ($\mu$), which represents the center of the distribution, and the standard deviation ($\sigma$), which measures the spread or dispersion of the data. Data tends to cluster around the mean, with the majority of values close to the mean, following a symmetrical pattern.\\
+\vspace{2pt}\textbf{Gaussian Noise}\\
+Adding Gaussian noise to inputs during training helps the autoencoder learn to reconstruct clean data from corrupted versions.\\
+\vspace{2pt}\textbf{GCN Layer}\\
+H = $\sigma$(D\textasciicircum{}{-1/2} A D\textasciicircum{}{-1/2} X W)\\
+\vspace{2pt}\textbf{General Equation of a Line}\\
+$A x + B y - C = 0$\\
+\vspace{2pt}\textbf{General Machine Learning Approach}\\
+Identify information we want.\\
+\vspace{2pt}\textbf{General Terminology}\\
+Artificial Intelligence\\
+Deep Learning\\
+Machine Learning Basics\\
+Introductory terminology for the chapter.\\
+\vspace{2pt}\textbf{Generalization}\\
+Generalization is a learning model's ability to apply knowledge learned from training data to new, unseen data; it reflects the foundational principles and constraints guiding the model's learning process.\\
+\vspace{2pt}\textbf{Generalization and Depth}\\
+Increasing depth of CNNs (e.g., AlexNet and successors) improves generalization on ILSVRC and other tasks.\\
+\vspace{2pt}\textbf{Generative Adversarial Networks}\\
+GANs consist of two models trained adversarially: a generator that tries to produce realistic data and a discriminator that tries to distinguish generated data from real data.\\
+\vspace{2pt}\textbf{Generative Adversarial Networks (GANs)}\\
+Generative Adversarial Networks, a class of generative models\\
+
+\vspace{2pt}\textbf{Generative Learning}\\
+One of the primary goals of GANs is to generate data that is indistinguishable from real data. This can be valuable in various applications, such as generating realistic images, videos, text, or other types of data. GANs have been used to create lifelike images of nonexistent people, animals, or scenes.\\
+\vspace{2pt}\textbf{Generative Model}\\
+Generative learning is an unsupervised learning task where a loss function is defined for an auxiliary task with known answers, but there is no ground-truth label for the actual task; the goal is to learn the structure and distribution of the data rather than label predictions.\\
+\vspace{2pt}\textbf{Generative Models}\\
+Generative Model: a type of model that learns to model the probability distribution of the input data. It can generate new data points that resemble the training data, making it capable of creating synthetic data. Examples include Variational Autoencoders (VAEs) and Generative Adversarial Networks (GANs).\\
+\vspace{2pt}\textbf{Generative network}\\
+A generative model is used to generate new data from some input encoding.\\
+Generative Models that learn the data distribution.\\
+\vspace{2pt}\textbf{Generative vs Discriminative Models}\\
+The decoder functions as a generative network that produces outputs from the encoded representation.\\
+\vspace{2pt}\textbf{Generator}\\
+A discriminative model learns to approximate the conditional probability $p(y|x)$, while a generative model learns to approximate the marginal probability $ p(x)$.\\
+\vspace{2pt}\textbf{GloVe}\\
+Generator network -- Input: a noise vector; Output: a generated image.\\
+The generator learns weights to maximize the probability that the discriminator labels a generated (fake) image as real.\\
+The loss function of the generator is defined by the discriminator itself, because a win for the generator is a loss for the discriminator and vice-versa.\\
+\vspace{2pt}\textbf{GloVe vectors}\\
+$X_{ij} = \text{count}(word\ i\ in\ context\ of\ word\ j)$\\
+$w_i^{T} w_j \approx \log X_{ij}$ (objective of GloVe).\\
+Enforces global information into embeddings by using co-occurrence frequency counts.\\
+Co-occurrence matrix element $X_{ij}$ denotes the number of times word i appears in the context of word j.\\
+Optimization aims for the inner product of word vectors to predict co-occurrence frequencies.\\
+Distance measures can be used to evaluate similarity between embeddings.\\
+\vspace{2pt}\textbf{GNN Models}\\
+Different ways of using aggregation functions create various Graph Neural Network models, including convolutional, attentional, and message-passing variants.\\
+\vspace{2pt}\textbf{GoogleLeNet (Inception)}\\
+GoogleLeNet (2014 ILSVRC winner) uses 22 convolutional layers and achieves 6.67\% Top-5 error, more parameter efficient (4 M vs 60 M for AlexNet).\\
+Inception block applies multiple filter sizes ($3\times3$, $5\times5$, $7\times7$) in parallel on the same layer.\\
+Uses $1\times1$ convolutions for dimensionality reduction and efficient depth control.\\
+\vspace{2pt}\textbf{Gradient Clipping}\\
+A technique that caps the magnitude of gradients: if a gradient exceeds a predefined threshold, it is set to that threshold to prevent exploding gradients.\\
+\vspace{2pt}\textbf{Gradient Descent}\\
+$\frac{\partial E}{\partial w_{ji}}$\\
+$w_{t+1}^{ji} = w_{t}^{ji} - \eta \frac{\partial E}{\partial w_{ji}}$\\
+
+$ \Delta w_{ji} = \eta \frac{\partial E}{\partial w_{ji}} $\Gradient Descent is an optimization algorithm used in machine learning to iteratively adjust the parameters of a model in the direction that decreases the model's error, guided by the gradient of the error with respect to those parameters.\\
+Adjusting weights according to the slope (gradient) of the loss function guides the model toward minimum (or maximum) error by updating each weight in the opposite direction of its gradient.\\
+Gradient Descent\\
+In this context, gradients and derivatives are the same thing. The vector of partial derivatives for all weights is the gradient. The direction of the gradient indicates where the function is increasing, and its magnitude gives the rate of increase.\\
+A positive gradient at a weight indicates the weight is increasing the loss, so the update subtracts the gradient.\\
+Gradient Descent (GD) applied on the entire training data.\\
+\vspace{2pt}\textbf{Gradients}\\
+Gradients represent the directions and magnitudes by which the network's internal settings (weights and biases) should be adjusted to minimize the difference between its predictions and the actual target values. They guide the network during training, fine-tuning parameters based on errors.\\
+\vspace{2pt}\textbf{Graph Attention Networks}\\
+Instead of using node degree, GAT learns an attention score between two nodes to weight the contribution of neighbor nodes.\\
+\vspace{2pt}\textbf{Graph Attention Networks (GAT)}\\
+Section 8.6 presenting attention mechanisms applied to graph neighborhoods.\\
+\vspace{2pt}\textbf{Graph Classification}\\
+Graph classification uses GNNs to predict class labels for entire graphs, e.g., predicting if a molecule is toxic.\\
+\vspace{2pt}\textbf{Graph Convolutional Networks (GCNs)}\\
+H = $\sigma$ (AXW) where $\sigma$ is a non-linearity function and W is the weight matrix.\\
+A GCN layer is a nonlinear function over node features $X$ and adjacency matrix $ A$, expressed as $ H = f(A, X)$.\\
+Section 8.5 describing convolutional operations on graphs for node representation learning.\\
+\vspace{2pt}\textbf{Graph Neural Networks}\\
+Graph Neural Networks (GNNs) are a class of deep learning models designed to work with structured data represented as graphs, extending neural network architectures to handle graph-structured data.\\
+Section 8.4 introducing neural network architectures that operate on graph-structured data.\\
+GNNs can be used to model predictions for non-Euclidean spaces (usually graphs).\\
+\vspace{2pt}\textbf{Graph Neural Networks (GNNs)}\\
+Section 8 introduces Graph Neural Networks, focusing on their structure and use cases.\\
+\vspace{2pt}\textbf{Graphs}\\
+$G = (V, E, X)$\\
+$E \subseteq V \times V$\Graph:
+
+Graphs are order-invariant: node naming or ordering can be shuffled without changing the graph.\\
+Functions on graphs must also be order-invariant.\\
+\vspace{2pt}\textbf{Greedy Search}\\
+$maxp(t_1, t_2, \dots, t_n) = maxp(t_1) \cdot p(t_2) \cdot \dots \cdot p(t_n)$\A decoding strategy that selects the token with the highest probability at each step as the generated token.\\
+\vspace{2pt}\textbf{Grid Search}\\
+Grid Search involves creating a predefined grid of hyperparameter values to explore and exhaustively evaluating each combination.\\
+Evaluates all possible combinations of hyperparameter values by systematically searching through the entire parameter space. Ideal for relatively small hyperparameter spaces with limited interactions. Pros: exhaustive search guarantees optimal hyperparameters within the specified space and covers all combinations. Cons: computationally expensive for large spaces and inefficient when many hyperparameters are not influential.\\
+\vspace{2pt}\textbf{Heaviside step function}\\
+$f(x) = (0, \text{if } x < 0; 1, \text{if } x \ge 0)$\f(x) = \{ 0, if x < 0; 1, if x $\geq$ 0 \}\\
+\vspace{2pt}\textbf{Hidden Layer}\\
+A set of neurons that process information between the input and output layers, capturing complex patterns in the data. It is called ``hidden'' because it is not directly connected to the input or output of the network.\\
+\vspace{2pt}\textbf{Hidden State Update}\\
+The hidden state is updated based on the previous hidden state and the current input using the same neural network (weight sharing). This update continues until all tokens are processed.\\
+The last hidden state is fed into a prediction network (e.g., a fully-connected classifier) to produce the final output.\\
+\vspace{2pt}\textbf{High-dimensional Optimization}\\
+A deep neural network has millions or billions of parameters; real gradient descent operates in millions of dimensions, where most zero-gradient points are saddle points.\\
+\vspace{2pt}\textbf{Hubel and Wiesel Experiments}\\
+Individual neurons respond to stimuli only in a restricted region of the visual field known as the receptive field. Collections of such fields overlap to cover the entire visual area. Some neurons react only to horizontal lines, while others respond to line orientations. Higher-level neurons are based on the outputs of neighboring lower-level neurons.\\
+\vspace{2pt}\textbf{Hyperparameters}\\
+Hyperparameters are tuned by methods such as Grid Search and Random Search (outer loop of optimization), whereas neural network parameters (weights) are updated through Gradient Descent (inner loop).\\
+Hyperparameters\\
+\vspace{2pt}\textbf{Hyperplane}\\
+Generalized line for any dimension, expressed as y = w·x + b, that splits the n-dimensional input space into two parts.\\
+\vspace{2pt}\textbf{ILSVRC}\\
+First large-scale image dataset (14 million images). ILSVRC dataset based on ImageNet provides 1 million training images across 1000 classes, with 50 k validation images; the test set was never released.\\
+ILSVRC challenge ran from 2010. Each year the winning entry improved accuracy by 1--2 \% . The CNN entry (AlexNet) in 2012 improved accuracy over the previous year by 10 \% , marking the start of
+
+\vspace{2pt}\textbf{ImageNet Large Scale Visual Recognition Challenge}\\
+Pascal VOC had around 20,000 images with 20 classes (2006-2009); around the 2010s, ImageNet became the largest dataset available.\\
+\vspace{2pt}\textbf{Inductive Bias}\\
+Inductive Bias (Learning Bias): set of assumptions used for modelling, or prior knowledge.\\
+\vspace{2pt}\textbf{Inference Sampling Strategies}\\
+During inference, instead of always picking the highest-probability token, sampling from the predicted distribution (optionally with temperature scaling) is used to increase diversity and reduce grammatical errors.\\
+\vspace{2pt}\textbf{Inference Time}\\
+Refers to the phase when a trained machine learning model is applied to new, unseen data to make predictions or produce outputs based on the knowledge it gained during its training phase.\\
+\vspace{2pt}\textbf{Integer Encoding}\\
+Integer Encoding is a technique in data preprocessing and natural language processing that assigns a unique integer value to each distinct element or category in a dataset, simplifying the representation of categorical or nominal data such as words.\\
+\vspace{2pt}\textbf{Internal Covariate Shift}\\
+The change in the distribution of the input to a given layer during training. As the network learns and its parameters get updated, the distribution of activations in each layer may shift, making the optimization process more difficult.\\
+\vspace{2pt}\textbf{Invariance and Equivariance}\\
+Invariance refers to predictions that do not change under permutations of node ordering; equivariance means the output changes in a predictable way with input permutations.\\
+\vspace{2pt}\textbf{Iteration}\\
+Iteration: One step -- the parameters are updated once per iteration.\\
+\vspace{2pt}\textbf{k-Skip n-Gram}\\
+An n-gram that can involve a skip operation of size k or smaller.\\
+\vspace{2pt}\textbf{Kernel}\\
+A kernel, also known as a filter, is a small matrix used to extract specific features from an input image or data. It is applied through convolution to scan the input and produce feature maps that highlight particular patterns such as edges, textures, or other relevant characteristics.\\
+Examples of kernels applied to images: \textbullet{} Blurring filter -- averages pixel intensities. \textbullet{} Vertical Edge Detector -- highlights vertical edges. \textbullet{} Horizontal Edge Detector -- highlights horizontal edges. \textbullet{} Blob Detector -- detects regions that differ in brightness or color from their surroundings.\\
+\vspace{2pt}\textbf{Kernel learning}\\
+Kernel values are learned through gradient descent. The training procedure: (1) initialize kernels randomly, (2) forward pass -- convolve the image with the kernel, (3) backward pass -- update the kernel using computed gradients.\\
+\vspace{2pt}\textbf{Keys}\\
+Keys are used to provide context and establish relationships between different elements in the input sequence. They are generated from the input data and are compared to queries to calculate attention scores. Keys help determine how much attention should be given to each value when processing the current query.\\
+\vspace{2pt}\textbf{Kullback-Leibler Divergence}\\
+$D_{KL}(P\|Q) = \sum_{x \in X} p(x) \log \frac{p(x)}{q(x)}$\\
+\vspace{2pt}\textbf{Language Modeling}\\
+
+Section 7.5 discusses language modeling techniques and applications.\\
+Self-supervised objectives such as next-token prediction can be used for language modeling with transformers.\\
+\vspace{2pt}\textbf{Language Models}\\
+Neural network-based algorithms that learn probability distributions over sequences of words, enabling tasks such as text generation, translation, summarization, and sentiment analysis.\\
+Language Models\\
+Language models and sequence-to-sequence models are self-supervised.\\
+\vspace{2pt}\textbf{Large Language Models}\\
+Transformer-based models differ in prediction tasks and training objectives, including XLNet, ELMo, GPT-1/2/3, BERT variants, RoBERTa, Big Bird (sparse attention), and others.\\
+\vspace{2pt}\textbf{Layer Normalization}\\
+Layer Normalization: a technique used to normalize the activations of a layer across the entire batch, focusing on the mean and standard deviation of each feature independently. This helps stabilize training, improve convergence, and reduce sensitivity to weight initialization, enhancing the network's performance.\\
+Normalization is applied on the neuron for a single instance across all features; Simpler to implement, no moving averages or parameters; Not dependent on batch size; Works on par with batch normalization or even better.\\
+\vspace{2pt}\textbf{Learning Categories}\\
+Three main categories: supervised learning, unsupervised learning, and reinforcement learning.\\
+\vspace{2pt}\textbf{Learning Rate}\\
+The learning rate $\eta$ is the step size that scales the weight update in gradient descent.\\
+The learning rate determines the size of the step that an optimizer takes during each iteration.\\
+2.9 Learning Rate\\
+Too small: very small parameter change $\rightarrow$ longer training time.\\
+Too large: noisy updates $\rightarrow$ detrimental to training.\\
+Appropriate learning rate depends on the learning problem, the optimizer, the batch size (large batch $\rightarrow$ larger rates, small batch $\rightarrow$ smaller rates), and the stage of training (usually reduced as training progresses).\\
+\vspace{2pt}\textbf{Learning Theory}\\
+A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E. (Mitchell et al. 1997)\\
+\vspace{2pt}\textbf{LeNet}\\
+LeNet-5 is a 7-layer convolutional neural network (2 convolutional layers, 2 pooling layers, 3 fully-connected layers) introduced by Yann LeCun in 1989, based on the earlier Neocognitron model.\\
+Training LeNet was difficult due to heavy hardware constraints at the time, but it demonstrated several useful properties once successfully trained.\\
+\vspace{2pt}\textbf{Licence Plate Recognition System}\\
+Two main problems: (1) if one step fails, subsequent steps also fail; (2) hand-written algorithms don't work in real-world scenarios due to fringe cases.\\
+\vspace{2pt}\textbf{Limitations of Vanilla RNNs}\\
+Limitations of Vanilla RNNs\\
+When unrolled over long sequences, vanilla RNNs become very deep (depth equals sequence length) and struggle with modeling long-term dependencies and training stability.\\
+\vspace{2pt}\textbf{Linear Activation Function}\\
+$y = w \cdot x + b$\\
+$y = w_0 x_0 + w_1 x_1 + b$\A linear activation function is a mathematical function that produces an output directly proportional to its input, i.e., the output increases or decreases at a constant rate without any bending or non-linear behavior.\\
+
+The bias term corresponds to the offset of the decision boundary (line) from the origin, allowing a boundary that does not have to pass through the origin.\\
+\vspace{2pt}\textbf{Linear activation functions}\\
+Usually not practical because most real datasets are not linearly separable; a straight line often cannot separate classes well in classification problems.\\
+\vspace{2pt}\textbf{Linear model formula}\\
+$y = w\cdot x + b$\\
+\vspace{2pt}\textbf{Link Prediction}\\
+Link prediction uses GNNs to predict the existence of edges between nodes, e.g., predicting if there should be a bond between two atoms.\\
+\vspace{2pt}\textbf{Locally Connected Layers}\\
+Layers that connect to local features in small regions of the image.\\
+\vspace{2pt}\textbf{Long Short-Term Memory (LSTM)}\\
+Long Short-Term Memory (LSTM): a recurrent neural network architecture that captures and preserves long-term dependencies via a specialized cell with gating mechanisms, suitable for sequential tasks.\\
+LSTMs consist of a long-term memory (cell state) and a short-term memory (context or hidden state).\\
+LSTMs use three gates to update memories: Forget Gate, Input Gate, and Output Gate.\\
+Forget Gate: determines how much of the past memory should be forgotten.\\
+Input Gate: determines how much the current input should contribute to the memory.\\
+\vspace{2pt}\textbf{LSTMs \& GRUs}\\
+LSTMs \& GRUs\\
+\vspace{2pt}\textbf{Machine Learning}\\
+A subset of AI where systems learn from data without explicit programming.\\
+Developing algorithms that learn from data rather than being hard-coded to solve a task.\\
+Machine Learning (ML): computers learn by example, from data, rather than being explicitly programmed, to solve a task.\\
+\vspace{2pt}\textbf{Machine Learning Balance}\\
+Machine Learning is a game of balance, aiming to generalize from training data to future data.\\
+\vspace{2pt}\textbf{Machine Learning Basics}\\
+There are three categories that describe how a Neural Network learns.\\
+\vspace{2pt}\textbf{Masked Word Prediction}\\
+A self-supervised task where 15 \% of tokens are randomly replaced with a [MASK] token; the model predicts the original token using the surrounding context, and loss is computed only on the masked positions.\\
+\vspace{2pt}\textbf{Max Pooling}\\
+$o = \left[ i - k s \right] + 1$ where i is the image dimension, k is the kernel size, and s is the stride.\\
+A pooling operator that selects the maximum value within each spatial window, downsampling the input while providing invariance to small translations.\\
+Pooling layers provide invariance to small translations of the input.\\
+Divides the input into non-overlapping regions and selects the maximum value from each region, capturing the most prominent feature within that region.\\
+\vspace{2pt}\textbf{Mean Squared Error}\\
+$MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$\\
+$MSE = \frac{1}{N} \sum_{i=1}^{N} (y_{\text{predicted},i} - y_{\text{actual},i})^2$\Mean Squared Error (MSE): metric used for measuring the average squared difference between the predicted values and the actual (true) values in a regression problem. Lower MSE indicates better model predictions.\\
+Mean Squared Error (MSE) is mostly used for regression problems (predicting continuous numeric output).\\
+\vspace{2pt}\textbf{Message Passing}\\
+
+Message passing is a process where each node aggregates embeddings of its neighbor nodes, combines the aggregated embedding with its own embedding, and updates its embedding.\\
+For each node in a graph: 1) Aggregate embeddings of its neighbor nodes; 2) Combine the aggregated embedding with the node embedding; 3) Update the node embedding.\\
+\vspace{2pt}\textbf{Mini Batch Gradient Descent}\\
+Use when: training on medium to large datasets efficiently.\\
+Scenario: computes gradient on a small subset (mini-batch) of data.\\
+Pros: faster convergence than pure \texttt{SGD}; benefits from vectorized operations.\\
+Cons: batch size selection matters; updates are noisy; requires more memory.\\
+\vspace{2pt}\textbf{Mini-Batch Gradient Descent}\\
+Mini-Batch Gradient Descent: an optimization algorithm used to update the parameters of a model by computing the gradient of the loss function using a small subset (mini-batch) of the training data in each iteration, striking a balance between the efficiency of Stochastic Gradient Descent (\texttt{SGD}) and the stability of \texttt{Batch Gradient Descent}.\\
+Instead of working with one sample at a time, batching can be applied: use the network to make predictions for n samples, compute the average loss for those n samples, and take a step to optimize the average loss.\\
+\vspace{2pt}\textbf{MinMax Game}\\
+In a \texttt{GAN}, the discriminator and generator play a min-max game: the discriminator tries to maximize its classification accuracy, while the generator tries to minimize it.\\
+\vspace{2pt}\textbf{Model Complexity}\\
+Increasing model complexity (e.g., more features, more layers) makes the model more flexible, allowing it to fit training data closely but also making it more sensitive to noise (higher variance). Decreasing complexity constrains the model, reducing variance but potentially causing underfitting (higher bias).\\
+\vspace{2pt}\textbf{Model Limitations}\\
+Using a simple summation of word embeddings (bag-of-words) discards word order, causing sentences with different meanings (e.g., "The food was adequate, but just not great" vs. "The food was not just adequate, but great") to receive identical embeddings.\\
+The summation operation leads to loss of sequential information, which limits the model's ability to capture nuanced sentiment.\\
+\vspace{2pt}\textbf{Modern Architectures}\\
+Modern Architectures\\
+\vspace{2pt}\textbf{Momentum Analogy}\\
+Analogy: pushing a ball down a hill; the ball accumulates momentum as it rolls downhill, becoming faster until reaching terminal velocity.\\
+\vspace{2pt}\textbf{Motivation}\\
+3.1 Motivation\\
+Motivation\\
+Motivation\\
+Section 8.1 explains the motivation behind using graph-based representations and \texttt{GNNs}.\\
+Fully connected networks suffer from high computational complexity (exponential growth), require larger capacity and thus more data to generalize, exhibit poor inductive bias by ignoring the geometry of image data, and are not flexible because different image sizes need different models, requiring retraining from scratch.\\
+\vspace{2pt}\textbf{Moving Average}\\
+Pros: Higher learning rate $\rightarrow$ speeding up the training; Regularizes the model; Less sensitivity to initialization. Cons: Depends on batch size $\rightarrow$ No effect with small batches; Cannot work with \texttt{SGD}. Warning: If the batch size is 1, we cannot use batch normalization!\\
+\vspace{2pt}\textbf{Multi-Head Attention}\\
+
+$ \text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \dots, \text{head}_h) W_O \text{ where } \text{head}_i = \text{Attention}(Q W_{Q_i}, K W_{K_i}, V W_{V_i})$\Multi-Head Attention improves performance by (1) dividing the representation space into h sub-spaces, (2) applying parallel linear projections and attention operations, and (3) concatenating the results back to the original space.\\
+\vspace{2pt}\textbf{Multiple Kernels}\\
+$ \text{Depth of the output} = \text{Number of kernels}$\Applying multiple kernels stacks their outputs on top of each other, forming the depth dimension of the feature map.\\
+\vspace{2pt}\textbf{Multiple Layers with Non-Linearity}\\
+Neural networks can learn features directly and end-to-end from raw input data. The activations of the layer before the last layer serve as high-level features representing the input, with the final layer presented with a linear separation. The network maps non-linearly separable input into higher-dimensional spaces where linear separation becomes possible.\\
+\vspace{2pt}\textbf{Multiple linear layers}\\
+There is no advantage from stacking multiple linear layers because their composition remains a linear layer, reducing the network's ability to model complex patterns.\\
+\vspace{2pt}\textbf{n-Gram}\\
+An n-Gram is a contiguous sequence of n items (e.g., words or characters) from a given text.\\
+\vspace{2pt}\textbf{Natural Language Processing}\\
+Making computers capable of understanding human languages.\\
+\vspace{2pt}\textbf{Network Architecture}\\
+Input size of the network is (20, B) where B is the batch size.\\
+The network has 4 layers (including the output layer, excluding the input layer).\\
+\texttt{lastLayer}( \texttt{activation3} ) return \texttt{activation4}\\
+\vspace{2pt}\textbf{Neural Network Architecture}\\
+Architecture selection will greatly affect model performance. It is an example of a very significant inductive bias.\\
+The output layer is a linear layer because by the time the data reaches it, it is already linearly separable.\\
+In hidden layers, the network learns features in the input data.\\
+2-Layer Neural Network (Figure 2.22).\\
+3-Layer Neural Network (Figure 2.23).\\
+\vspace{2pt}\textbf{Neural Network Architectures}\\
+Neural Network Architectures\\
+In the limit of an infinitely-wide neural network with at least one hidden layer, the network becomes a universal function approximator, capable of approximating almost any function.\\
+Idea 1 -- Concatenate the word embeddings of a tweet and feed the resulting vector to a fully-connected neural network. This preserves word order but introduces two problems: (1) input size varies with tweet length, and (2) padding to a fixed size dramatically increases the number of network parameters.\\
+Idea 2 -- Concatenate the word embeddings and process them with a 1-dimensional convolutional neural network (1-D CNN). The convolutional architecture handles variable-length inputs more efficiently, mitigating the parameter explosion seen with fully-connected layers.\\
+\vspace{2pt}\textbf{Neural Network Layer Representation}\\
+$ y_1 = f(w_1 \cdot x + b_1), \; y_2 = f(w_2 \cdot x + b_2)$ \\
+$ y = f(Wx + b)$\A neural network layer can be represented by a weight matrix $W$ where each neuron's weight vector is a row, the input vector $ x$ is a column vector, and $ b$ is the bias vector; the layer output is computed as $ y = f(Wx + b)$.\\
+
+\vspace{2pt}\textbf{Neural Networks}\\
+Nonlinear Mapping: Neural networks can capture complex nonlinear relationships in data.\\
+Pattern Recognition: Excellent at tasks such as image recognition, natural language processing, and other pattern-recognition tasks.\\
+Adaptability: Neural networks can learn from data and adapt to different tasks with appropriate training.\\
+Robustness: Neural networks can generalize well to new data, even in the presence of noise or variability.\\
+Black Box Nature: Neural networks can be challenging to interpret, making their decision-making processes difficult to understand.\\
+Data Dependency: Neural networks require substantial amounts of data for effective training.\\
+Overfitting: There is a risk of overfitting to training data if the model is not properly regularized.\\
+\vspace{2pt}\textbf{Next Sentence Prediction}\\
+A self-supervised task that presents two sentences and asks the model to predict whether they appear consecutively in the original text, using a balanced set of 50 \% positive and 50 \% negative sentence pairs.\\
+\vspace{2pt}\textbf{No Free Lunch Theorem}\\
+The No Free Lunch Theorem states that there is no universal optimization of a learning algorithm that performs best for all possible problems; no one-size-fits-all approach can excel across all domains and problem instances.\\
+\vspace{2pt}\textbf{Node Classification}\\
+Node classification uses graph neural networks to predict the class labels of individual nodes.\\
+\vspace{2pt}\textbf{Noise in Gradients}\\
+Some amount of noise in gradients can help training converge faster; thus larger batch size is not always better.\\
+\vspace{2pt}\textbf{Non-Euclidean Space}\\
+Non-Euclidean Space: also known as curved or non-flat spaces, are mathematical spaces that do not follow the rules of Euclidean geometry. They exhibit different geometric properties compared to Euclidean space (R\textasciicircum{}n), which is flat and follows Euclid's axioms.\\
+\vspace{2pt}\textbf{Non-linear transformations}\\
+Learning non-linear transformations of data helps separate classes; multiple layers with non-linear transformations are useful for capturing complex patterns.\\
+\vspace{2pt}\textbf{Normalization}\\
+$X_i = X_i - \mu_i \, \sigma_i$\Normalization refers to the process of scaling and shifting input data or intermediate activations to ensure they have a consistent and suitable range, improving stability and convergence by mitigating varying magnitudes across features or layers.\\
+The adjacency matrix A is not normalized, causing scale changes in feature vectors. Fix: symmetrically normalize A using the diagonal degree matrix D so that all rows sum to one: $D^{-1/2} A D^{-1/2}$.\\
+2.10 Normalization\\
+We always normalize inputs to prevent the model from paying attention to features with larger range.\\
+$X_i$ is the original value of the $ i$-th element in the data vector.\\
+$\mu_i$ is the mean (average) of all $ i$-th elements across a batch of data.\\
+$\sigma_i$ is the standard deviation of all $ i$-th elements across the same batch.\\
+\vspace{2pt}\textbf{Notation}\\
+$n$ is the number of data points (samples) in the dataset.\\
+$y_i$ represents the actual target value (ground truth) for the $ i$th data point.\\
+$\hat{y}_i$ represents the predicted value for the $ i$th data point by the regression model.\\
+\vspace{2pt}\textbf{Number of Layers}\\
+
+$\text{Number of Layers} = \text{number of hidden layers} + \text{output layer}$\Number of hidden layers + output layer (not including input layer).\\
+\vspace{2pt}\textbf{Object Classification Solutions}\\
+Best solutions to Object Classification are based on Deformable Parts Models.\\
+\vspace{2pt}\textbf{One-hot Encoding}\\
+$\text{Fall} = [1, 0, 0]; \text{Winter} = [0, 1, 0]; \text{Summer} = [0, 0, 1]$\\
+\vspace{2pt}\textbf{One-Hot Encoding}\\
+happy $\rightarrow$ [0, 0, 0, \ldots{}, 1 , \ldots{}, 0]\\
+\vspace{2pt}\textbf{One-hot encoding}\\
+One-hot encoding: a binary representation technique used to convert categorical variables into a numerical format. Each category is represented as a binary vector where a single element is set to 1 (indicating the presence of that category) while all other elements are set to 0 (indicating the absence of other categories).\\
+\vspace{2pt}\textbf{One-Hot Encoding}\\
+One-hot Encoding: a data preprocessing technique used in machine learning and data analysis. It converts categorical data, such as discrete categories or labels, into a binary vector representation. Each category is represented as a binary vector where all elements are zero except for one, which corresponds to the category being ``hot'' or ``on.''\\
+\vspace{2pt}\textbf{One-hot Encoding}\\
+Each word is represented by a unique index; with a vocabulary of V words, the one-hot vector has V dimensions with a single 1 at the word's index.\\
+Dimensions grow with the number of words: e.g., 10000 words means 10000 dimensional encoding.\\
+One-hot encoding assumes each word is completely independent and cannot model relative similarities between words.\\
+\vspace{2pt}\textbf{Optimizers}\\
+An optimizer determines, based on the loss function value, how each parameter (weight) should change, solving the credit assignment problem by assigning credit to parameters according to network performance. Optimizers are typically based on gradient descent.\\
+Optimizers\\
+\vspace{2pt}\textbf{Output Dimension Formula}\\
+$o = (i - 1) * s + (k - 1) - 2p + op + 1$, where $ i = input size$, $ k = kernel size$, $ p = padding$, $ op = output padding$, $ s = stride$\\
+\vspace{2pt}\textbf{Output Padding}\\
+When stride > 1, multiple input sizes can map to the same output size; output padding resolves this ambiguity by effectively increasing the calculated output shape on one side, without adding actual zero-padding to the output.\\
+Output padding: an extra amount of rows and columns added to the output of a transposed convolution, distinct from regular padding.\\
+\vspace{2pt}\textbf{Output Size Computation}\\
+$o = [i + 2p - k s ] + 1$\\
+$o1 = [i + 2p - k s ] + 1$\\
+$o2 = [j + 2p - l s ] + 1$\Theorem: Computing the output size of the feature map (from convolving an image with a kernel).\\
+\vspace{2pt}\textbf{Overfitting}\\
+Overfitting occurs when a model captures noise and random fluctuations in the training data, leading to low training error but high variance and poor performance on unseen data.\\
+Autoencoders often overfit; denoising autoencoders help mitigate this problem.\\
+
+(concept) In transposed convolution, padding has the opposite effect of standard convolution: after computing the output normally, rows and columns are removed from the perimeter.\\
+\vspace{2pt}\textbf{Perceptron}\\
+(definition) Perceptron Activation Function: a decision rule that outputs 1 when the weighted sum of inputs exceeds a threshold, and outputs 0 otherwise.\\
+\vspace{2pt}\textbf{Permutation Invariance}\\
+(definition) Order-invariance or permutation-invariance: property where the model's output does not change when the input tokens are randomly shuffled.\\
+\vspace{2pt}\textbf{Plateaus}\\
+(concept) Plateaus are a problem in optimization but can be addressed using specialized variants on gradient descent.\\
+\vspace{2pt}\textbf{Pointwise (1x1) Convolution}\\
+(definition) Pixel-wise linear transformation where each kernel is applied to a single pixel; originally used in the Network-in-Network model.\\
+(concept) With a non-linearity, $1\times1$ convolutions become non-linear pixel-wise transformations.\\
+(concept) Allows mapping CNN feature maps into lower or higher dimensional spaces for compact representations/compression.\\
+(concept) Efficiently controls network depth across layers while maintaining resolution; used in all modern architectures.\\
+\vspace{2pt}\textbf{Pointwise Convolution}\\
+(concept) Using pointwise convolution, the number of parameters is reduced to a relatively small number.\\
+\vspace{2pt}\textbf{Pooling Layer}\\
+(formula) \texttt{self.pool = nn.MaxPool2d(kernel\_size, stride)}\\
+(formula) \texttt{self.pool = nn.AvgPool2d(kernel\_size, stride)}\\
+\vspace{2pt}\textbf{Pooling Operator}\\
+(definition) A downsampling technique that reduces spatial dimensions by aggregating information from neighboring elements, decreasing computational cost while preserving important features.\\
+(concept) Down-sampling operation (e.g., max-pooling, average-pooling) that reduces spatial dimensions while retaining salient features.\\
+(concept) Pooling (or strided convolutions) compresses information, allowing deeper layers to capture more abstract, foundational features for better generalization.\\
+\vspace{2pt}\textbf{Positional Encoding}\\
+(concept) Because the model lacks recurrent or convolutional layers, positional encodings are added to inject order information, enabling the model to attend to relative positions.\\
+(concept) If Positional Encoding is omitted from Transformers, the input is treated as a set and the learned representation becomes order-invariant (permutation-invariant).\\
+\vspace{2pt}\textbf{Pre-Deep Learning Era}\\
+(concept) Pre-Deep Learning Era\\
+(concept) During the mid-1990s deep learning research experienced a pause before the resurgence of modern CNN architectures.\\
+\vspace{2pt}\textbf{Pre-training with Autoencoders}\\
+(concept) Pre-training with Autoencoders\\
+\vspace{2pt}\textbf{Pre‑training}\\
+(concept) Pre-training with autoencoders: train an autoencoder on a large unlabeled dataset of the same type as the target task, then use the learned encoder weights as a feature extractor for downstream supervised tasks.\\
+\vspace{2pt}\textbf{Problem with Autoencoders}\\
+(concept) Vanilla autoencoders trained with mean-squared error (MSE) loss tend to produce blurry images because the loss encourages the network to predict the average pixel value.\\
+\vspace{2pt}\textbf{PyTorch Convolution Layer}\\
+(definition) Syntax: \texttt{self.conv1 = nn.Conv2d(in\_channels, out\_channels, kernel\_size, stride, padding)} where in\_channels and out\_channels are integers; kernel\_size, stride, and padding may be integers or tuples. Default stride is 1 and default padding is 0.\\
+\vspace{2pt}\textbf{PyTorch Implementation}\\
+(concept) Practical coding of convolutional and pooling layers using PyTorch's nn.Conv2d, nn.Conv3d, nn.MaxPool2d, etc., for building CNN models.\\
+(concept) Implementation of GANs using the PyTorch framework\\
+(concept) Section 7.4 covers practical implementation details using the PyTorch deep learning framework.\\
+(concept) Section 8.7 providing practical implementation details using PyTorch.\\
+(concept) Figure 6.5 illustrates a PyTorch implementation of a discriminator network.\\
+
+\vspace{2pt}\textbf{PyTorch RNN Implementation}\\
+Figures illustrate PyTorch code for a Transformer encoder and a Transformer-based classifier.\\
+\vspace{2pt}\textbf{Queries}\\
+PyTorch provides an RNN module where training code is similar to previous architectures, enabling straightforward implementation of the described recurrent process.\\
+\vspace{2pt}\textbf{Random Coding}\\
+Queries are used to inquire about the relationships between different elements in the input sequence. They represent a specific element's information and are compared to keys to determine how relevant each key is to the current query. Queries are typically generated from the input data and used to compute attention scores.\\
+\vspace{2pt}\textbf{Random Initialization}\\
+Randomly selecting a latent code often yields disjoint, non-continuous regions of the latent space, producing nonsensical outputs; meaningful digits are rarely generated due to high dimensionality.\\
+\vspace{2pt}\textbf{Random Search}\\
+Randomly initializing kernel weights ensures that each filter learns different features, preventing them from converging to the same solution.\\
+Randomly samples hyperparameters from a specified distribution or range, performing a set number of independent trials and evaluating model performance for each set. Particularly useful for large search spaces or when the impact of individual hyperparameters is unclear.\\
+Random Search is often sufficient because Grid Search is very time-consuming and costly.\\
+\vspace{2pt}\textbf{Ravines}\\
+Pros: more efficient than grid search for large spaces and when some hyperparameters are less influential; less computationally demanding. Cons: no guarantee of finding the optimal hyperparameters and may require more trials to converge compared to grid search.\\
+Ravines: areas where the surface curves much more steeply in one dimension than in another, common around local optima.\\
+\vspace{2pt}\textbf{Read-out Function}\\
+SGD has trouble navigating ravines, causing oscillations across the slopes; momentum helps accelerate SGD in the relevant direction and dampens oscillations.\\
+Read-out (graph pooling) function aggregates all node embeddings into a single graph embedding using an order invariant function such as sum, mean, max, or attention.\\
+\vspace{2pt}\textbf{Recurrent Neural Networks}\\
+Must be an order invariant function such as sum, mean, max, attention, etc.\\
+Recurrent Neural Networks\\
+Motivation: learning embeddings of words for sequential data, often using encoders and decoders to map between raw data and vector representations.\\
+\vspace{2pt}\textbf{Recurrent Neural Networks (RNNs)}\\
+RNNs can take variable-sized sequential input and maintain memory or state over time, allowing them to capture dependencies across distant tokens.\\
+\vspace{2pt}\textbf{Regression}\\
+Recurrent Neural Networks (RNNs)\\
+Fitting a polynomial (Regression): given noisy sample data, many possible curves can fit; selecting the best fit requires domain knowledge and appropriate modelling technique.\\
+\vspace{2pt}\textbf{Regularization}\\
+Regularization: refers to techniques that mitigate overfitting by adding constraints or penalties to the model's training process. These techniques discourage the model from ...\\
+2.11 Regularization\\
+
+Reinforcement Learning trains an agent to perform a task without a known optimal solution by having the agent discover the best sequence of actions through ranking its methods; the agent perceives its environment, makes decisions, takes actions toward goals, receives sparse rewards, and its actions dynamically influence the environment, creating a feedback loop.\\
+Sparse rewards occur when feedback (e.g., win/loss) is only provided at the end of an episode, making it difficult for the agent to associate specific actions with outcomes.\\
+Dynamic nature: the agent's actions directly affect the environment, which in turn shapes future options and decisions for the agent.\\
+\vspace{2pt}\textbf{ReLU Activation Function}\\
+\texttt{ReLU} activation function turns on for positive input values, allowing signals to pass unchanged. For negative inputs, it outputs zero, which helps introduce sparsity and mitigates the vanishing gradient issue.\\
+\vspace{2pt}\textbf{Residual Networks}\\
+\texttt{ResNet} addresses training failure of very deep networks (even with \texttt{Batch Normalization} and \texttt{ReLUs}) by employing skip connections (shortcuts) that give deeper layers direct access to earlier signals, mitigating vanishing gradients.\\
+\texttt{ResNet} won \texttt{ILSVRC} 2015 with a 3.57\% error rate.\\
+\vspace{2pt}\textbf{ResNet}\\
+Residual blocks (multiple convolutions with skip connections); downsampling using stride 2 instead of max/avg pooling (strided convolution); global average pooling after the last convolutional layers (embedding has no spatial dimension and is only 512 floats); only a single fully-connected classification layer (learned embeddings are so good we don't need a complex classifier at the end of the model, allowing variable input sizes).\\
+Post-\texttt{ILVRC}: the last \texttt{ILVRC} competition was held in 2017; \texttt{ResNets} remain the most popular architecture for many problems; object recognition in-the-wild is still not solved, as not all edge cases can be recognized yet.\\
+\vspace{2pt}\textbf{RNN architectures}\\
+\texttt{LSTMs}/\texttt{GRUs} can be trained on longer sequences and are much better at learning long-term relationships compared to \texttt{vanilla RNNs}.\\
+\texttt{LSTMs}/\texttt{GRUs} are easier to train and achieve better performance than \texttt{vanilla RNNs}.\\
+\texttt{LSTM}/\texttt{GRU} models may not have finished converging; with more training they improve further.\\
+\vspace{2pt}\textbf{RNN Forward Path}\\
+Forward path: the computation from input to output at each time step in an \texttt{RNN}, analogous to a fully-connected layer when vectors are concatenated.\\
+When concatenated input/hidden and output/hidden vectors are treated as simple input and output, the forward path of an \texttt{RNN} is equivalent to a fully-connected neural network.\\
+\vspace{2pt}\textbf{RNN Layers}\\
+\texttt{RNN} layers have a recursive, unrolled structure that processes sequences step-by-step, using past hidden states to determine future states.\\
+Many real-world problems involve inputs/outputs of varying sizes and require past information to accurately model future data; \texttt{RNN}s address this by using their past to determine their future.\\
+\vspace{2pt}\textbf{RNN Model Types}\\
+Common \texttt{RNN} setups include many-to-one and many-to-many (same length). Other tasks such as translation and image captioning require slightly different \texttt{RNN} configurations.\\
+\vspace{2pt}\textbf{RNN vs Transformer}\\
+
+\vspace{2pt}\textbf{RNNs}\\
+RNNs struggle with long-range dependencies, suffer from gradient vanishing/explosion, require many training steps, and prevent parallel computation. Transformers alleviate these issues: they handle long-range dependencies, have reduced gradient problems, need fewer training steps, and enable parallel computation due to the absence of recurrence.\\
+Recurrent Neural Networks (\texttt{RNNs}) are used to model sequences.\\
+Vanilla \texttt{RNNs} cannot capture long dependencies due to exploding/vanishing gradients.\\
+\texttt{LSTMs} and \texttt{GRUs} are commonly preferred over vanilla \texttt{RNNs} for handling long-range dependencies.\\
+\texttt{RNNs} are sequential in nature, making them inefficient for full vectorization or GPU parallelization.\\
+\vspace{2pt}\textbf{RotNet}\\
+\texttt{RotNet}: architecture designed for the task of image rotation recognition. It is trained to predict the rotation angle of an input image, typically in 90-degree increments (0°, 90°, 180°, or 270°). \texttt{RotNet} helps improve the robustness of machine learning models by enabling them to recognize objects in images regardless of their orientation, which can be useful in various computer vision applications.\\
+Idea: Rotate images randomly by 0°, 90°, 180°, or 270° and make the model predict the rotation angle.\\
+RotNet Multiclass Classification: The task is multi-class classification with 4 classes (using cross-entropy loss) with free labels generated automatically. Disadvantage: the task is still human-generated and needs to be "interesting" enough; otherwise the network may cheat.\\
+\vspace{2pt}\textbf{Saliency Maps}\\
+Saliency Maps are visual representations highlighting the most important and relevant regions or features within an image, indicating where human visual attention is likely to be drawn.\\
+Procedure to generate saliency maps: 1) Feed the image to the network, 2) Compute gradients back to the input image, 3) Take the maximum absolute gradient across channels, 4) Visualize the result.\\
+\vspace{2pt}\textbf{Self-loops}\\
+Multiplication with the adjacency matrix \texttt{A} sums the feature vectors of all neighboring nodes but not the node itself. Fix: add self-loops by adding the identity matrix to \texttt{A}, i.e., \texttt{A} = \texttt{A} + \texttt{I}.\\
+\vspace{2pt}\textbf{Self-supervised Learning}\\
+Use the success of supervised learning without relying on human-provided supervision (automatic supervision), such as masking part of the input and predicting the masked information.\\
+\vspace{2pt}\textbf{Self-Supervised Learning}\\
+Self-Supervised Learning\\
+\vspace{2pt}\textbf{Self‑Supervised Learning}\\
+Cast unsupervised learning into a supervised setting by defining proxy tasks whose labels are generated automatically, forcing the model to learn meaningful representations without human-annotated data.\\
+\vspace{2pt}\textbf{Semi-supervised Learning}\\
+Learning from data that mostly consists of unlabeled samples, with a small amount of human-labeled data also available.\\
+\vspace{2pt}\textbf{Sentiment Analysis}\\
+Sentiment analysis is the task of identifying the sentiment (e.g., positive or negative) conveyed by a piece of text. It can be applied to movie reviews, product feedback, emails, tweets, etc.\\
+Sentiment140 is a dataset of 1,600,000 tweets collected for a course project, where sentiment labels are derived from emoticons: :) indicates positive sentiment and :( indicates negative sentiment.\\
+\vspace{2pt}\textbf{Sequence-Level Predictions}\\
+Predictions made based on the entire input sequence as a whole, used in tasks such as text summarization, machine summarization, and sequence-to-sequence language translation.\\
+
+\vspace{2pt}\textbf{Sequence-to-Sequence Models}\\
+The model generates an output sequence that summarizes or transforms the input sequence, and evaluation considers the quality of the whole generated sequence.\\
+Sequence-to-Sequence models map an input sequence to an output sequence and are generative, functioning similarly to autoencoders.\\
+Sequence-to-Sequence Models for mapping input sequences to output sequences\\
+\vspace{2pt}\textbf{SGD}\\
+Stochastic Gradient Descent (\texttt{SGD}): Updates model parameters using the gradient of a single randomly selected data point. Use when training on large datasets with limited computational resources. Pros: Faster updates, can escape local minima, suitable for online learning. Cons: Noisy updates, slower convergence on some problems.\\
+\vspace{2pt}\textbf{SGD with Momentum}\\
+\texttt{SGD with Momentum}: Incorporates a moving average of past gradients to accelerate convergence. Use when training needs faster convergence and better handling of noisy gradients. Pros: Faster convergence, reduced oscillations, better handling of noisy data. Cons: May overshoot in some cases.\\
+\vspace{2pt}\textbf{Sigmoid activation function}\\
+Sigmoid Activation Function: a mathematical function that smoothly maps input values to a specified output range, characterized by an S-shaped curve.\\
+\vspace{2pt}\textbf{Sigmoid Function}\\
+$f(x)=\tanh(x)$\\
+$f(x)=\frac{1}{1+e^{-x}}$\Sigmoid activation functions are commonly used in neural networks to introduce non-linearity, allowing the network to capture complex relationships in data. They are useful for transforming raw scores into probabilities or for controlling the strength of neuron activations.\\
+The sigmoid activation is $f(a)=\frac{1}{1+e^{-a}}$ and its derivative is $\frac{dy}{da}=(1-y)\,y$.\\
+Range between $[-1, 1]$ or $[0, 1]$\Saturated neurons ``kill'' the gradients\\
+\vspace{2pt}\textbf{Sign function}\\
+$f(x)=\operatorname{sign}(x)$\\
+$f(x)=\operatorname{sign}(x)$\\
+\vspace{2pt}\textbf{SimCLR}\\
+SimCLR (Simultaneous Contrastive Learning) is a self-supervised deep learning framework for learning powerful representations from unlabeled data, encouraging the model to pull together similar data points (positive pairs) while pushing apart dissimilar ones (negative pairs) in a high-dimensional feature space.\\
+Augmentations of the same image are positive examples; augmentations of different images are negative examples; same images are pushed together, different images are pushed away.\\
+\vspace{2pt}\textbf{Simple Attention Mechanism}\\
+An attention-based pooling for classifying tweets uses a fully-connected network to generate a score for each word embedding, normalizes these scores, and aggregates the embeddings weighted by the scores, rather than simple sum or average.\\
+\vspace{2pt}\textbf{Skip Connections}\\
+A technique where the output of one layer or block of layers is combined with the output of a previous layer. This helps mitigate issues like vanishing gradients and aids in training deeper neural networks by allowing information to flow more directly across layers.\\
+\vspace{2pt}\textbf{Skip-Connections}\\
+Connections that bypass intermediate states, linking a layer directly to earlier states to preserve hidden state/context over long terms and mitigate vanishing gradients.\\
+Ideal skip connections to all previous states are too expensive, but limited skip connections can help retain long-term information.\\
+\vspace{2pt}\textbf{Skip-Gram}\\
+Skip-Gram predicts context words from a target (center) word; the center word is input and surrounding words are output.\\
+
+\vspace{2pt}\textbf{Sliding Window}\\
+Given a word, predict its neighboring words within a window defined by a hyper-parameter.\\
+The output layer is only used for training; after training, only the weights from input to hidden layer are retained.\\
+Words with similar context are mapped to similar embeddings.\\
+Works well with small datasets, captures better semantic relationships, and represents less frequent words effectively.\\
+A sliding window selects a central word as input and the surrounding words as context, analogous to a convolutional kernel sliding over an image.\\
+\vspace{2pt}\textbf{Softmax}\\
+Softmax function: normalizes the logits into a categorical probability distribution over all possible classes. Produces normalized probabilities for multiple classes.\\
+Softmax is needed to represent class probabilities when differentiating images into multiple classes.\\
+\vspace{2pt}\textbf{Softmax Temperature Scaling}\\
+Softmax Temperature Scaling: helps with the problem of over-confidence in neural networks by scaling the input logits to the softmax with a temperature.\\
+Low Temperature (larger logits, more confident): higher quality samples, less variety; High Temperature (smaller logits, less confident): lower quality samples, more variety.\\
+\vspace{2pt}\textbf{Sparse Implementation}\\
+Sparse implementation is better but dense implementation is more intuitive to implement.\\
+Implementing sparse operations are supported by PyTorch but are not very straightforward.\\
+PyTorch Geometric (PYG) provides utilities for sparse graph neural network operations.\\
+\vspace{2pt}\textbf{Stacked Autoencoders}\\
+Stacked (deep) autoencoders have multiple hidden layers and are typically symmetrical around the central coding layer.\\
+\vspace{2pt}\textbf{Stacking GCNs}\\
+A GCN layer updates node embeddings based on immediate neighbors. Stacking multiple GCN layers allows information to propagate from farther neighborhoods, analogous to increasing the receptive field in CNNs.\\
+\vspace{2pt}\textbf{Static Embeddings}\\
+Word2Vec/GloVe learn static embeddings where each token has a single embedding regardless of context, i.e., one embedding for all senses.\\
+\vspace{2pt}\textbf{Stochastic Gradient Descent}\\
+Stochastic Gradient Descent: an optimization algorithm used to iteratively (one at a time) update the parameters of a model by computing the gradient of the loss function using a randomly selected subset of the training data in each iteration.\\
+A gradient descent variant where, for each iteration, a single training sample (or a small mini-batch) from the dataset is used to evaluate the gradient and update the model parameters.\\
+SGD allows you to do more of a global search for an optimum, often resulting in a better set of weights for your model.\\
+Computing the gradient takes less time, but may not actually be faster; the optimization path can look rather erratic.\\
+\vspace{2pt}\textbf{Stochastic Gradient Descent with Momentum}\\
+$v_{t+1} = \mu v_t - \alpha \nabla J(\theta_t)$\\
+$\theta_{t+1} = \theta_t +
+
+\vspace{2pt}\textbf{Strides}\\
+A downsampling technique that combines convolution and pooling by applying convolutional operations with larger strides (spacing between filter placements) than usual, resulting in reduced spatial dimensions and aggregated feature representation.\\
+Recent architectures replace explicit pooling layers with strided convolutions, shifting the kernel by the stride (e.g., $s = 2$) when computing the convolution.\\
+\vspace{2pt}\textbf{Supervised Learning}\\
+Supervised Learning: training by feeding labeled data to the computer, leading it to predict the correct label for inputted data (relationship between input and label).\\
+Regression: the model predicts a continuous or real-valued output. Classification: the model assigns inputs to specific categories or classes.\\
+Performance metrics: mean squared error for regression; accuracy, precision, and recall (true positive rate) for classification.\\
+\vspace{2pt}\textbf{Symbolic Approach}\\
+A logic-based AI approach that achieves intelligent behavior by manipulating symbols or abstract representations using formal logic, rules, and explicit knowledge representations.\\
+Strengths: transparency and logical reasoning; Weaknesses: difficulty handling complexity and contextual understanding.\\
+Rule-Based Systems: AI systems use rule-based systems to infer conclusions from given premises.\\
+Logic and Inference: Logical reasoning derives new information from existing knowledge.\\
+Expert Systems: Early AI applications encoded human expertise as rules and facts.\\
+Strength -- Transparency: Provides clear, interpretable representations of knowledge and reasoning.\\
+Strength -- Logical Reasoning: Well-suited for problems requiring logical inference and deductive reasoning.\\
+Strength -- Human-Readable: Representations are often understandable to humans.\\
+Weakness -- Complexity: Struggles to manage and represent the complexity of real-world domains.\\
+Weakness -- Knowledge Acquisition: Building comprehensive rule sets for complex domains is challenging.\\
+Weakness -- Lack of Contextual Understanding: Difficulty handling ambiguous or incomplete information.\\
+\vspace{2pt}\textbf{Targeted vs. Non-Targeted Attack}\\
+$f(x + \epsilon) = \text{correct class}$ \\
+$f(x + \epsilon) = \text{target class}$\Non-targeted attack -- minimize the probability that $f(x + \epsilon)$ equals the correct class; the attacker aims to cause any misclassification without specifying a particular target class.\\
+Targeted attack -- maximize the probability that $f(x + \epsilon)$ equals a chosen target class; the attacker aims for a specific misclassification.\\
+Targeted and non-targeted attacks differ in the attacker's intent: targeted attacks have a specific desired outcome, while non-targeted attacks only aim to disrupt correct classification.\\
+\vspace{2pt}\textbf{Teacher Forcing}\\
+A training technique where the ground-truth token is provided as the next input to the RNN instead of the model's own prediction, forcing the model to stay close to the true sequence.\\
+\vspace{2pt}\textbf{Text vs Image Challenges}\\
+Working with text is more challenging than images due to grammar, spelling, large vocabularies, and decisions about word-level versus subword-level representations.\\
+\vspace{2pt}\textbf{Token-Level Predictions}\\
+Predictions or labels assigned to individual elements (tokens) within a sequence, useful for part-of-speech tagging, named entity recognition, sentiment analysis, and machine translation.\\
+Each token is annotated or classified independently within the sequence.\\
+\vspace{2pt}\textbf{Trainable Weights Calculation}\\
+
+27 trainable weights = $3 \times 3 \times 3$\The number of trainable weights equals the total number of elements in the convolution kernel tensor.\\
+\vspace{2pt}\textbf{Training Deep Models Issues}\\
+Training very deep models often fails due to vanishing or exploding gradients.\\
+Improved initialization for ReLUs helps address gradient issues.\\
+Normalization techniques such as Batch Normalization mitigate gradient problems.\\
+Residual connections enable training of very deep networks.\\
+\vspace{2pt}\textbf{Training Neural Networks}\\
+$E = \text{Loss}(y, t)$\Forward Pass: (definition not provided in the source text)\\
+Prediction step: $y = \texttt{M}(w; x)$\Comparison step: compute loss between predicted output $y$ and ground truth $ t$\Adjustment step: update weights/bias to minimize error\\
+Repetition step: repeat until an acceptable level of error is reached\\
+Input: $x$, Predicted Output: $ y$, Ground Truth Label: $ t$, Neuron model: \texttt{M}(w; x)\\
+\vspace{2pt}\textbf{Training Process}\\
+The forward and backward passes are iteratively repeated multiple times, refining the network's parameters to improve predictions over time.\\
+\vspace{2pt}\textbf{Transfer Learning}\\
+An approach where a model trained on one task is re-purposed or fine-tuned for a different but related task. This leverages knowledge gained from the source task to improve learning efficiency and performance on the target task, especially when data is limited.\\
+Transfer learning allows us to leverage information from larger data sets with low computational cost, effectively acting like a larger training set.\\
+Assumption: the source dataset (e.g., \texttt{ImageNet}) is similar enough to the new task that features learned on the source can improve performance on the target.\\
+Transfer Learning\\
+Procedure: (1) Train a \texttt{CNN} (e.g., \texttt{AlexNet}) on a large image dataset (e.g., \texttt{ImageNet}). (2) Remove the final classification layers and freeze the remaining weights. (3) Add and train new layers for the target task, using the frozen \texttt{CNN} as a feature extractor.\\
+Transfer learning helps prevent overfitting because the pretrained architecture and weights (e.g., \texttt{AlexNet} trained on >1 million images) already capture general visual knowledge, reducing the need for large task-specific datasets.\\
+Pre-training a model on large corpora with self-supervised objectives (e.g., \texttt{BERT}) and then fine-tuning it on downstream tasks, enabling strong performance with limited task-specific data.\\
+\vspace{2pt}\textbf{Transformer Encoder}\\
+$\texttt{FFN}(x) = \max(0, x W\_1 + b\_1) W\_2 + b\_2$\\
+$\texttt{LayerNorm}(x + \texttt{Sublayer}(x))$\Each encoder layer consists of a multi-head self-attention sub-layer, a fully-connected feed-forward sub-layer, and a residual connection around each sub-layer followed by layer normalization.\\
+\vspace{2pt}\textbf{Transformers}\\
+A deep-learning architecture for natural language processing that handles sequential data efficiently via a self-attention mechanism, capturing long-range dependencies and enabling parallelizable, scalable models for tasks such as machine translation and text generation.\\
+Motivation\\
+Attention Mechanism\\
+Transformers\\
+\vspace{2pt}\textbf{Transposed Convolution}\\
+
+(definition) Transposed Convolution (also called deconvolution or up-sampling) expands the spatial dimensions of data in CNNs by using learnable filters to perform upsampling or interpolation, generating higher-resolution feature maps from lower-resolution input. It operates with filters, kernels, padding, and strides like regular convolutions, but maps from 1 pixel to a $K\times K$ region instead of the reverse.\\
+(definition) A layer that upsamples an input by (1) taking each input pixel, (2) multiplying it with each kernel value to form a weighted kernel, (3) inserting this weighted kernel into the output grid, and (4) summing overlapping contributions.\\
+(definition) Transposed convolution padding: padding applied in a transposed convolution layer to control the spatial dimensions of the output.\\
+(definition) Transpose stride: the stride parameter in a transposed convolution that increases the resolution (upsamples) of the feature map.\\
+(concept) Theorem: Computing the output size of the feature map when transposed convolving an image with a kernel.\\
+\vspace{2pt}\textbf{Unconditional vs Conditional Generative Models}\\
+(definition) Unconditional generative models receive only random noise as input and have no control over the generated category. Conditional generative models receive additional information such as a one-hot target category vector, random noise, or an embedding from another model, providing high-level control over what is generated.\\
+\vspace{2pt}\textbf{Underfitting}\\
+(concept) Underfitting occurs when a model is too simple to capture the underlying patterns in the data, resulting in high bias and poor performance on both training and new data.\\
+\vspace{2pt}\textbf{Unsupervised Learning}\\
+(definition) Unsupervised Learning involves training on unlabeled data, allowing the model to discover relationships among input elements (e.g., clustering, grouping); it requires observations without human annotations and is also known as self-supervised or semi-supervised learning.\\
+(definition) Learning patterns from data without human annotations (e.g., clustering, density estimation, dimensionality reduction).\\
+\vspace{2pt}\textbf{Values}\\
+(definition) Represent the information retrieved or queried based on relationships between keys and queries; values hold the content/features of each input element and are weighted/combined according to attention scores during self-attention.\\
+\vspace{2pt}\textbf{Vanishing Gradient Problem}\\
+(theorem) The vanishing gradient problem pertains to the phenomenon wherein the gradients of the loss function with respect to the parameters of the earlier layers become extremely small as they are back-propagated through the network. This reduction diminishes weight updates for early layers, causing slow or stalled learning and hindering the network's ability to capture complex relationships.\\
+\vspace{2pt}\textbf{Vanishing Gradients}\\
+(definition) If the discriminator becomes too good, the generator receives little or no gradient signal because small changes in generator weights do not affect the discriminator output, preventing proper feedback and incremental improvement of the generator.\\
+(concept) The discriminator is used as a loss function for the generator; when it is overly accurate, the loss landscape becomes flat for the generator, leading to vanishing gradients.\\
+\vspace{2pt}\textbf{Variable-length Sequence Generation}\\
+(concept) Use dedicated control symbols \texttt{<BOS>} (Beginning of Sequence) and \texttt{<EOS>} (End of Sequence) to indicate start and end of generated sequences; generation stops when the \texttt{RNN} outputs \texttt{<EOS>}.\\
+
+\vspace{2pt}\textbf{Variance}\\
+During training, the RNN is fed the ground-truth token at each step and the loss is computed via cross-entropy between the model's prediction and the next ground-truth token.\\
+Variance refers to the model's sensitivity to small fluctuations or changes in the training data. High variance means the model fits the training data closely, including noise, resulting in good training performance but poor performance on unseen data (overfitting).\\
+\vspace{2pt}\textbf{Variational Autoencoder}\\
+Encoder distribution \texttt{q\_{\phi}}(z|x) = $\mathcal{N}(\mu, \sigma)$ and prior distribution \texttt{p}(z) = $\mathcal{N}(0, I)$.\\
+Variational Autoencoders are probabilistic (outputs are partly determined by chance even after training) and generative (can generate an infinite number of new instances that resemble the training set). They impose a distribution constraint on the latent space to have a smooth space.\\
+Encoder generates a normal distribution with mean $\mu$ and a standard deviation $\sigma$ instead of a fixed embedding. An embedding is sampled from the distribution and the decoder decodes the sample to reconstruct the input.\\
+\vspace{2pt}\textbf{Variational Autoencoders}\\
+$DKL(p||q) = \frac{1}{2} \sum_{i=1}^{N} [\mu_i^{2} + \sigma_i^{2} - (1 + \log(\sigma_i^{2}))]$.\\
+Variational Autoencoders (VAEs) are probabilistic generative models consisting of an encoder and a decoder neural network. VAEs learn a probabilistic mapping between input data and a latent space where data points are represented as probability distributions.\\
+Variational Autoencoders\\
+VAEs help mitigate smoothness issues in the embedding space of denoising autoencoders by enforcing a continuous, regularized latent distribution.\\
+Variational autoencoders use probability distributions for embeddings so that the entire embedding subspace is a valid input to the decoder, ensuring that encoder outputs are meaningful.\\
+\vspace{2pt}\textbf{VGG}\\
+VGG (Visual Geometry Group) achieved 2nd place in ILSVRC 2014 classification with 7.3\% Top-5 error and won the localization challenge.\\
+Proposed VGG models have 11, 13, 16, and 19 layers and contain a very large number of parameters (138 million) compared to AlexNet (60 million).\\
+VGG uses only 3$\times$3 filters; stacked 3$\times$3 filters can approximate any larger-sized convolution more efficiently, establishing the modern standard for CNN filter size.\\
+Data augmentation techniques introduced by VGG have become commonly used in subsequent CNN research.\\
+\vspace{2pt}\textbf{Vision Transformers (ViT)}\\
+ViT applies the Transformer architecture to image patches, achieving higher accuracy on large vision datasets than CNNs due to higher modeling capacity, lower inductive bias, and global receptive fields.\\
+\vspace{2pt}\textbf{Visual Object Classification}\\
+Visual Object Classification is considered the holy grail of Computer Vision; it involves classifying objects within an image, e.g., dog vs. cat.\\
+\vspace{2pt}\textbf{Visualizing Convolutional Filters}\\
+Visualizing Convolutional Filters\\
+\vspace{2pt}\textbf{Visualizing Reconstructions}\\
+Comparing inputs and outputs ensures proper training of an autoencoder.\\
+\vspace{2pt}\textbf{Weight Decay (L2)}\\
+Loss = original loss + $\lambda$ * $ Sigma_{i} w_{i}^{2}$ (L2 penalty term).\\
+Weight Decay (L2) adds a penalty term (summation of all weights of the network) to the loss function during training, discouraging excessively large weights and promoting simpler, more generalizable solutions.\\
+
+When a model tries to overfit, it inflates weights, warping the feature space; weight decay prevents weights from growing too much, lowering variance. Weight reduction is multiplicative and proportional to the scale of $W$ .\\
+\vspace{2pt}\textbf{Weight Sharing}\\
+Detect the same local features across the entire image; outputs of kernels are connected to neurons instead of each individual pixel, making the network more efficient than fully-connected networks.\\
+Weight sharing refers to the practice in convolutional neural networks where the same set of kernel weights is applied across different spatial locations of the input, reducing the total number of parameters.\\
+\vspace{2pt}\textbf{White-Box vs. Black-Box Attacks}\\
+White-box attack -- assumes full knowledge of the model architecture and weights, allowing direct optimization of the perturbation $\epsilon$ .\\
+Black-box attack -- does not have access to the model's architecture or weights; instead uses a substitute differentiable model to approximate the target and generate perturbations.\\
+Adversarial attacks often transfer across models because the perturbations are not tailored to a specific set of parameters.\\
+White-box and black-box attacks differ in the attacker's knowledge of the model.\\
+\vspace{2pt}\textbf{Why use convolution}\\
+In signal processing, convolution extracts important features of the input signal. Instead of predicting directly from raw pixels, a kernel extracts salient features (edges, textures, etc.) and predictions are made based on these feature maps, which represent the most important assets of the image.\\
+\vspace{2pt}\textbf{Word Analogies}\\
+Word analogies in embedding spaces reveal structured relationships, indicating that models capture semantic patterns.\\
+\vspace{2pt}\textbf{Word Embeddings}\\
+$\texttt{tweet\_embedding} = \sum_{i=1}^{n} \text{GloVe}(\texttt{word\_i})$ // sum of the GloVe embeddings of all words in the tweet (ignoring words without embeddings)\\
+Word Embedding models were created to address the problem that word meaning is not represented by the letters that make up the word but comes from context, the sequence of characters, and how words are used together.\\
+Word Embeddings\\
+The meaning of a word comes from the sequence of characters and how they are used in conjunction with other words; meaning comes from context.\\
+The term "Word embedding" was coined in 2003 (Bengio et al.).\\
+\vspace{2pt}\textbf{word2vec}\\
+word2vec is a family of architectures used to learn word embeddings, consisting of Skip-Gram and Continuous Bag-of-Words (CBOW) models.\\
+word2vec model proposed in 2013 (Mikolov et al.).\\
+\vspace{2pt}\textbf{Word2Vec and GloVe}\\
+Word2Vec and GloVe models produce fixed (static) embeddings for each word, which is insufficient because natural language meaning is contextual.\\
+\vspace{2pt}\textbf{Word2vec Limitations}\\
+The model is constrained to windows of text and lacks explicit global information.\\
+\vspace{2pt}\textbf{XOR Function}\\
+XOR (exclusive OR) is a logical operation that takes two inputs and produces an output of 1 (true) when the inputs differ and 0 (false) when the inputs are the same.\\
+A single decision boundary (one NN layer) cannot solve the XOR problem; at least two decision boundaries (i.e., a hidden layer) are required.\\
+\vspace{2pt}\textbf{Zero Padding}\\
+
+\vspace{2pt}\textbf{definition}\\
+Zero Padding: adding zeros around the border of the image before convolution. It is applied to (1) keep width and height consistent with the previous layer and (2) preserve information near the image borders.\\
+
+\end{multicols}
+\end{document}
