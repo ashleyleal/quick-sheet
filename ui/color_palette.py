@@ -28,50 +28,6 @@ COLOR_PALETTES = {
         "tag_instructions": "#FCE7F3",
         "tag_instructions_text": "#9D174D"
     },
-    "Forest Green": {
-        "primary": "#065F46",
-        "secondary": "#10B981",
-        "accent": "#34D399",
-        "background": "#F0FDF4",
-        "surface": "#ECFDF5",
-        "text": "#1F2937",
-        "border": "#D1D5DB",
-        "success": "#10B981",
-        "warning": "#F59E0B",
-        "error": "#EF4444",
-        "tag_exam": "#FEF3C7",
-        "tag_exam_text": "#92400E",
-        "tag_assignment": "#D1FAE5",
-        "tag_assignment_text": "#065F46",
-        "tag_notes": "#A7F3D0",
-        "tag_notes_text": "#047857",
-        "tag_slides": "#BBF7D0",
-        "tag_slides_text": "#065F46",
-        "tag_instructions": "#C7D2FE",
-        "tag_instructions_text": "#3730A3"
-    },
-    "Sunset Purple": {
-        "primary": "#7C3AED",
-        "secondary": "#8B5CF6",
-        "accent": "#A78BFA",
-        "background": "#FAF5FF",
-        "surface": "#F5F3FF",
-        "text": "#1F2937",
-        "border": "#D1D5DB",
-        "success": "#10B981",
-        "warning": "#F59E0B",
-        "error": "#EF4444",
-        "tag_exam": "#FDE68A",
-        "tag_exam_text": "#92400E",
-        "tag_assignment": "#DDD6FE",
-        "tag_assignment_text": "#5B21B6",
-        "tag_notes": "#E9D5FF",
-        "tag_notes_text": "#7C3AED",
-        "tag_slides": "#EDE9FE",
-        "tag_slides_text": "#5B21B6",
-        "tag_instructions": "#FBCFE8",
-        "tag_instructions_text": "#9D174D"
-    },
     "Midnight Dark": {
         "primary": "#1F2937",
         "secondary": "#374151",
@@ -93,127 +49,83 @@ COLOR_PALETTES = {
         "tag_slides_text": "#5B21B6",
         "tag_instructions": "#F87171",
         "tag_instructions_text": "#7F1D1D"
-    },
-    "Coral Red": {
-        "primary": "#DC2626",
-        "secondary": "#EF4444",
-        "accent": "#F87171",
-        "background": "#FEF2F2",
-        "surface": "#FEE2E2",
-        "text": "#1F2937",
-        "border": "#D1D5DB",
-        "success": "#10B981",
-        "warning": "#F59E0B",
-        "error": "#DC2626",
-        "tag_exam": "#FDE68A",
-        "tag_exam_text": "#92400E",
-        "tag_assignment": "#FECACA",
-        "tag_assignment_text": "#991B1B",
-        "tag_notes": "#FED7D7",
-        "tag_notes_text": "#DC2626",
-        "tag_slides": "#FEE2E2",
-        "tag_slides_text": "#B91C1C",
-        "tag_instructions": "#FBCFE8",
-        "tag_instructions_text": "#9D174D"
     }
 }
 
 # ============================================================================
-# CUSTOM COLOR PICKER FUNCTION
+# SIMPLIFIED PALETTE SELECTOR (Auto-detect theme)
 # ============================================================================
 
-def custom_color_picker():
-    """UI for creating a custom color palette"""
-    st.markdown("### 🎨 Customize Your Palette")
+def palette_selector_ui():
+    """Auto-detect system theme and return appropriate palette"""
     
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        primary = st.color_picker("Primary Color", "#1E3A8A")
-        background = st.color_picker("Background", "#F0F9FF")
-        tag_exam_bg = st.color_picker("Exam Tag BG", "#FEF3C7")
-        
-    with col2:
-        secondary = st.color_picker("Secondary Color", "#3B82F6")
-        surface = st.color_picker("Surface", "#EFF6FF")
-        tag_assignment_bg = st.color_picker("Assignment Tag BG", "#D1FAE5")
-        
-    with col3:
-        accent = st.color_picker("Accent Color", "#60A5FA")
-        border = st.color_picker("Border", "#D1D5DB")
-        tag_notes_bg = st.color_picker("Notes Tag BG", "#DBEAFE")
-    
-    col4, col5, col6 = st.columns(3)
-    with col4:
-        text = st.color_picker("Text Color", "#1F2937")
-        tag_exam_text = st.color_picker("Exam Tag Text", "#92400E")
-    with col5:
-        success = st.color_picker("Success", "#10B981")
-        tag_assignment_text = st.color_picker("Assignment Tag Text", "#065F46")
-    with col6:
-        warning = st.color_picker("Warning", "#F59E0B")
-        tag_notes_text = st.color_picker("Notes Tag Text", "#1E40AF")
-    
-    return {
-        "primary": primary,
-        "secondary": secondary,
-        "accent": accent,
-        "background": background,
-        "surface": surface,
-        "text": text,
-        "border": border,
-        "success": success,
-        "warning": warning,
-        "error": "#EF4444",
-        "tag_exam": tag_exam_bg,
-        "tag_exam_text": tag_exam_text,
-        "tag_assignment": tag_assignment_bg,
-        "tag_assignment_text": tag_assignment_text,
-        "tag_notes": tag_notes_bg,
-        "tag_notes_text": tag_notes_text,
-        "tag_slides": "#E0E7FF",
-        "tag_slides_text": "#3730A3",
-        "tag_instructions": "#FCE7F3",
-        "tag_instructions_text": "#9D174D"
-    }
+    # Simple: just return Ocean Blue (light mode) by default
+    # The actual theme switching will be handled by CSS media queries
+    return COLOR_PALETTES["Ocean Blue"]
 
 # ============================================================================
-# CSS GENERATOR FUNCTION
+# CSS GENERATOR FUNCTION WITH AUTO THEME SWITCHING
 # ============================================================================
 
 def generate_css(palette):
-    """Generate CSS with the selected color palette"""
+    """Generate CSS that auto-switches between light/dark mode"""
     
-    # Helper function to adjust color brightness
-    def adjust_color(color, factor):
-        """Simple function to lighten/darken a color"""
-        # This is a placeholder - in production, you'd want a proper color adjustment
-        return color
+    # Get both palettes
+    light_palette = COLOR_PALETTES["Ocean Blue"]
+    dark_palette = COLOR_PALETTES["Midnight Dark"]
     
     css = f"""
     <style>
+    /* Default light mode (Ocean Blue) */
     :root {{
-        --primary-color: {palette['primary']};
-        --secondary-color: {palette['secondary']};
-        --accent-color: {palette['accent']};
-        --background-color: {palette['background']};
-        --surface-color: {palette['surface']};
-        --text-color: {palette['text']};
-        --border-color: {palette['border']};
-        --success-color: {palette['success']};
-        --warning-color: {palette['warning']};
-        --error-color: {palette['error']};
+        --primary-color: {light_palette['primary']};
+        --secondary-color: {light_palette['secondary']};
+        --accent-color: {light_palette['accent']};
+        --background-color: {light_palette['background']};
+        --surface-color: {light_palette['surface']};
+        --text-color: {light_palette['text']};
+        --border-color: {light_palette['border']};
+        --success-color: {light_palette['success']};
+        --warning-color: {light_palette['warning']};
+        --error-color: {light_palette['error']};
         
-        --exam-tag-bg: {palette['tag_exam']};
-        --exam-tag-color: {palette['tag_exam_text']};
-        --assignment-tag-bg: {palette['tag_assignment']};
-        --assignment-tag-color: {palette['tag_assignment_text']};
-        --notes-tag-bg: {palette['tag_notes']};
-        --notes-tag-color: {palette['tag_notes_text']};
-        --slides-tag-bg: {palette['tag_slides']};
-        --slides-tag-color: {palette['tag_slides_text']};
-        --instructions-tag-bg: {palette['tag_instructions']};
-        --instructions-tag-color: {palette['tag_instructions_text']};
+        --exam-tag-bg: {light_palette['tag_exam']};
+        --exam-tag-color: {light_palette['tag_exam_text']};
+        --assignment-tag-bg: {light_palette['tag_assignment']};
+        --assignment-tag-color: {light_palette['tag_assignment_text']};
+        --notes-tag-bg: {light_palette['tag_notes']};
+        --notes-tag-color: {light_palette['tag_notes_text']};
+        --slides-tag-bg: {light_palette['tag_slides']};
+        --slides-tag-color: {light_palette['tag_slides_text']};
+        --instructions-tag-bg: {light_palette['tag_instructions']};
+        --instructions-tag-color: {light_palette['tag_instructions_text']};
+    }}
+    
+    /* Dark mode override (Midnight Dark) */
+    @media (prefers-color-scheme: dark) {{
+        :root {{
+            --primary-color: {dark_palette['primary']};
+            --secondary-color: {dark_palette['secondary']};
+            --accent-color: {dark_palette['accent']};
+            --background-color: {dark_palette['background']};
+            --surface-color: {dark_palette['surface']};
+            --text-color: {dark_palette['text']};
+            --border-color: {dark_palette['border']};
+            --success-color: {dark_palette['success']};
+            --warning-color: {dark_palette['warning']};
+            --error-color: {dark_palette['error']};
+            
+            --exam-tag-bg: {dark_palette['tag_exam']};
+            --exam-tag-color: {dark_palette['tag_exam_text']};
+            --assignment-tag-bg: {dark_palette['tag_assignment']};
+            --assignment-tag-color: {dark_palette['tag_assignment_text']};
+            --notes-tag-bg: {dark_palette['tag_notes']};
+            --notes-tag-color: {dark_palette['tag_notes_text']};
+            --slides-tag-bg: {dark_palette['tag_slides']};
+            --slides-tag-color: {dark_palette['tag_slides_text']};
+            --instructions-tag-bg: {dark_palette['tag_instructions']};
+            --instructions-tag-color: {dark_palette['tag_instructions_text']};
+        }}
     }}
     
     /* Main Styles */
@@ -249,7 +161,7 @@ def generate_css(palette):
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }}
     
-    /* File Type Tags */
+    /* File Type Tags - FORCE with !important */
     .file-type-tag {{
         display: inline-block;
         padding: 0.25rem 0.75rem;
@@ -260,12 +172,35 @@ def generate_css(palette):
         margin-bottom: 0.5rem;
     }}
     
-    .exam-tag {{ background-color: var(--exam-tag-bg); color: var(--exam-tag-color); }}
-    .assignment-tag {{ background-color: var(--assignment-tag-bg); color: var(--assignment-tag-color); }}
-    .notes-tag {{ background-color: var(--notes-tag-bg); color: var(--notes-tag-color); }}
-    .slides-tag {{ background-color: var(--slides-tag-bg); color: var(--slides-tag-color); }}
-    .instructions-tag {{ background-color: var(--instructions-tag-bg); color: var(--instructions-tag-color); }}
-    .other-tag {{ background-color: var(--border-color); color: var(--text-color); }}
+    .exam-tag {{ 
+        background-color: var(--exam-tag-bg) !important; 
+        color: var(--exam-tag-color) !important; 
+    }}
+    
+    .assignment-tag {{ 
+        background-color: var(--assignment-tag-bg) !important; 
+        color: var(--assignment-tag-color) !important; 
+    }}
+    
+    .notes-tag {{ 
+        background-color: var(--notes-tag-bg) !important; 
+        color: var(--notes-tag-color) !important; 
+    }}
+    
+    .slides-tag {{ 
+        background-color: var(--slides-tag-bg) !important; 
+        color: var(--slides-tag-color) !important; 
+    }}
+    
+    .instructions-tag {{ 
+        background-color: var(--instructions-tag-bg) !important; 
+        color: var(--instructions-tag-color) !important; 
+    }}
+    
+    .other-tag {{ 
+        background-color: var(--border-color) !important; 
+        color: var(--text-color) !important; 
+    }}
     
     /* Buttons */
     .stButton > button {{
@@ -413,144 +348,13 @@ def generate_css(palette):
     return css
 
 # ============================================================================
-# PALETTE SELECTOR UI
-# ============================================================================
-
-def palette_selector_ui():
-    """UI for selecting or creating a color palette"""
-    
-    st.sidebar.markdown("---")
-    st.sidebar.markdown("### 🎨 Theme Customization")
-    
-    # Theme selection
-    theme_options = list(COLOR_PALETTES.keys()) + ["Custom Palette"]
-    selected_theme = st.sidebar.selectbox(
-        "Select Theme",
-        theme_options,
-        index=0,
-        help="Choose from predefined themes or create your own"
-    )
-    
-    palette = COLOR_PALETTES.get("Ocean Blue")  # Default
-    
-    if selected_theme == "Custom Palette":
-        st.sidebar.markdown("---")
-        with st.sidebar.expander("🎨 Custom Colors", expanded=True):
-            custom_palette = custom_color_picker()
-            
-            # Save custom palette button
-            if st.button("💾 Save Custom Palette"):
-                palette_name = st.text_input("Name your palette", "My Custom Theme")
-                if palette_name:
-                    COLOR_PALETTES[palette_name] = custom_palette
-                    st.success(f"Saved as '{palette_name}'")
-            
-            palette = custom_palette
-    else:
-        palette = COLOR_PALETTES[selected_theme]
-    
-    # Show palette preview
-    st.sidebar.markdown("---")
-    st.sidebar.markdown("### 🎨 Palette Preview")
-    
-    cols = st.sidebar.columns(3)
-    cols[0].color_picker("Primary", palette['primary'], disabled=True)
-    cols[1].color_picker("Secondary", palette['secondary'], disabled=True)
-    cols[2].color_picker("Accent", palette['accent'], disabled=True)
-    
-    # Export/Import palette
-    st.sidebar.markdown("---")
-    with st.sidebar.expander("📁 Palette Management"):
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            if st.button("📤 Export Palette"):
-                palette_json = json.dumps(palette, indent=2)
-                st.download_button(
-                    label="Download JSON",
-                    data=palette_json,
-                    file_name="custom_palette.json",
-                    mime="application/json"
-                )
-        
-        with col2:
-            uploaded_file = st.file_uploader("Import JSON", type=['json'])
-            if uploaded_file:
-                try:
-                    imported_palette = json.load(uploaded_file)
-                    # Validate imported palette has required keys
-                    required_keys = ['primary', 'secondary', 'accent', 'background']
-                    if all(key in imported_palette for key in required_keys):
-                        st.success("Palette imported successfully!")
-                        palette.update(imported_palette)
-                    else:
-                        st.error("Invalid palette format")
-                except:
-                    st.error("Error reading palette file")
-    
-    return palette
-
-# ============================================================================
-# EXAMPLE USAGE IN YOUR STREAMLIT APP
-# ============================================================================
-
-# def main_app():
-#     """Example of how to integrate the color palette system"""
-    
-#     # Get selected palette
-#     selected_palette = palette_selector_ui()
-    
-#     # Generate and inject CSS
-#     css = generate_css(selected_palette)
-#     st.markdown(css, unsafe_allow_html=True)
-    
-#     # Your existing app code would go here
-#     st.markdown('<h1 class="main-header">📚 AI Cheatsheet Generator</h1>', unsafe_allow_html=True)
-    
-#     # Example section with tags
-#     st.markdown('<div class="section-box">', unsafe_allow_html=True)
-#     st.markdown('<h2 class="sub-header">📤 Upload Course Materials</h2>', unsafe_allow_html=True)
-    
-#     # Example tags
-#     st.markdown("#### File Types")
-#     st.markdown('<span class="file-type-tag exam-tag">Past Exams</span>', unsafe_allow_html=True)
-#     st.markdown('<span class="file-type-tag assignment-tag">Assignments</span>', unsafe_allow_html=True)
-#     st.markdown('<span class="file-type-tag notes-tag">Lecture Notes</span>', unsafe_allow_html=True)
-#     st.markdown('<span class="file-type-tag slides-tag">Slide Decks</span>', unsafe_allow_html=True)
-#     st.markdown('<span class="file-type-tag instructions-tag">Instructions</span>', unsafe_allow_html=True)
-    
-#     st.markdown('</div>', unsafe_allow_html=True)
-    
-#     # Example metrics
-#     col1, col2, col3 = st.columns(3)
-#     with col1:
-#         st.metric("Files Processed", "12", "+3")
-#     with col2:
-#         st.metric("Topics Identified", "45", "+8")
-#     with col3:
-#         st.metric("Processing Time", "2.3s", "-0.5s")
-    
-#     # Example progress bar
-#     st.progress(0.75)
-    
-#     # Example buttons
-#     if st.button("🚀 Generate Cheatsheet", type="primary"):
-#         st.success("Cheatsheet generated successfully!")
-    
-#     if st.button("🔄 Reset"):
-#         st.warning("This will reset all settings")
-
-# ============================================================================
-# PALETTE UTILITY FUNCTIONS
+# MINIMAL UTILITY FUNCTIONS (kept for compatibility)
 # ============================================================================
 
 def get_color_variants(base_color):
     """Generate color variants from a base color"""
-    # This is a simplified version - in production, you might want
-    # to use a proper color manipulation library like `colorsys`
-    
     return {
-        'light': base_color + "20",  # 20% opacity version
+        'light': base_color + "20",
         'dark': base_color,
         'darker': base_color,
     }
@@ -567,19 +371,3 @@ def validate_palette(palette):
         raise ValueError(f"Palette missing required keys: {missing_keys}")
     
     return True
-
-# ============================================================================
-# RUN THE APP
-# ============================================================================
-
-# if __name__ == "__main__":
-#     # Page config
-#     st.set_page_config(
-#         page_title="AI Cheatsheet Generator",
-#         page_icon="🎨",
-#         layout="wide",
-#         initial_sidebar_state="expanded"
-#     )
-    
-#     # Run the app with color palette system
-#     main_app()
