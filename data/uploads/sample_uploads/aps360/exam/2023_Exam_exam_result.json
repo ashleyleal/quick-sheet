@@ -1,0 +1,180 @@
+{
+  "questions": [
+    {
+      "topic": "Parameter count",
+      "question_summary": "Compute the required quantity represented by the given numeric options"
+    },
+    {
+      "topic": "Attention mechanism purpose",
+      "question_summary": "Identify the primary function of attention mechanisms in neural networks"
+    },
+    {
+      "topic": "Primary advantage",
+      "question_summary": "State the main benefit of the specified technique"
+    },
+    {
+      "topic": "Attention Mechanism",
+      "question_summary": "Explain the purpose of the attention mechanism in a transformer network"
+    },
+    {
+      "topic": "GRU vs LSTM",
+      "question_summary": "Identify the primary difference between a gated recurrent unit (GRU) and an LSTM cell in recurrent neural networks"
+    },
+    {
+      "topic": "Multi-head Self-Attention",
+      "question_summary": "Describe what the multi\u2011head self\u2011attention mechanism enables in transformer models"
+    },
+    {
+      "topic": "Fully Connected Parameter Count",
+      "question_summary": "Calculate the total number of trainable parameters in a fully connected network with 2 inputs, 3 hidden units, and 2 outputs"
+    },
+    {
+      "topic": "GAN Objective",
+      "question_summary": "State the primary goal of a generative adversarial network (GAN)"
+    },
+    {
+      "topic": "Autoencoder Bottleneck",
+      "question_summary": "Explain the main purpose of the bottleneck layer in an autoencoder network"
+    },
+    {
+      "topic": "GNN Features",
+      "question_summary": "Identify which features in graph neural networks improve their learning capability."
+    },
+    {
+      "topic": "Stride",
+      "question_summary": "Define what stride means in convolutional neural networks."
+    },
+    {
+      "topic": "Loss Function Classification",
+      "question_summary": "State the loss function that is commonly used for training classification models in deep learning."
+    },
+    {
+      "topic": "Output Shape VALID Convolution",
+      "question_summary": "Determine the correct output tensor dimensions for a VALID convolution given input and filter shapes with stride 1 and no padding."
+    },
+    {
+      "topic": "Best Predicted Category",
+      "question_summary": "Identify the category for which the model achieved the highest prediction performance."
+    },
+    {
+      "topic": "Prediction Accuracy Percentage",
+      "question_summary": "Compute the percentage of correct predictions for the best\u2011performing category."
+    },
+    {
+      "topic": "Dataset Distribution",
+      "question_summary": "Describe how the samples are distributed across categories in the dataset."
+    },
+    {
+      "topic": "Category Remarks",
+      "question_summary": "Provide observations about each category\u2019s sample characteristics."
+    },
+    {
+      "topic": "Dataset Balance",
+      "question_summary": "Assess whether the dataset is balanced across categories."
+    },
+    {
+      "topic": "Classification Accuracy",
+      "question_summary": "Calculate the overall accuracy of a three\u2011class model using the provided confusion matrix."
+    },
+    {
+      "topic": "Confusion Matrix Interpretation",
+      "question_summary": "Explain why a confusion matrix provides more insight than overall accuracy alone for evaluating a classification model."
+    },
+    {
+      "topic": "Gradient Derivation",
+      "question_summary": "Derive a closed\u2011form expression for the gradient of the given loss function."
+    },
+    {
+      "topic": "Gradient Derivation",
+      "question_summary": "Derive a closed\u2011form expression for the gradient of the weight\u2011update rule for a single neuron with a binary outcome."
+    },
+    {
+      "topic": "Command Output Prediction",
+      "question_summary": "Determine the expected output produced by the listed commands."
+    },
+    {
+      "topic": "Linear Layer Output Shape",
+      "question_summary": "Determine the output shape of a fully connected linear layer when applied to a 2\u2011D tensor of shape [30, 16] and a 4\u2011D tensor of shape [30, 16, 32, 32]."
+    },
+    {
+      "topic": "Conv2d Output Shape",
+      "question_summary": "Calculate the output tensor shape produced by a Conv2d layer with in_channels=16, out_channels=40, kernel_size=8, padding=2 when applied to the input tensor x2."
+    },
+    {
+      "topic": "Conv2d Output Shape with Stride",
+      "question_summary": "Compute the output shape of a Conv2d layer with in_channels=16, out_channels=32, kernel_size=16, stride=4, padding=0 when applied to the input tensor x2."
+    },
+    {
+      "topic": "MaxPool2d Output Shape",
+      "question_summary": "Find the output tensor shape after applying a MaxPool2d layer with kernel_size=16, stride=3, padding=4 to the input tensor x2."
+    },
+    {
+      "topic": "ConvTranspose2d Output Shape",
+      "question_summary": "Determine the output shape of a ConvTranspose2d layer with in_channels=16, out_channels=8, kernel_size=3, padding=1, output_padding=1 (and appropriate stride) when applied to the input tensor x2."
+    },
+    {
+      "topic": "GRU Text Generation Training",
+      "question_summary": "Explain the data preparation, training process, loss function role, and how to generate new text using a trained GRU\u2011based text generation model."
+    },
+    {
+      "topic": "GRU code completion",
+      "question_summary": "Complete the missing parts of a PyTorch class definition for a GRU-based text generation model"
+    },
+    {
+      "topic": "Attention QKV role",
+      "question_summary": "Explain the functions of the Query, Key, and Value matrices within the Transformer attention mechanism"
+    },
+    {
+      "topic": "Attention formula",
+      "question_summary": "Write the mathematical expression for computing attention using the softmax function over queries, keys, and values"
+    },
+    {
+      "topic": "Self-attention neural dictionary",
+      "question_summary": "Describe how the self\u2011attention mechanism enables the Transformer to build and use a neural dictionary of relationships among input elements"
+    },
+    {
+      "topic": "Scaled Dot-Product Attention",
+      "question_summary": "Explain why the dot-product is scaled in attention mechanisms and state the shape of the resulting output tensor."
+    },
+    {
+      "topic": "GNN Architecture",
+      "question_summary": "Describe the overall structure of a graph neural network for binary chemical compound classification, including how it processes graph inputs and produces the final prediction."
+    },
+    {
+      "topic": "GNN Applicability",
+      "question_summary": "Discuss why graph neural networks are well-suited for predicting toxicity of chemical compounds represented as node\u2011edge graphs."
+    },
+    {
+      "topic": "Global Graph Representation",
+      "question_summary": "Suggest a modification to the described GNN that captures global structural information of a compound and analyze its advantages and possible challenges."
+    },
+    {
+      "topic": "GAN Architecture",
+      "question_summary": "Outline the components of a generative adversarial network, detailing the roles of the generator and discriminator and how they are trained together."
+    },
+    {
+      "topic": "Mode Collapse",
+      "question_summary": "Explain the concept of mode collapse in GANs, its impact on the quality of generated samples, and suggest one method to mitigate it"
+    },
+    {
+      "topic": "GAN Loss Functions",
+      "question_summary": "Define how the loss function for the generator is formulated and how the loss function for the discriminator is formulated in a GAN"
+    },
+    {
+      "topic": "Common Architectural Features",
+      "question_summary": "Identify three common architectural elements present in most deep learning models such as GNNs, Transformers, GANs, RNNs, LSTMs, GRUs, and ANNs, and explain their roles in enabling learning"
+    },
+    {
+      "topic": "CNN vs Transformer Training",
+      "question_summary": "Compare and contrast the training process of a Convolutional Neural Network and a Transformer network, providing at least two differences in architecture, model type, or dataset requirements and one similarity in training steps"
+    },
+    {
+      "topic": "Training Challenges",
+      "question_summary": "Discuss the typical challenges that deep learning models encounter during the training process"
+    },
+    {
+      "topic": "Training Challenges",
+      "question_summary": "Explain three common challenges encountered when training deep neural networks, regardless of the specific model architecture."
+    }
+  ]
+}
