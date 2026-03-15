@@ -494,51 +494,51 @@ def palette_selector_ui():
 # EXAMPLE USAGE IN YOUR STREAMLIT APP
 # ============================================================================
 
-def main_app():
-    """Example of how to integrate the color palette system"""
+# def main_app():
+#     """Example of how to integrate the color palette system"""
     
-    # Get selected palette
-    selected_palette = palette_selector_ui()
+#     # Get selected palette
+#     selected_palette = palette_selector_ui()
     
-    # Generate and inject CSS
-    css = generate_css(selected_palette)
-    st.markdown(css, unsafe_allow_html=True)
+#     # Generate and inject CSS
+#     css = generate_css(selected_palette)
+#     st.markdown(css, unsafe_allow_html=True)
     
-    # Your existing app code would go here
-    st.markdown('<h1 class="main-header">📚 AI Cheatsheet Generator</h1>', unsafe_allow_html=True)
+#     # Your existing app code would go here
+#     st.markdown('<h1 class="main-header">📚 AI Cheatsheet Generator</h1>', unsafe_allow_html=True)
     
-    # Example section with tags
-    st.markdown('<div class="section-box">', unsafe_allow_html=True)
-    st.markdown('<h2 class="sub-header">📤 Upload Course Materials</h2>', unsafe_allow_html=True)
+#     # Example section with tags
+#     st.markdown('<div class="section-box">', unsafe_allow_html=True)
+#     st.markdown('<h2 class="sub-header">📤 Upload Course Materials</h2>', unsafe_allow_html=True)
     
-    # Example tags
-    st.markdown("#### File Types")
-    st.markdown('<span class="file-type-tag exam-tag">Past Exams</span>', unsafe_allow_html=True)
-    st.markdown('<span class="file-type-tag assignment-tag">Assignments</span>', unsafe_allow_html=True)
-    st.markdown('<span class="file-type-tag notes-tag">Lecture Notes</span>', unsafe_allow_html=True)
-    st.markdown('<span class="file-type-tag slides-tag">Slide Decks</span>', unsafe_allow_html=True)
-    st.markdown('<span class="file-type-tag instructions-tag">Instructions</span>', unsafe_allow_html=True)
+#     # Example tags
+#     st.markdown("#### File Types")
+#     st.markdown('<span class="file-type-tag exam-tag">Past Exams</span>', unsafe_allow_html=True)
+#     st.markdown('<span class="file-type-tag assignment-tag">Assignments</span>', unsafe_allow_html=True)
+#     st.markdown('<span class="file-type-tag notes-tag">Lecture Notes</span>', unsafe_allow_html=True)
+#     st.markdown('<span class="file-type-tag slides-tag">Slide Decks</span>', unsafe_allow_html=True)
+#     st.markdown('<span class="file-type-tag instructions-tag">Instructions</span>', unsafe_allow_html=True)
     
-    st.markdown('</div>', unsafe_allow_html=True)
+#     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Example metrics
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.metric("Files Processed", "12", "+3")
-    with col2:
-        st.metric("Topics Identified", "45", "+8")
-    with col3:
-        st.metric("Processing Time", "2.3s", "-0.5s")
+#     # Example metrics
+#     col1, col2, col3 = st.columns(3)
+#     with col1:
+#         st.metric("Files Processed", "12", "+3")
+#     with col2:
+#         st.metric("Topics Identified", "45", "+8")
+#     with col3:
+#         st.metric("Processing Time", "2.3s", "-0.5s")
     
-    # Example progress bar
-    st.progress(0.75)
+#     # Example progress bar
+#     st.progress(0.75)
     
-    # Example buttons
-    if st.button("🚀 Generate Cheatsheet", type="primary"):
-        st.success("Cheatsheet generated successfully!")
+#     # Example buttons
+#     if st.button("🚀 Generate Cheatsheet", type="primary"):
+#         st.success("Cheatsheet generated successfully!")
     
-    if st.button("🔄 Reset"):
-        st.warning("This will reset all settings")
+#     if st.button("🔄 Reset"):
+#         st.warning("This will reset all settings")
 
 # ============================================================================
 # PALETTE UTILITY FUNCTIONS
@@ -572,14 +572,14 @@ def validate_palette(palette):
 # RUN THE APP
 # ============================================================================
 
-if __name__ == "__main__":
-    # Page config
-    st.set_page_config(
-        page_title="AI Cheatsheet Generator",
-        page_icon="🎨",
-        layout="wide",
-        initial_sidebar_state="expanded"
-    )
+# if __name__ == "__main__":
+#     # Page config
+#     st.set_page_config(
+#         page_title="AI Cheatsheet Generator",
+#         page_icon="🎨",
+#         layout="wide",
+#         initial_sidebar_state="expanded"
+#     )
     
-    # Run the app with color palette system
-    main_app()
+#     # Run the app with color palette system
+#     main_app()

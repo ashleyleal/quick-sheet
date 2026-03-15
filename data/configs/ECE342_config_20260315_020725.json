@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "created": "2026-03-15T02:07:25.962918",
+    "version": "1.0",
+    "course_code": "ECE342",
+    "course_name": "Embedded System",
+    "config_type": "cheatsheet_settings"
+  },
+  "settings": {
+    "course_name": "Embedded System",
+    "course_code": "ECE342",
+    "formatting": {
+      "font_size": "9pt",
+      "num_pages": 2,
+      "font_family": "Computer Modern",
+      "columns": "2",
+      "include_diagrams": true,
+      "include_examples": true,
+      "color_scheme": "Monochrome"
+    },
+    "processing": {
+      "topic_threshold": 0.3,
+      "llm_model": "GPT-4"
+    }
+  }
+}

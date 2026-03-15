@@ -2,8 +2,18 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 import json
+import os
 
 from color_palette import palette_selector_ui, generate_css
+from config import ConfigManager, settings_sidebar
+# from processing import CheatsheetProcessor
+
+
+config_manager = ConfigManager()
+# processor = CheatsheetProcessor()
+
+selected_palette = palette_selector_ui()
+css = generate_css(selected_palette)
 
 # Page configuration
 st.set_page_config(
@@ -13,98 +23,107 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for better styling
-st.markdown("""
-<style>
-    .main-header {
-        font-size: 2.5rem;
-        color: #1E3A8A;
-        text-align: center;
-        margin-bottom: 1rem;
-    }
-    .sub-header {
-        font-size: 1.5rem;
-        color: #374151;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-        border-bottom: 2px solid #E5E7EB;
-        padding-bottom: 0.5rem;
-    }
-    .section-box {
-        background-color: #F9FAFB;
-        padding: 1.5rem;
-        border-radius: 10px;
-        border: 1px solid #E5E7EB;
-        margin-bottom: 1.5rem;
-    }
-    .file-type-tag {
-        display: inline-block;
-        padding: 0.25rem 0.75rem;
-        border-radius: 15px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        margin-right: 0.5rem;
-        margin-bottom: 0.5rem;
-    }
-    .exam-tag { background-color: #FEF3C7; color: #92400E; }
-    .assignment-tag { background-color: #D1FAE5; color: #065F46; }
-    .notes-tag { background-color: #DBEAFE; color: #1E40AF; }
-    .slides-tag { background-color: #E0E7FF; color: #3730A3; }
-    .instructions-tag { background-color: #FCE7F3; color: #9D174D; }
-    .other-tag { background-color: #F3F4F6; color: #4B5563; }
-</style>
-""", unsafe_allow_html=True)
 
+
+# Custom CSS for better styling
+# st.markdown("""
+# <style>
+#     .main-header {
+#         font-size: 2.5rem;
+#         color: #1E3A8A;
+#         text-align: center;
+#         margin-bottom: 1rem;
+#     }
+#     .sub-header {
+#         font-size: 1.5rem;
+#         color: #374151;
+#         margin-top: 2rem;
+#         margin-bottom: 1rem;
+#         border-bottom: 2px solid #E5E7EB;
+#         padding-bottom: 0.5rem;
+#     }
+#     .section-box {
+#         background-color: #F9FAFB;
+#         padding: 1.5rem;
+#         border-radius: 10px;
+#         border: 1px solid #E5E7EB;
+#         margin-bottom: 1.5rem;
+#     }
+#     .file-type-tag {
+#         display: inline-block;
+#         padding: 0.25rem 0.75rem;
+#         border-radius: 15px;
+#         font-size: 0.85rem;
+#         font-weight: 600;
+#         margin-right: 0.5rem;
+#         margin-bottom: 0.5rem;
+#     }
+#     .exam-tag { background-color: #FEF3C7; color: #92400E; }
+#     .assignment-tag { background-color: #D1FAE5; color: #065F46; }
+#     .notes-tag { background-color: #DBEAFE; color: #1E40AF; }
+#     .slides-tag { background-color: #E0E7FF; color: #3730A3; }
+#     .instructions-tag { background-color: #FCE7F3; color: #9D174D; }
+#     .other-tag { background-color: #F3F4F6; color: #4B5563; }
+# </style>
+# """, unsafe_allow_html=True)
+
+
+st.markdown(css, unsafe_allow_html=True)
 # Main title
 st.markdown('<h1 class="main-header">📚 QuickSheet.AI Cheatsheet Generator</h1>', unsafe_allow_html=True)
 st.markdown("Transform your course materials into a comprehensive, exam-ready cheatsheet powered by QuickSheet.AI.")
 
-# Sidebar for project settings
-with st.sidebar:
-    st.markdown("### 🛠️ Project Settings")
+
+# Get settings from sidebar
+config_data = settings_sidebar(config_manager)
+
+
+# # Sidebar for project settings
+# with st.sidebar:
+#     st.markdown("### 🛠️ Project Settings")
     
-    # Course info
-    course_name = st.text_input("Course Name", placeholder="e.g., Signals and Systems")
-    course_code = st.text_input("Course Code", placeholder="e.g., ECE316")
+#     # Course info
+#     course_name = st.text_input("Course Name", placeholder="e.g., Signals and Systems")
+#     course_code = st.text_input("Course Code", placeholder="e.g., ECE316")
     
-    st.markdown("---")
-    st.markdown("### 📄 Cheatsheet Formatting")
+#     st.markdown("---")
+#     st.markdown("### 📄 Cheatsheet Formatting")
     
-    # Formatting options
-    col1, col2 = st.columns(2)
-    with col1:
-        font_size = st.selectbox("Font Size", ["8pt", "9pt", "10pt", "11pt", "12pt"], index=1)
-        num_pages = st.number_input("Max Pages", min_value=1, max_value=10, value=2)
-    with col2:
-        font_family = st.selectbox("Font Family", ["Computer Modern", "Helvetica", "Times New Roman", "Arial"])
-        columns = st.selectbox("Columns", ["1", "2", "3"], index=1)
+#     # Formatting options
+#     col1, col2 = st.columns(2)
+#     with col1:
+#         font_size = st.selectbox("Font Size", ["8pt", "9pt", "10pt", "11pt", "12pt"], index=1)
+#         num_pages = st.number_input("Max Pages", min_value=1, max_value=10, value=2)
+#     with col2:
+#         font_family = st.selectbox("Font Family", ["Computer Modern", "Helvetica", "Times New Roman", "Arial"])
+#         columns = st.selectbox("Columns", ["1", "2", "3"], index=1)
     
-    # Additional formatting
-    include_diagrams = st.checkbox("Include Diagrams", value=True)
-    include_examples = st.checkbox("Include Examples", value=True)
-    color_scheme = st.selectbox("Color Scheme", ["Monochrome", "Colorful", "Custom"])
+#     # Additional formatting
+#     include_diagrams = st.checkbox("Include Diagrams", value=True)
+#     include_examples = st.checkbox("Include Examples", value=True)
+#     color_scheme = st.selectbox("Color Scheme", ["Monochrome", "Colorful", "Custom"])
     
-    st.markdown("---")
-    st.markdown("### 🧠 Processing Settings")
+#     st.markdown("---")
+#     st.markdown("### 🧠 Processing Settings")
     
-    # Processing options
-    topic_threshold = st.slider("Topic Importance Threshold", 0.0, 1.0, 0.3, 0.05)
-    llm_model = st.selectbox("LLM Model", ["GPT-4", "Claude-3", "Gemini Pro", "Llama-3"])
+#     # Processing options
+#     topic_threshold = st.slider("Topic Importance Threshold", 0.0, 1.0, 0.3, 0.05)
+#     llm_model = st.selectbox("LLM Model", ["GPT-4", "Claude-3", "Gemini Pro", "Llama-3"])
     
-    st.markdown("---")
+#     st.markdown("---")
     
-    # Action buttons
-    if st.button("🔄 Reset All", type="secondary"):
-        st.rerun()
+#     # Action buttons
+#     if st.button("🔄 Reset All", type="secondary"):
+#         st.rerun()
     
-    if st.button("🚀 Generate Cheatsheet", type="primary"):
-        st.session_state.generate_clicked = True
+#     if st.button("🚀 Generate Cheatsheet", type="primary"):
+#         st.session_state.generate_clicked = True
 
 # Main content area
 col1, col2 = st.columns([3, 2])
 
 with col1:
-    st.markdown('<div class="section-box">', unsafe_allow_html=True)
+    # st.markdown('<div class="section-box">', unsafe_allow_html=True)
     st.markdown('<h2 class="sub-header">📤 Upload Course Materials</h2>', unsafe_allow_html=True)
     
     # File type definitions
@@ -134,12 +153,17 @@ with col1:
         
         if uploaded:
             uploaded_files[file_type] = uploaded
+            os.makedirs(f"data/uploads/{course_code}/{file_type}", exist_ok=True)
+            for file in uploaded:
+                file_path = f"data/uploads/{course_code}/{file_type}/{file.name}"
+                with open(file_path, "wb") as f:
+                    f.write(file.getbuffer())
             st.success(f"✓ Uploaded {len(uploaded)} {info['name'].lower()} file(s)")
     
     st.markdown('</div>', unsafe_allow_html=True)
     
     # Additional instructions section
-    st.markdown('<div class="section-box">', unsafe_allow_html=True)
+    # st.markdown('<div class="section-box">', unsafe_allow_html=True)
     st.markdown('<h2 class="sub-header">✏️ Additional Instructions & Emphasis</h2>', unsafe_allow_html=True)
     
     professor_hints = st.text_area(
@@ -161,7 +185,7 @@ with col1:
 
 with col2:
     # File processing status dashboard
-    st.markdown('<div class="section-box">', unsafe_allow_html=True)
+    # st.markdown('<div class="section-box">', unsafe_allow_html=True)
     st.markdown('<h2 class="sub-header">📊 Processing Dashboard</h2>', unsafe_allow_html=True)
     
     # File summary
@@ -207,7 +231,7 @@ with col2:
     st.markdown('</div>', unsafe_allow_html=True)
     
     # Preview section
-    st.markdown('<div class="section-box">', unsafe_allow_html=True)
+    # st.markdown('<div class="section-box">', unsafe_allow_html=True)
     st.markdown('<h2 class="sub-header">👁️ Preview</h2>', unsafe_allow_html=True)
     
     # Topic importance preview
@@ -244,7 +268,7 @@ with col2:
 
 # Bottom section - Output configuration
 st.markdown("---")
-st.markdown('<div class="section-box">', unsafe_allow_html=True)
+# st.markdown('<div class="section-box">', unsafe_allow_html=True)
 st.markdown('<h2 class="sub-header">🎯 Output Configuration</h2>', unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns(3)
