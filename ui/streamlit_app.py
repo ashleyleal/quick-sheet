@@ -5,7 +5,12 @@ import json
 import os
 
 from color_palette import palette_selector_ui, generate_css
+from config import ConfigManager, settings_sidebar
+# from processing import CheatsheetProcessor
 
+
+config_manager = ConfigManager()
+# processor = CheatsheetProcessor()
 
 selected_palette = palette_selector_ui()
 css = generate_css(selected_palette)
@@ -68,46 +73,51 @@ st.markdown(css, unsafe_allow_html=True)
 st.markdown('<h1 class="main-header">📚 QuickSheet.AI Cheatsheet Generator</h1>', unsafe_allow_html=True)
 st.markdown("Transform your course materials into a comprehensive, exam-ready cheatsheet powered by QuickSheet.AI.")
 
-# Sidebar for project settings
-with st.sidebar:
-    st.markdown("### 🛠️ Project Settings")
+
+# Get settings from sidebar
+config_data = settings_sidebar(config_manager)
+
+
+# # Sidebar for project settings
+# with st.sidebar:
+#     st.markdown("### 🛠️ Project Settings")
     
-    # Course info
-    course_name = st.text_input("Course Name", placeholder="e.g., Signals and Systems")
-    course_code = st.text_input("Course Code", placeholder="e.g., ECE316")
+#     # Course info
+#     course_name = st.text_input("Course Name", placeholder="e.g., Signals and Systems")
+#     course_code = st.text_input("Course Code", placeholder="e.g., ECE316")
     
-    st.markdown("---")
-    st.markdown("### 📄 Cheatsheet Formatting")
+#     st.markdown("---")
+#     st.markdown("### 📄 Cheatsheet Formatting")
     
-    # Formatting options
-    col1, col2 = st.columns(2)
-    with col1:
-        font_size = st.selectbox("Font Size", ["8pt", "9pt", "10pt", "11pt", "12pt"], index=1)
-        num_pages = st.number_input("Max Pages", min_value=1, max_value=10, value=2)
-    with col2:
-        font_family = st.selectbox("Font Family", ["Computer Modern", "Helvetica", "Times New Roman", "Arial"])
-        columns = st.selectbox("Columns", ["1", "2", "3"], index=1)
+#     # Formatting options
+#     col1, col2 = st.columns(2)
+#     with col1:
+#         font_size = st.selectbox("Font Size", ["8pt", "9pt", "10pt", "11pt", "12pt"], index=1)
+#         num_pages = st.number_input("Max Pages", min_value=1, max_value=10, value=2)
+#     with col2:
+#         font_family = st.selectbox("Font Family", ["Computer Modern", "Helvetica", "Times New Roman", "Arial"])
+#         columns = st.selectbox("Columns", ["1", "2", "3"], index=1)
     
-    # Additional formatting
-    include_diagrams = st.checkbox("Include Diagrams", value=True)
-    include_examples = st.checkbox("Include Examples", value=True)
-    color_scheme = st.selectbox("Color Scheme", ["Monochrome", "Colorful", "Custom"])
+#     # Additional formatting
+#     include_diagrams = st.checkbox("Include Diagrams", value=True)
+#     include_examples = st.checkbox("Include Examples", value=True)
+#     color_scheme = st.selectbox("Color Scheme", ["Monochrome", "Colorful", "Custom"])
     
-    st.markdown("---")
-    st.markdown("### 🧠 Processing Settings")
+#     st.markdown("---")
+#     st.markdown("### 🧠 Processing Settings")
     
-    # Processing options
-    topic_threshold = st.slider("Topic Importance Threshold", 0.0, 1.0, 0.3, 0.05)
-    llm_model = st.selectbox("LLM Model", ["GPT-4", "Claude-3", "Gemini Pro", "Llama-3"])
+#     # Processing options
+#     topic_threshold = st.slider("Topic Importance Threshold", 0.0, 1.0, 0.3, 0.05)
+#     llm_model = st.selectbox("LLM Model", ["GPT-4", "Claude-3", "Gemini Pro", "Llama-3"])
     
-    st.markdown("---")
+#     st.markdown("---")
     
-    # Action buttons
-    if st.button("🔄 Reset All", type="secondary"):
-        st.rerun()
+#     # Action buttons
+#     if st.button("🔄 Reset All", type="secondary"):
+#         st.rerun()
     
-    if st.button("🚀 Generate Cheatsheet", type="primary"):
-        st.session_state.generate_clicked = True
+#     if st.button("🚀 Generate Cheatsheet", type="primary"):
+#         st.session_state.generate_clicked = True
 
 # Main content area
 col1, col2 = st.columns([3, 2])
