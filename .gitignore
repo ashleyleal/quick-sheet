@@ -1,3 +1,4 @@
 .env
 .venv
 ui\__pycache__
+data\uploads
