@@ -1,0 +1,596 @@
+\documentclass[8pt]{extarticle}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[paper=letterpaper,landscape,top=0.3in,bottom=0.3in,left=0.3in,right=0.3in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath,amssymb,textcomp}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{formulacolor}{RGB}{0,100,180}
+\definecolor{definitioncolor}{RGB}{180,70,0}
+\definecolor{conceptcolor}{RGB}{20,120,50}
+\definecolor{examplecolor}{RGB}{120,0,140}
+\definecolor{diagramcolor}{RGB}{90,90,90}
+\newcommand{\ftag}{\textcolor{formulacolor}{\tiny\textbf{F}}\;}
+\newcommand{\dtag}{\textcolor{definitioncolor}{\tiny\textbf{D}}\;}
+\newcommand{\ctag}{\textcolor{conceptcolor}{\tiny\textbf{C}}\;}
+\newcommand{\etag}{\textcolor{examplecolor}{\tiny\textbf{E}}\;}
+\newcommand{\xtag}{\textcolor{diagramcolor}{\tiny\textbf{X}}\;}
+\DeclareUnicodeCharacter{03D5}{$\phi$}
+\DeclareUnicodeCharacter{03C6}{$\phi$}
+\DeclareUnicodeCharacter{03B1}{$\alpha$}
+\DeclareUnicodeCharacter{03B2}{$\beta$}
+\DeclareUnicodeCharacter{03B3}{$\gamma$}
+\DeclareUnicodeCharacter{03B4}{$\delta$}
+\DeclareUnicodeCharacter{03B5}{$\epsilon$}
+\DeclareUnicodeCharacter{03B7}{$\eta$}
+\DeclareUnicodeCharacter{03B8}{$\theta$}
+\DeclareUnicodeCharacter{03BB}{$\lambda$}
+\DeclareUnicodeCharacter{03BC}{$\mu$}
+\DeclareUnicodeCharacter{03C1}{$\rho$}
+\DeclareUnicodeCharacter{03C3}{$\sigma$}
+\DeclareUnicodeCharacter{03C8}{$\psi$}
+\DeclareUnicodeCharacter{03C9}{$\omega$}
+\DeclareUnicodeCharacter{03A3}{$\Sigma$}
+\DeclareUnicodeCharacter{03A0}{$\Pi$}
+\setlength{\columnsep}{0.15in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\raggedright
+\begin{document}
+\scriptsize
+\begin{multicols}{4}
+
+\vspace{2pt}\textbf{Attention}\\
+\ftag c\_i = \sum\_{j} \alpha\_{ij} \, h\_j\\
+\vspace{2pt}\textbf{Gradient}\\
+\ftag $\nabla$ J($\theta_t$): Gradient of the cost (loss) function J with respect to the parameters $\theta$ at time step t\\
+\vspace{2pt}\textbf{Self-Attention}\\
+\ftag Attention(Q, K, V) = \text{softmax}\left(\frac{Q K\textasciicircum{}{T}}{\sqrt{d\_k}}\right) V\\
+\vspace{2pt}\textbf{Autoencoder}\\
+\dtag An autoencoder maps input data into a lower-dimensional representation (encoding) via an encoder and reconstructs the original data from this encoding via a decoder, learning an efficient representation for tasks such as data compression, denoising, or dimensionality reduction.\\
+\vspace{2pt}\textbf{Classification}\\
+\dtag Classification: the model assigns inputs to specific categories or classes.\\
+\vspace{2pt}\textbf{Confusion Matrix}\\
+\dtag Tabular representation used to display the performance of a classification model; it summarizes predicted class labels against actual class labels, showing counts of true positive, true negative, false positive, and false negative predictions.\\
+\dtag True Positive (TP): correctly predicted positive instances.\\
+\dtag False Positive (FP): negative instances incorrectly predicted as positive.\\
+\dtag True Negative (TN): correctly predicted negative instances.\\
+\dtag False Negative (FN): positive instances incorrectly predicted as negative.\\
+\vspace{2pt}\textbf{Deep Learning}\\
+\dtag Deep learning (DL) is a subset of machine learning that uses multi-level (deep) neural network architectures to learn hierarchical abstractions.\\
+\vspace{2pt}\textbf{Encoder}\\
+\dtag The encoder converts the inputs to an internal representation, performing dimensionality reduction.\\
+\vspace{2pt}\textbf{Feature}\\
+\dtag Feature: something in the image, like an edge, blob, or shape.\\
+\vspace{2pt}\textbf{Graph}\\
+\dtag A mathematical structure consisting of nodes (vertices) and edges (connections) that represent relationships or connections between the nodes.\\
+\vspace{2pt}\textbf{Graph Neural Networks}\\
+\dtag Graph Neural Networks: a class of deep learning models specifically designed to work with structured data represented as graphs.\\
+\vspace{2pt}\textbf{Loss Function}\\
+\dtag Computes how bad predictions are compared to the ground truth labels. Large loss means the network's predictions differ from the ground truth; small loss means the predictions match the ground truth. Typically calculated over all training samples to obtain the average error.\\
+\vspace{2pt}\textbf{Loss Functions}\\
+\dtag Since there are two possibilities as output for the discriminator (true \& false), the optimal loss function is Binary Cross-Entropy.\\
+\vspace{2pt}\textbf{Mode Collapse}\\
+\dtag A failure mode where the generator produces a limited set of outputs (often a single output) instead of the full diversity of the data distribution.\\
+\vspace{2pt}\textbf{Self-Attention}\\
+\dtag Computes attention of the input with respect to itself; for a given token, attention weights are computed for all other tokens in the same sequence.\\
+\vspace{2pt}\textbf{Stride}\\
+\dtag Stride: distance between two consecutive positions of the kernel, which controls the output resolution.\\
+\vspace{2pt}\textbf{Attention}\\
+\ctag Words within the tweet are weighted by a softmax over their embeddings, then each embedding is multiplied by its normalized score and summed.\\
+\ctag The network is trained end-to-end together with the classifier.\\
+\ctag RNN with attention versus RNN without attention (illustrated in Figure 7.4).\\
+\ctag Attention in transformers allows the context of the sentence to define the meaning and embedding of a word.\\
+
+\vspace{2pt}\textbf{Confusion Matrix}\\
+\ctag Warning: Accuracy is only a reliable metric when class distributions are equal (balanced dataset).\\
+\vspace{2pt}\textbf{Deep Learning}\\
+\ctag Deep Learning\\
+\ctag DL excels in tasks such as translation, image generation, and gaming, but faces challenges in interpretability and bias.\\
+\ctag Deep Learning now dominates fields such as Machine Learning, Computer Vision, and NLP.\\
+\ctag Differentiated from vanilla neural networks by (1) much larger training datasets (e.g., ImageNet), (2) vast increase in compute/GPU acceleration, and (3) much larger model size/more layers enabled by the above.\\
+\vspace{2pt}\textbf{Encoder}\\
+\ctag In the encoder, tokens are processed one at a time; the hidden state represents all the tokens read thus far.\\
+\vspace{2pt}\textbf{Gradient}\\
+\ctag The gradient of the loss function with respect to each network parameter indicates the direction and magnitude of change needed to reduce the loss.\\
+\vspace{2pt}\textbf{Graph Neural Networks}\\
+\ctag Graph Neural Networks\\
+\ctag Neural networks designed to operate on graph-structured (non-Euclidean) data, extending the capabilities of CNNs and RNNs beyond Euclidean spaces.\\
+\ctag GNNs are neural networks that function on graphs.\\
+\vspace{2pt}\textbf{Loss Function}\\
+\ctag Loss Function\\
+\ctag A loss function quantifies reconstruction error, guiding the training of the autoencoder.\\
+\vspace{2pt}\textbf{Loss functions}\\
+\ctag Loss functions are used to determine the accuracy of the model by comparing model outputs to true labels.\\
+\vspace{2pt}\textbf{Loss Functions}\\
+\ctag Loss Function for MinMax Game Idea.\\
+\vspace{2pt}\textbf{Mode Collapse}\\
+\ctag If the generator repeatedly outputs the same sample, the optimal discriminator strategy is to reject that sample; however, if the discriminator gets trapped in a local optimum, it cannot adapt, allowing the generator to fool it by generating only one type of data (e.g., only digit `1').\\
+\ctag Recent GAN variants mitigate mode collapse by feeding the discriminator a small batch (set) of real or fake samples at once, enabling the discriminator to use the variety within the set as a feature for determining authenticity.\\
+\vspace{2pt}\textbf{Neural Networks}\\
+\ctag Can be viewed as a way of learning features directly and end-to-end from raw input data.\\
+\vspace{2pt}\textbf{Neuron}\\
+\ctag Neuron\\
+\vspace{2pt}\textbf{Scaled Dot-Product Attention}\\
+\ctag Scaled Dot-Product Attention computes attention scores by taking the dot product of queries and keys, scaling by $1/\sqrt{d_k}$, applying softmax, and multiplying by the values.\\
+\vspace{2pt}\textbf{Training}\\
+\ctag Alternate between training the discriminator and training the generator.\\
+\ctag GANs are notoriously difficult to train.\\
+\ctag A training curve is no longer as helpful as in supervised learning; generator and discriminator losses tend to bounce up and down because both networks change over time.\\
+\ctag Tuning hyperparameters is much more difficult because the training curve cannot reliably guide the process.\\
+\vspace{2pt}\textbf{Activation Functions}\\
+\ftag $ReLU(x) = (x)^+ = \max(0, x)$\\
+\ftag $LeakyReLU(x) = \{\, x,\ \text{if } x \ge 0;\ \texttt{negative\_slope}\, x,\ \text{otherwise} \,\}$\\
+\ftag $PReLU(x) = \{\, x,\ \text{if } x \ge 0;\ a\, x,\ \text{otherwise} \,\}$\\
+
+\ftag $SiLU(x) = x \cdot \sigma(x) = \frac{x}{1 + e^{-x}}$\\
+\ftag $SoftPlus(x) = \frac{1}{\beta}\,\log\bigl(1 + e^{\beta x}\bigr)$\\
+\vspace{2pt}\textbf{Adjacency Normalization}\\
+\ftag $D^{-1/2} A D^{-1/2}$\\
+\vspace{2pt}\textbf{Adversarial Attacks}\\
+\ftag $f(x + \epsilon) =$\\
+\vspace{2pt}\textbf{Artificial Neuron}\\
+\ftag $y = f(w \cdot x + b)$\\
+\vspace{2pt}\textbf{Attention in Transformers}\\
+\ftag $attention(q, k, v) = \sum_i \text{similarity}(q, k_i) \times v_i$\\
+\vspace{2pt}\textbf{Attention Normalization}\\
+\ftag $\alpha_{ij} = \text{softmax}_j(e_{ij}) = \frac{\exp(e_{ij})}{\sum_{k \in N_i} \exp(e_{ik})}$\\
+\vspace{2pt}\textbf{Attention Score Computation}\\
+\ftag $score(a, b) = a^{\top} b \quad\text{(dot-product score)}$\\
+\ftag $score(a, b
+
+\ftag Example: Weights = 16 $\times$ 100 + 32 $\times$ 100; Bias = 100 + 100; Total parameters = 5,000.\\
+\vspace{2pt}\textbf{Gating Mechanism}\\
+\ftag f(x) = X \cdot \sigma(X) (where \sigma is the sigmoid or tanh activation)\\
+\ftag f(x) = X \cdot NN(X) (where NN denotes a learned neural-network function)\\
+\vspace{2pt}\textbf{GCN Layer}\\
+\ftag H = \sigma\big( D\textasciicircum{}{ -1/2 } A D\textasciicircum{}{ -1/2 } X W \big)\\
+\vspace{2pt}\textbf{Generative vs Discriminative Models}\\
+\ftag p(y|x)\\
+\ftag p(x)\\
+\vspace{2pt}\textbf{Gradient Descent}\\
+\ftag \frac{\partial E}{\partial w\_{ji}}\\
+\ftag w\_{t+1}\textasciicircum{}{ji} = w\_{t}\textasciicircum{}{ji} - \eta \frac{\partial E}{\partial w\_{ji}}\\
+\ftag \Delta w\_{ji} = \eta \frac{\partial E}{\partial w\_{ji}}\\
+\vspace{2pt}\textbf{Greedy Search}\\
+\ftag maxp(t1, t2, ... tn) = maxp(t1) \cdot p(t2) \cdot ... \cdot p(tn)\\
+\vspace{2pt}\textbf{Heaviside step function}\\
+\ftag f(x) = (0, if x < 0, 1, if x $\geq$ 0)\\
+\vspace{2pt}\textbf{hyperplane}\\
+\ftag y = w · x + b\\
+\vspace{2pt}\textbf{KL Divergence}\\
+\ftag D\_{KL}(p\|q) = \frac{1}{2}\sum\_{i=1}\textasciicircum{}{N}\bigl[\mu\_i\textasciicircum{}{2}+\sigma\_i\textasciicircum{}{2}-(1+\log(\sigma\_i\textasciicircum{}{2}))\bigr]\\
+\vspace{2pt}\textbf{Kullback-Leibler Divergence}\\
+\ftag D\_{KL}(P\|Q) = \sum\_{x \in X} p(x) \log \frac{p(x)}{q(x)}\\
+\ftag DKL(P||Q) = \sum\_{x \in X} p(x) \log(p(x) q(x))\\
+\vspace{2pt}\textbf{Learning Rate}\\
+\ftag $\alpha$: Learning rate\\
+\vspace{2pt}\textbf{Linear Activation Function}\\
+\ftag y = f(w \cdot x + b) \rightarrow y = w \cdot x + b\\
+\ftag y = w\_0 x\_0 + w\_1 x\_1 + b (2-dimensional case)\\
+\ftag Ax + By - C = 0 (general equation of a line)\\
+\vspace{2pt}\textbf{Max Pooling}\\
+\ftag o = \left\lfloor \frac{i - k}{s} \right\rfloor + 1, where i is the input dimension, k is the kernel size, and s is the stride.\\
+\vspace{2pt}\textbf{Mean Squared Error}\\
+\ftag MSE = \frac{1}{n} \sum\_{i=1}\textasciicircum{}{n} (y\_{i} - \hat{y}\_{i})\textasciicircum{}{2}\\
+\ftag MSE = (1/N) $\Sigma$\_\{i=1\}\textasciicircum{}{N} (y\_predicted,i − y\_actual,i)\textasciicircum{}2\\
+\vspace{2pt}\textbf{Multi-Head Attention}\\
+\ftag MultiHead(Q, K, V) = Concat(head\_1, ..., head\_h) W\_O where head\_i = Attention(Q W\_{Q\_i}, K W\_{K\_i}, V W\_{V\_i})\\
+\vspace{2pt}\textbf{Multiple Kernels}\\
+\ftag Depths of the output = Number of kernels\\
+\vspace{2pt}\textbf{Neural Network Layer Representation}\\
+\ftag y\_1 = f(w\_1 \cdot x + b\_1)\quad y\_2 = f(w\_2 \cdot x + b\_2)\\
+\vspace{2pt}\textbf{Node Embedding Update (GAT)}\\
+\ftag h\_i = \sigma\Big( \sum\_{j \in N\_i} \alpha\_{ij} W h\_j \Big)\\
+\vspace{2pt}\textbf{Non‑square Output Computation}\\
+\ftag o₁ = [i + 2p − k s] + 1\\
+\ftag o₂ = [j + 2p − l s] + 1\\
+\vspace{2pt}\textbf{Normalization}\\
+\ftag Xi = (Xi − µi) / $\sigma$ i\\
+\vspace{2pt}\textbf{One-hot Encoding}\\
+\ftag Fall = [1, 0, 0];
+
+
+
+\vspace{2pt}\textbf{Artificial Intelligence}\\
+\dtag An entity capable of perceiving its environment, making decisions, and taking actions to achieve specific goals; can be a software program, a robot equipped with sensors, or any system that interacts with its environment.\\
+\vspace{2pt}\textbf{Artificial Neural Networks (ANNs)}\\
+\dtag AI was coined in 1956 with the hope to reproduce human intelligence with machines. It captures the notion of developing computer systems that can perform tasks normally only humans can. AI is a poorly defined term and its meaning has changed with time.\\
+\dtag Artificial Neural Networks (ANNs): Computational models inspired by the brain's structure and function.\\
+\dtag Neurons: Processing units in ANNs that apply weights to inputs and pass through activation functions.\\
+\dtag Activation Functions: Introduce non-linearity to neuron outputs, enabling complex pattern capturing.\\
+\dtag Loss Function: Measures the discrepancy between predicted and actual outputs.\\
+\dtag Training: Process of adjusting weights to minimize the loss function.\\
+\dtag Gradient Descent: Optimization algorithm that updates weights in the direction of loss reduction.\\
+\dtag Simple Fully Connected Network: Neurons in one layer connected to all in the next; input passes through hidden layers to produce output.\\
+\dtag Hyperparameters: Settings chosen prior to training, such as learning rate, batch size, and network architecture.\\
+\dtag Optimizers: Algorithms that control weight updates during training (e.g., SGD, Adam).\\
+\dtag Normalization: Techniques like Batch Norm and Layer Norm stabilize training by normalizing input or activation distributions.\\
+\dtag Regularization: Techniques like Dropout and Weight Decay prevent overfitting by adding constraints or penalties.\\
+\vspace{2pt}\textbf{Artificial Neuron}\\
+\dtag y is the output such as the class an image belongs to.\\
+\vspace{2pt}\textbf{Attention Mechanism}\\
+\dtag An attention score indicates the importance of different parts of the data and is used to aggregate the data.\\
+\vspace{2pt}\textbf{Attention Score Computation}\\
+\dtag Methods to compute the attention score between two embeddings $a, b \in \mathbb{R}^{d}$ .\\
+\vspace{2pt}\textbf{Autoencoders}\\
+\dtag Neural network architectures designed for unsupervised learning. They consist of an encoder and a decoder network. The encoder compresses the input into a latent representation, and the decoder reconstructs the original input from this representation.\\
+\vspace{2pt}\textbf{Auxiliary Loss}\\
+\dtag Auxiliary Loss: refers to an additional loss function incorporated into a model's training process alongside the main objective. It aims to provide auxiliary supervision to intermediate layers, helping the network learn relevant features and improve convergence.\\
+\vspace{2pt}\textbf{Average Pooling}\\
+\dtag A pooling operator used to downsample the spatial dimensions of input data. It divides the input into non-overlapping regions and calculates the average value of the elements within each region.\\
+\vspace{2pt}\textbf{Backpropagation}\\
+\dtag A method in training neural networks, where the network adjusts its internal parameters (weights and biases) by computing the gradient of the loss function with respect to these parameters.\\
+\vspace{2pt}\textbf{Backward Pass}\\
+\dtag \\
+
+\vspace{2pt}\textbf{Batch Normalization}\\
+\dtag Also known as backpropagation, this step follows the forward pass. It involves calculating the gradients of the loss function with respect to the network's parameters. These gradients indicate how much each parameter needs to be adjusted to reduce prediction errors. The gradients are then used to update the parameters using optimization algorithms. It is used only for training.\\
+\vspace{2pt}\textbf{Batch size}\\
+\dtag Batch size: Number of training examples used per optimization ``step''.\\
+\vspace{2pt}\textbf{Beam Search}\\
+\dtag Beam Search: looks for a sequence of tokens with the highest probability within a window.\\
+\vspace{2pt}\textbf{BERT}\\
+\dtag Bidirectional Encoder Representations from Transformers; a Transformer model trained with two self-supervised tasks (masked word prediction and next sentence prediction); achieves state-of-the-art results on many NLP tasks; exhibits strong transfer-learning capabilities; used in Google Search to represent queries and documents.\\
+\vspace{2pt}\textbf{Bias}\\
+\dtag Bias: refers to systematic and consistent errors or inaccuracies in the predictions or outcomes produced by a machine learning model. These biases can arise from various sources and can significantly impact the model's performance and fairness.\\
+\dtag Bias refers to the error introduced by approximating a real-world problem with a simplified model; in machine learning it is the error due to overly simplistic assumptions, leading to systematic errors and underfitting.\\
+\vspace{2pt}\textbf{Bias Term}\\
+\dtag A constant value that's added to the weighted sum of inputs in a neuron or model, allowing the neuron to shift the decision boundary.\\
+\vspace{2pt}\textbf{Bias-Variance Tradeoff}\\
+\dtag The bias-variance tradeoff states that increasing model complexity generally reduces bias but increases variance, while decreasing complexity reduces variance but increases bias; optimal performance balances both.\\
+\vspace{2pt}\textbf{Bidirectional RNN}\\
+\dtag Bidirectional RNN: a type of neural network architecture that processes input sequences in both forward and reverse directions simultaneously. This allows them to capture information from past and future time steps, making them particularly useful for tasks.\\
+\vspace{2pt}\textbf{Binary Cross Entropy (BCE)}\\
+\dtag Binary Cross Entropy (BCE) is mostly used for binary classification problems.\\
+\vspace{2pt}\textbf{CBOW}\\
+\dtag CBOW (Continuous Bag of Words): predicts the target (center) word from its context; context words are the input and the center word is the output.\\
+\vspace{2pt}\textbf{Chain Rule}\\
+\dtag The chain rule allows the derivative of a composite function to be expressed as the product of the derivatives of its constituent functions.\\
+\vspace{2pt}\textbf{Classification Metrics}\\
+\dtag Accuracy: metric that measures the proportion of correct predictions made by a classification model; it gives an overall view of the model's correctness across all classes.\\
+\dtag Precision: metric that measures the proportion of positive predictions that were actually correct; it reflects the model's ability to avoid false positives.\\
+
+\vspace{2pt}\textbf{Computer Vision}\\
+\dtag Recall (True Positive Rate): metric that quantifies the proportion of actual positive instances correctly predicted; it indicates the model's ability to capture all positive cases, minimizing false negatives.\\
+\dtag Computer Vision (CV) is the field of making computers capable of seeing.\\
+\vspace{2pt}\textbf{Conditional Generative Models}\\
+\dtag Conditional generative models receive additional conditioning information (e.g., a one-hot target category vector, an embedding from another model such as a CNN, or other high-level control signals) together with random noise, allowing the user to steer what the model generates.\\
+\vspace{2pt}\textbf{Connectionist Approach}\\
+\dtag Connectionist Approach (Neural Networks) refers to brain-inspired networks that perform pattern recognition and learn adaptively from data.\\
+\dtag Also called the neural network approach; it builds artificial neural networks of interconnected nodes that learn patterns from data by adjusting connection weights.\\
+\vspace{2pt}\textbf{Context Vector}\\
+\dtag Context Vector: a fixed-size representation that summarizes the information from the entire input sequence processed by the RNN. It captures the context or relevant information from past time steps and serves as an input to subsequent parts of the network, allowing the RNN to maintain memory and make predictions based on the entire sequence history.\\
+\vspace{2pt}\textbf{Continuous Bag of Words (CBOW) Model}\\
+\dtag Predicts the centre word from a fixed window of context words; the input and output are one-hot representations of a pair of words.\\
+\vspace{2pt}\textbf{Contrastive Learning}\\
+\dtag Contrastive Learning: a self-supervised learning technique where a neural network is trained to differentiate between pairs of data points by maximizing similarity (or minimizing distance) for positive pairs and minimizing similarity (or maximizing distance) for negative pairs.\\
+\vspace{2pt}\textbf{Control Symbols}\\
+\dtag <BOS> denotes the beginning of a sequence; <EOS> denotes the end of a sequence.\\
+\vspace{2pt}\textbf{Convolution}\\
+\dtag Colored input image: 3$\times$28$\times$28\\
+\dtag Convolution kernel: 5$\times$3$\times$8$\times$8 -- there are 5 kernels applied in parallel, each of size 3$\times$8$\times$8\\
+\dtag Input channels: 3 input channels because the depth of the input image is 3\\
+\dtag Output channels: 5 output channels because there are 5 kernels\\
+\vspace{2pt}\textbf{Convolution and Transposed Convolution}\\
+\dtag Output padding -- a type of padding that adds an additional row and column to the output of a transposed convolution.\\
+\vspace{2pt}\textbf{Convolution in 3D}\\
+\dtag Colored input image shape: 3 $\times$ 28 $\times$ 28 (channels $\times$ height $\times$ width)\\
+\dtag Convolution kernel shape: 3 $\times$ 3 $\times$ 3 (depth $\times$ height $\times$ width)\\
+\vspace{2pt}\textbf{Convolution Operator}\\
+\dtag Convolution is a mathematical operation on two functions $f$ and $ g$ that expresses how the shape of one is modified by the other. The function $ f$ is the input function and the function $ g$ is known as the kernel.\\
+\vspace{2pt}\textbf{Convolutional Autoencoders}\\
+\dtag A type of artificial neural network designed for unsupervised learning that uses convolutional layers to encode and decode input data efficiently, primarily for feature extraction and dimensionality reduction in image reconstruction and denoising.\\
+
+\vspace{2pt}\textbf{Credit Assignment Problem}\\
+\dtag Convolutional Neural Network: a type of deep learning model specifically designed for processing and analyzing grid-like data, such as images and sequences. It uses layers of learnable filters (kernels) to perform convolutions on the input data, enabling the network to automatically learn and extract hierarchical features.\\
+\dtag Credit Assignment Problem: the challenge of training a neural network with more than one layer, i.e., determining how to assign credit (or blame) to internal weights for the final output error.\\
+\vspace{2pt}\textbf{Cross Entropy}\\
+\dtag Cross Entropy (CE): mostly used for multi-class classification problems.\\
+\vspace{2pt}\textbf{Cross-Attention}\\
+\dtag Considers interactions between elements from two different sequences (e.g., one sequence in language 1 and another in language 2 for a translator).\\
+\vspace{2pt}\textbf{CycleGAN}\\
+\dtag Cycle loss is reconstruction loss between the input to CycleGAN and the output of CycleGAN to ensure consistency (the model consists of two GANs).\\
+\vspace{2pt}\textbf{Data Augmentation}\\
+\dtag Technique of artificially increasing the diversity of a dataset used for training machine learning models by applying various transformations, modifications, or perturbations to the original data, resulting in augmented samples that enhance the model's ability to generalize and perform better on unseen data.\\
+\vspace{2pt}\textbf{Decoder}\\
+\dtag The decoder converts the internal representation back to the outputs, acting as a generative network.\\
+\vspace{2pt}\textbf{Deep RNN}\\
+\dtag Deep RNN: a type of recurrent neural network architecture that consists of multiple recurrent layers stacked on top of each other. These additional layers enable the network to capture more complex hierarchical features and representations from sequential data, making them suitable for tasks that require a deep understanding of temporal dependencies and context.\\
+\vspace{2pt}\textbf{Deformable Parts Models}\\
+\dtag Deformable Parts Models: a class of object detection models in computer vision that incorporate flexible part structures within an object to improve accuracy in recognizing complex objects with varying appearances and poses.\\
+\vspace{2pt}\textbf{Delta Rule}\\
+\dtag The Delta Rule updates a single weight based on the gradient of the error with respect to that weight for one training example.\\
+\vspace{2pt}\textbf{Denoising Autoencoders}\\
+\dtag Denoising autoencoders add noise to the input data and train the network to recover the original, noise-free inputs, providing regularization and preventing trivial copying.\\
+\vspace{2pt}\textbf{Dense Implementation}\\
+\dtag Batching is done by creating a diagonal matrix of adjacency matrices; large-scale graph datasets will almost always run out of memory.\\
+\vspace{2pt}\textbf{Dense vs Sparse: Computational Efficiency}\\
+\dtag Dense GNNs assume dense connectivity and involve interactions between all nodes.\\
+\dtag Sparse GNNs take advantage of the sparsity of the graph and only consider interactions between connected nodes, which is more efficient for sparsely connected graphs.\\
+\vspace{2pt}\textbf{Discriminative Model}\\
+\dtag Discriminative Model.\\
+
+\vspace{2pt}\textbf{Discriminator}\\
+\dtag Discriminative Model: a model that learns to model the decision boundary between different classes or categories in the data. It's primarily used for classification tasks, aiming to distinguish between different classes based on input features. Examples include Logistic Regression, Support Vector Machines (SVMs), and Convolutional Neural Networks (CNNs) for image classification.\\
+\dtag Discriminator model: try to distinguish between real and fake images.\\
+\dtag Discriminator network -- Input $\rightarrow$ an image -- Output $\rightarrow$ a binary label (real vs fake).\\
+\dtag The discriminator learns weights to maximize the probability that it labels a real image as real and a generated image as fake.\\
+\vspace{2pt}\textbf{Distance Measures}\\
+\dtag Euclidean Distance $\rightarrow$ L2-norm of embeddings (sensitive to magnitude)\\
+\dtag Cosine Similarity $\rightarrow$ cosine of the angle between embeddings (invariant to magnitude)\\
+\vspace{2pt}\textbf{Dropout}\\
+\dtag Dropout involves randomly deactivating (dropping out) a proportion of neurons during each training iteration. This helps prevent overfitting by encouraging the network to learn more robust and independent features, improving its generalization on new data.\\
+\vspace{2pt}\textbf{Early Stopping with Patience}\\
+\dtag Early Stopping with Patience refers to monitoring the model's performance on a validation set during training and halting the training process when the performance stops improving for a certain number of consecutive epochs (patience).\\
+\vspace{2pt}\textbf{Embedding Space}\\
+\dtag The low-dimensional latent representation learned by an autoencoder; similar images are mapped to similar embeddings, enabling compact storage of image structure.\\
+\vspace{2pt}\textbf{Embeddings}\\
+\dtag Embeddings: the process of representing objects, such as words, images, or entities, in a lower-dimensional space where their relationships and characteristics are preserved. These representations capture semantic or contextual information, making them suitable for various tasks like similarity measurement, classification, and recommendation.\\
+\vspace{2pt}\textbf{Epoch}\\
+\dtag Epoch: Number of times all the training data is used once to update the parameters.\\
+\vspace{2pt}\textbf{Error Function}\\
+\dtag The error (or loss) function measures the squared difference between the network output $y$ and the target value $ t$.\\
+\vspace{2pt}\textbf{Expanding Feature Maps}\\
+\dtag Each kernel produces its own output (feature map).\\
+\vspace{2pt}\textbf{Expert Systems}\\
+\dtag Early AI applications that encode human expertise as rules and facts to solve domain-specific problems.\\
+\vspace{2pt}\textbf{Families of Deep Generative Models}\\
+\dtag Autoregressive Models generate data sequentially, modeling the joint distribution as a product of conditionals.\\
+\dtag Variational Autoencoders (VAEs) learn a latent probabilistic representation and maximize a variational lower bound on the data likelihood.\\
+\dtag Generative Adversarial Networks (GANs) consist of a generator and a discriminator trained in a minimax game.\\
+\dtag Flow-Based Generative Models transform a simple base distribution into the data distribution via a series of invertible mappings.\\
+\dtag Diffusion Models generate data by iteratively denoising a sample starting from pure noise.\\
+\vspace{2pt}\textbf{Feature Detection}\\
+\dtag Detecting: the output (activation) is high if the feature is present.\\
+
+\vspace{2pt}\textbf{Feed-Forward Network}\\
+\dtag Feature Map: a 2D or 3D array of values representing the activations of specific features detected within an input data volume, generated by applying filters through convolutional operations in CNNs.\\
+\vspace{2pt}\textbf{Fine-tuning}\\
+\dtag Information only flows forward from one layer to a later layer, from the input to the output without any loops or cycles. It's designed to make predictions or classifications based on the input data without internal feedback connections.\\
+\vspace{2pt}\textbf{Forward Pass}\\
+\dtag Forward Pass: the process of feeding input data through the network to compute predictions using the current weights and biases.\\
+\dtag The forward pass is the initial step that produces predictions based on input data. Input data is fed into a neural network, flows through the layers, undergoing computations using the network's parameters (weights and biases), generating predictions or output values. It is used for both training and inference.\\
+\vspace{2pt}\textbf{Fully-Connected Layer}\\
+\dtag Number of weights for a fully-connected layer = (input dimension) $\times$ (number of neurons) + (bias term for each neuron, if present).\\
+\vspace{2pt}\textbf{Fully-Connected Network}\\
+\dtag Neurons between adjacent layers are fully connected. Each neuron in a given layer is connected to every neuron in the subsequent layer. This creates a dense and interconnected structure that enables information to flow freely between all layers.\\
+\vspace{2pt}\textbf{Gated Recurrent Unit}\\
+\dtag Gated Recurrent Unit: a type of recurrent neural network (RNN) architecture that is designed for modeling sequential data. It simplifies the architecture of Long Short-Term Memory (LSTM) networks by using fewer gates but still effectively captures and manages information over time. GRUs have gate mechanisms that control the flow of information, helping them mitigate the vanishing gradient problem and enabling the modeling of long-term dependencies in sequential data, making them suitable for various tasks such as natural language processing and time series analysis.\\
+\vspace{2pt}\textbf{Gating Mechanism}\\
+\dtag Gating Mechanism: a set of learnable components that regulate the flow of information through the network's hidden states. Gating mechanisms, such as those used in Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) cells, allow the network to selectively update, forget, or pass along information from previous time steps, enabling better modeling of long-term dependencies and mitigating issues like vanishing gradients.\\
+\vspace{2pt}\textbf{Gaussian Distribution}\\
+\dtag Also known as a normal distribution, it is a probability distribution characterized by a mean (µ) that defines the center of the distribution and a standard deviation ($\sigma$) that measures the spread. The distribution is symmetric and bell-shaped, with most data points clustering around the mean.\\
+\vspace{2pt}\textbf{Generative Adversarial Networks}\\
+\dtag GANs train two models simultaneously: a generator that tries to produce realistic data samples and a discriminator that tries to distinguish generated samples from real data.\\
+
+\vspace{2pt}\textbf{Generative Model}\\
+\dtag Generative learning is an unsupervised learning task where a loss function serves as an auxiliary task with known answers, there is no ground-truth for the ultimate generation task, and the goal is to learn the structure and distribution of the data rather than label assignments.\\
+\vspace{2pt}\textbf{Generative Models}\\
+\dtag Generative Model: a type of model that learns to model the probability distribution of the input data. It can generate new data points that resemble the training data, making it capable of creating synthetic data. Examples include Variational Autoencoders (VAEs) and Generative Adversarial Networks (GANs).\\
+\vspace{2pt}\textbf{Generative vs Discriminative Models}\\
+\dtag A generative model is a model that can generate new data samples from some input encoding.\\
+\vspace{2pt}\textbf{Generator}\\
+\dtag Discriminative models are supervised and learn to approximate the conditional probability $p(y|x)$, i.e., the probability of a label $ y$ given input $ x$.\\
+\dtag Generative models are unsupervised and learn to approximate the marginal probability $p(x)$, i.e., the probability distribution of the data itself.\\
+\dtag Generator network -- Input $\rightarrow$ a noise vector -- Output $\rightarrow$ a generated image.\\
+\dtag The generator learns weights to maximize the probability that the discriminator labels a generated (fake) image as real.\\
+\dtag The loss function of the generator is the discriminator itself -- if the generator wins, the discriminator loses and vice-versa; there are only two possible scenarios.\\
+\vspace{2pt}\textbf{Gradient Clipping}\\
+\dtag If a gradient exceeds a predefined threshold, it is set (clipped) to that threshold value.\\
+\vspace{2pt}\textbf{Gradient Descent}\\
+\dtag Gradient Descent is an optimization algorithm used in machine learning to iteratively adjust model parameters in the direction that decreases the model's error, guided by the gradient of the error with respect to those parameters.\\
+\dtag Gradient Descent is an optimization method that updates each weight in the opposite direction of the gradient of the loss function, thereby moving toward a minimum (or maximum) error.\\
+\vspace{2pt}\textbf{Gradients}\\
+\dtag Gradients represent the directions and magnitudes by which the network's internal settings (weights and biases) should be adjusted to minimize the difference between its predictions and the actual target values. Gradients guide the network during training, fine-tuning parameters based on error.\\
+\vspace{2pt}\textbf{Graphs}\\
+\dtag Graph: $G = (V, E, X)$ is a data-structure that encodes pair-wise interactions or relations among concepts and objects.\\
+\dtag $V$ is the set of nodes representing concepts or objects.\\
+\dtag $E \subseteq V \times V$ is the set of edges connecting nodes and representing relations or interactions among them.\\
+\dtag $X$ encodes the node features of each node.\\
+\vspace{2pt}\textbf{Greedy Search}\\
+\dtag Greedy Search selects the token with the highest probability as the generated token.\\
+\vspace{2pt}\textbf{Grid Search}\\
+\dtag Grid Search involves creating a predefined grid of hyperparameter values and exhaustively evaluating each combination.\\
+\vspace{2pt}\textbf{Hidden Layer}\\
+
+\vspace{2pt}\textbf{Hidden State}\\
+\dtag Hidden Layer: a set of neurons that process information between the input and output layers, capturing complex patterns in the data. It's called ``hidden'' because it's not directly connected to the input or output of the network.\\
+\vspace{2pt}\textbf{Hyperparameter Optimization}\\
+\dtag Updating Hidden State: hidden state is updated based on previous hidden state and the input using the same neural network as before (weight sharing).\\
+\dtag Grid Search: evaluates all possible combinations of hyperparameter values by systematically searching through the entire parameter space, testing each combination to find the best-performing set.\\
+\dtag Random Search: randomly samples hyperparameters from a specified distribution or range, performs a certain number of independent random trials, and evaluates the model's performance with each set of hyperparameters.\\
+\vspace{2pt}\textbf{Hyperparameters}\\
+\dtag Hyperparameters are settings that are not learned by gradient descent; they are tuned using outer-loop methods such as Grid Search or Random Search.\\
+\vspace{2pt}\textbf{ImageNet Large Scale Visual Recognition Challenge}\\
+\dtag ImageNet Large Scale Visual Recognition Challenge (ILSVRC): is an annual competition in computer vision where participants develop and train machine learning models to classify and detect objects within a large dataset of images, known as ImageNet, containing thousands of categories.\\
+\vspace{2pt}\textbf{Inductive Bias}\\
+\dtag Inductive Bias (Learning Bias): set of assumptions used for modelling, or prior knowledge that guides the learning process.\\
+\vspace{2pt}\textbf{Inference Time}\\
+\dtag Inference Time: refers to the phase when a trained machine learning model is applied to new, unseen data to make predictions or produce outputs based on the knowledge it gained during its training phase.\\
+\vspace{2pt}\textbf{Integer Encoding}\\
+\dtag Integer Encoding is a technique in data preprocessing and natural language processing (NLP) that assigns a unique integer value to each distinct element or category in a dataset, simplifying the representation of categorical data by replacing it with integer IDs.\\
+\vspace{2pt}\textbf{Internal Covariate Shift}\\
+\dtag Internal Covariate Shift Problem: the change in the distribution of the input to a given layer during training. As the network learns and its parameters get updated, the distribution of activations in each layer may shift, making the optimization process more difficult. This can slow down training and require the use of lower learning rates to prevent the network from diverging or getting stuck.\\
+\vspace{2pt}\textbf{Iteration}\\
+\dtag Iteration: One step -- the parameters are updated once per iteration.\\
+\vspace{2pt}\textbf{k-Skip n-Gram}\\
+\dtag An n-gram that can involve a skip operation of size k or smaller.\\
+\vspace{2pt}\textbf{Kernel}\\
+\dtag A kernel, also known as a filter, is a small matrix used to extract specific features from an input image or data. It is applied through convolution to scan the input and produce feature maps that highlight particular patterns such as edges, textures, or other relevant characteristics.\\
+
+\dtag Keys are used to provide context and establish relationships between different elements in the input sequence. They are generated from the input data and are compared to queries to calculate attention scores. Keys help determine how much attention should be given to each value when processing the current query.\\
+\vspace{2pt}\textbf{Kullback-Leibler Divergence}\\
+\dtag A measure of the difference between two probability distributions $P$ and $ Q$. It quantifies how much information is lost when $ Q$ is used to approximate $ P$.\\
+\vspace{2pt}\textbf{Language Models}\\
+\dtag Language Models are neural-network-based algorithms designed to understand and generate human language text, learning probability distributions over sequences of words.\\
+\vspace{2pt}\textbf{Layer Normalization}\\
+\dtag Layer Normalization: a technique used to normalize the activations of a layer across the entire batch, focusing on the mean and standard deviation of each feature independently. This helps stabilize training, improve convergence, and reduce sensitivity to weight initialization, enhancing the network's performance.\\
+\dtag LayerNorm normalizes the summed input across features to stabilize training.\\
+\vspace{2pt}\textbf{Learning Categories}\\
+\dtag Learning categories: supervised learning, unsupervised learning, and reinforcement learning.\\
+\vspace{2pt}\textbf{Learning Rate}\\
+\dtag The learning rate ($\eta$) is a scalar step size that controls how large a weight update is performed during each iteration of gradient descent.\\
+\dtag The learning rate determines the size of the step that an optimizer takes during each iteration; a larger step size means a bigger change in the parameters (weights) in each iteration.\\
+\vspace{2pt}\textbf{LeNet}\\
+\dtag Convolutional Neural Networks were first introduced by Yann LeCun in 1989, based on the earlier Neocognitron (Fukushima, 1980). The most common variant is LeNet-5 (1998), which has 7 layers total: 2 convolutional, 2 pooling, and 3 fully-connected.\\
+\vspace{2pt}\textbf{Linear Activation Function}\\
+\dtag A mathematical function that produces an output directly proportional to its input; for any given input, the output increases or decreases at a constant rate without any bending or non-linear behavior.\\
+\vspace{2pt}\textbf{Local Optimum}\\
+\dtag A point in the parameter space where the discriminator's loss cannot be further reduced locally, even though a better global solution may exist; can cause the discriminator to become stuck and enable mode collapse.\\
+\vspace{2pt}\textbf{Locally Connected Layers}\\
+\dtag Locally connected layers: local features in small regions of the image.\\
+\vspace{2pt}\textbf{Logic and Inference}\\
+\dtag Logical reasoning used to derive new information from existing knowledge within a symbolic AI system.\\
+\vspace{2pt}\textbf{Long Short-Term Memory (LSTM)}\\
+\dtag Long Short-Term Memory (LSTM): a type of recurrent neural network (RNN) architecture designed to model sequential data by effectively capturing and preserving long-term dependencies. LSTMs use a specialized cell with gating mechanisms to control the flow of information, allowing them to store, update, and retrieve information over extended sequences.\\
+\vspace{2pt}\textbf{Machine Learning}\\
+\dtag Machine learning learns from data without explicit programming.\\
+\dtag Machine Learning (ML) is the development of algorithms that learn from data rather than being hard-coded to solve a task.\\
+
+\dtag Self-supervised task where 15 \% of tokens are replaced with a \texttt{[MASK]} token; the model predicts the original token using surrounding context; loss is computed only on the masked tokens.\\
+\vspace{2pt}\textbf{Max Pooling}\\
+\dtag Max Pooling: a pooling operator used to downsample the spatial dimensions of input.\\
+\dtag A pooling operator that divides the input into non-overlapping regions and selects the maximum value from each region, effectively capturing the most prominent feature within that region.\\
+\vspace{2pt}\textbf{Mean Squared Error}\\
+\dtag Mean Squared Error (MSE): metric used for measuring the average squared difference between the predicted values and the actual (true) values in a regression problem. It provides a measure of how well a regression model's predictions align with the ground truth values. The lower the MSE value, the better the model's predictions match the data points.\\
+\dtag Mean Squared Error (MSE): mostly used for regression problems (predicting continuous numeric output).\\
+\vspace{2pt}\textbf{Mini-Batch Gradient Descent}\\
+\dtag Mini-Batch Gradient Descent: an optimization algorithm used to update the parameters of a model by computing the gradient of the loss function using a small subset (mini-batch) of the training data in each iteration, striking a balance between the efficiency of Stochastic Gradient Descent (SGD) and the stability of Batch Gradient Descent.\\
+\vspace{2pt}\textbf{MinMax Optimization}\\
+\dtag The adversarial training objective of GANs, expressed as a minimax game: the generator minimizes the probability of the discriminator correctly identifying fake samples while the discriminator maximizes its ability to distinguish real from fake.\\
+\vspace{2pt}\textbf{Model Evaluation}\\
+\dtag Testing (holdout) data should not be seen during training as it leads to overfitting to the test data and poor generalization on new data.\\
+\dtag Purpose of validation data is for assessing performance and making informed decisions about model selection and hyper-parameter tuning.\\
+\vspace{2pt}\textbf{Moving Average}\\
+\dtag Moving Average: addresses the challenge of Batch Normalization during inference by maintaining running statistics, including the mean and standard deviation of features, over the course of training. These running statistics are computed by aggregating the statistics from all training batches. During inference, these accumulated statistics are used to normalize the input features, providing a consistent behavior that aligns with the model's learned behavior during training.\\
+\vspace{2pt}\textbf{n-Gram}\\
+\dtag n-Gram: a contiguous sequence of n items (e.g., words or characters) extracted from a given text.\\
+\vspace{2pt}\textbf{Natural Language Processing}\\
+\dtag Natural Language Processing (NLP) is the field of making computers capable of understanding human languages.\\
+\vspace{2pt}\textbf{Neuron (Biological)}\\
+\dtag Simplified Biological Neuron: Dendrites receive information from other neurons; Cell body consolidates information from the dendrites; Axon passes information to other neurons; Synapse is the area where the axon of one neuron and the dendrite of another connect.\\
+\vspace{2pt}\textbf{Next Sentence Prediction}\\
+\dtag Self-supervised task that presents two sentences and asks the model to predict whether they appear consecutively in the original text; training data consists of 50 \% positive (actual) and 50 \% negative (random) sentence pairs.\\
+
+\vspace{2pt}\textbf{No Free Lunch Theorem}\\
+\dtag Concept that there is no universal optimization of a learning algorithm that performs best for all possible problems; no one-size-fits-all approach can excel across all domains and problem instances.\\
+\vspace{2pt}\textbf{Non-Euclidean Space}\\
+\dtag Also known as curved or non-flat spaces, these are mathematical spaces that do not follow the rules of Euclidean geometry. They exhibit different geometric properties compared to Euclidean space (R$^{n}$), which is flat and follows Euclid's axioms.\\
+\vspace{2pt}\textbf{Non‑square Output Computation}\\
+\dtag Image dimensions of size i $\times$ j\\
+\dtag Kernel dimensions of size k $\times$ l\\
+\vspace{2pt}\textbf{Normalization}\\
+\dtag Normalization refers to the process of scaling and shifting input data or intermediate activations to ensure they have a consistent and suitable range, improving stability and convergence of training.\\
+\vspace{2pt}\textbf{Number of Layers}\\
+\dtag Number of Layers = number of hidden layers + output layer (not including input layer).\\
+\vspace{2pt}\textbf{One-hot encoding}\\
+\dtag One-hot encoding: a binary representation technique used to convert categorical variables into a numerical format. Each category is represented as a binary vector where a single element is set to 1 (indicating the presence of that category) while all other elements are set to 0 (indicating the absence of other categories).\\
+\vspace{2pt}\textbf{One-hot Encoding}\\
+\dtag One-hot Encoding: a data preprocessing technique used in machine learning and data analysis. It converts categorical data, such as discrete categories or labels, into a binary vector representation. Each category is represented as a binary vector where all elements are zero except for one, which corresponds to the category being ``hot'' or ``on.''\\
+\vspace{2pt}\textbf{One-Hot Encoding}\\
+\dtag One-Hot Encoding of Words: each word is assigned a unique index; with a vocabulary of V words, the one-hot vector has V dimensions with a single 1 at the word's index and 0s elsewhere.\\
+\vspace{2pt}\textbf{Optimizers}\\
+\dtag Loss function: a function that quantifies the error of a model, turning a learning problem into an optimization problem.\\
+\dtag Optimizer: an algorithm that determines, based on the value of the loss function, how each parameter (weight) should change, thereby solving the credit assignment problem.\\
+\dtag Stochastic Gradient Descent (SGD): an optimizer that, for each iteration, evaluates a training sample from the dataset and updates parameters using the gradient of the loss function.\\
+\vspace{2pt}\textbf{Order-invariance}\\
+\dtag Property where the learned representation does not change if the input tokens are randomly shuffled; also called permutation-invariance.\\
+\vspace{2pt}\textbf{Output Padding}\\
+\dtag When stride > 1, multiple input shapes can map to the same output shape. Output padding resolves this ambiguity by effectively increasing the calculated output shape on one side. It is only used to determine the output shape and does not actually add zero-padding to the output.\\
+\vspace{2pt}\textbf{Output Size Computation}\\
+\dtag Image dimension of size i\\
+\dtag Kernel of size k\\
+\dtag Padding of size p\\
+\dtag Stride of size s\\
+\vspace{2pt}\textbf{Padding}\\
+
+\vspace{2pt}\textbf{perceptron}\\
+\dtag In transposed convolution, padding has the opposite effect of regular convolution: compute the output as normal and then remove rows and columns around the perimeter.\\
+\vspace{2pt}\textbf{Pooling Operator}\\
+\dtag Perceptron Activation Function: a decision rule that outputs 1 when the weighted sum of inputs exceeds a threshold, and outputs 0 otherwise.\\
+\vspace{2pt}\textbf{Pre‑training with Autoencoders}\\
+\dtag Autoencoders can be pretrained on a large set of unlabeled data of the same type as the target task, learning useful feature representations without human-provided labels.\\
+\vspace{2pt}\textbf{Problem with Autoencoders}\\
+\dtag Mean Squared Error (MSE) loss computes the average of the squared differences between predicted and true pixel intensities.\\
+\vspace{2pt}\textbf{Queries}\\
+\dtag Queries are used to inquire about the relationships between different elements in the input sequence. They represent a specific element's information and are compared to keys to determine how relevant each key is to the current query. Queries are typically generated from the input data and used to compute attention scores.\\
+\vspace{2pt}\textbf{Receptive Field}\\
+\dtag Individual neurons respond to stimuli only in a restricted region of the visual field known as the Receptive Field.\\
+\vspace{2pt}\textbf{Regression}\\
+\dtag Regression: the model predicts a continuous or real-valued output.\\
+\vspace{2pt}\textbf{Regularization}\\
+\dtag Regularization: refers to techniques that mitigate overfitting by adding constraints or penalties to the model's training process. These techniques discourage the model from\\
+\vspace{2pt}\textbf{Reinforcement Learning}\\
+\dtag Training a computer to perform a task without a known optimized way; the computer finds the best steps by ranking its methods relative to each other, thereby learning the best method to perform the task.\\
+\vspace{2pt}\textbf{ReLU Activation Function}\\
+\dtag ReLU activation function turns on for positive input values, allowing signals to pass unchanged; for negative inputs, it outputs zero.\\
+\vspace{2pt}\textbf{Residual Connection}\\
+\dtag A residual connection adds the input of a sub-layer to its output before applying layer normalization.\\
+\vspace{2pt}\textbf{RNNs/Transformers}\\
+\dtag Architectures that learn contextual embeddings.\\
+\vspace{2pt}\textbf{RotNet}\\
+\dtag RotNet: architecture designed for the task of image rotation recognition. It is trained to predict the rotation angle of an input image, typically in 90-degree increments (0°, 90°, 180°, or 270°).\\
+\vspace{2pt}\textbf{Rule-Based Systems}\\
+\dtag AI systems that infer conclusions from given premises by applying a set of IF-THEN rules.\\
+\vspace{2pt}\textbf{Saliency Maps}\\
+\dtag Saliency Maps are visual representations highlighting the most important and relevant regions or features within an image, indicating where the human visual attention is likely to be drawn.\\
+\vspace{2pt}\textbf{Self-supervised Learning}\\
+\dtag Use the success of supervised learning without relying on human-provided supervision (automatic supervision) (e.g., mask part of the input and predict the masked information).\\
+
+\vspace{2pt}\textbf{Semi-supervised Learning}\\
+\dtag Proxy supervised tasks -- tasks where labels are created for free (no human annotation) and solving the task forces the model to understand the underlying content.\\
+\vspace{2pt}\textbf{Sentiment Analysis}\\
+\dtag Learning from data that mostly consists of unlabeled samples, with a small amount of human-labeled data also available.\\
+\vspace{2pt}\textbf{Sentiment140 Dataset}\\
+\dtag Sentiment analysis is the task of identifying the sentiment a text conveys.\\
+\vspace{2pt}\textbf{Sequence-Level Predictions}\\
+\dtag Sentiment140 consists of 1,600,000 tweets collected by students, where sentiment is inferred from emoticons: :) indicates positive sentiment and :( indicates negative sentiment.\\
+\vspace{2pt}\textbf{Sequence-to-Sequence Models}\\
+\dtag Predictions or decisions made based on the entire sequence as a whole.\\
+\vspace{2pt}\textbf{SGD with Momentum}\\
+\dtag Sequence-to-Sequence Models: models where both input and output are sequences, often implemented with an encoder-decoder architecture.\\
+\vspace{2pt}\textbf{sigmoid activation function}\\
+\dtag SGD with Momentum: Incorporates a moving average of past gradients to accelerate convergence, providing faster convergence and reduced oscillations compared to plain SGD.\\
+\vspace{2pt}\textbf{Sigmoid Function}\\
+\dtag Sigmoid Activation Function: a mathematical function that smoothly maps input values to a specified output range. It is characterized by an S-shaped curve.\\
+\dtag Sigmoid activation functions were most common before 2012; they are easily differentiable, smooth, continuous, with range between [-1, 1] or [0, 1]; the most common variants are the hyperbolic tangent and logistic functions.\\
+\dtag The sigmoid (logistic) activation function maps any real-valued input to the interval (0,1).\\
+\vspace{2pt}\textbf{SimCLR}\\
+\dtag SimCLR (Simultaneous Contrastive Learning) is a self-supervised deep learning framework for learning powerful representations from unlabeled data. It encourages the model to pull together similar data points (positive pairs) while pushing apart dissimilar ones (negative pairs) in a high-dimensional feature space.\\
+\vspace{2pt}\textbf{Simple Attention Mechanism}\\
+\dtag Pooling word embeddings using uniform sum or average assumes equal importance of all words, which attention addresses.\\
+\vspace{2pt}\textbf{Skip Connections}\\
+\dtag a technique where the output of one layer or block of layers is combined with the output of a previous layer. This helps mitigate issues like vanishing gradients and aids in training deeper neural networks by allowing information to flow more directly across layers.\\
+\vspace{2pt}\textbf{Skip-Connections}\\
+\dtag Ideally, skip connections would link to all previous states, but this is computationally expensive.\\
+\vspace{2pt}\textbf{Skip-Gram}\\
+\dtag Skip-Gram: predicts context words from a target (center) word; the center word is the input and surrounding words are the output.\\
+\dtag Given a word, predict its neighbouring words.\\
+\vspace{2pt}\textbf{Softmax}\\
+\dtag Softmax function: normalizes the logits into a categorical probability distribution over all possible classes. Produces normalized probabilities for multiple classes.\\
+\vspace{2pt}\textbf{Softmax Temperature Scaling}\\
+\dtag Softmax Temperature Scaling: helps with the problem of over-confidence in neural networks by scaling the input logits to the softmax with a temperature.\\
+\vspace{2pt}\textbf{Sparse Implementation}\\
+\dtag Uses an index vector which maps each node to its respective graph in the batch; very simple and efficient.\\
+
+\vspace{2pt}\textbf{Stochastic Gradient Descent}\\
+\dtag Stacked (deep) autoencoders consist of multiple hidden layers and are typically symmetrical with respect to the central coding layer.\\
+\vspace{2pt}\textbf{Stochastic Gradient Descent (SGD)}\\
+\dtag Stochastic Gradient Descent: an optimization algorithm used to iteratively (one at a time) update the parameters of a model by computing the gradient of the loss function using a randomly selected subset of the training data in each iteration.\\
+\vspace{2pt}\textbf{Strided Convolutions}\\
+\dtag SGD (Stochastic Gradient Descent): Updates model parameters using the gradient of a single randomly selected data point. It is suited for training on large datasets with limited computational resources.\\
+\vspace{2pt}\textbf{Strides}\\
+\dtag A downsampling technique that combines convolution and pooling. It applies convolutional operations with larger strides (spacing between filter placements) than usual, resulting in reduced spatial dimensions and an aggregated feature representation.\\
+\vspace{2pt}\textbf{Supervised Learning}\\
+\dtag In transposed convolution, increasing the stride increases the upsampling effect, which is the opposite of regular convolution where a larger stride reduces the spatial size of the output.\\
+\vspace{2pt}\textbf{Symbolic Approach}\\
+\dtag Supervised Learning: training by feeding labeled data to the computer, leading it to predict the correct label for inputted data (relationship between input and label).\\
+\vspace{2pt}\textbf{Targeted vs. Non-Targeted Attack}\\
+\dtag The symbolic approach to AI is based on the idea that intelligent behavior can be achieved by manipulating symbols or abstract representations of concepts and their relationships. It draws inspiration from formal logic and relies on rules, logic, and symbolic representation of knowledge to solve problems.\\
+\vspace{2pt}\textbf{Teacher Forcing}\\
+\dtag Targeted attack -- Maximize the probability that $f(x + \epsilon) = \text{target class}$ The attacker aims to cause a particular misclassification or a specific response from the machine-learning model. The attacker has a clear target class or outcome in mind. Example: manipulate image of a cat so that it's classified as a dog. Requires a deep understanding of the model's decision boundaries and often involves optimization techniques to find the smallest possible perturbations that achieve the desired target outcome.\\
+\dtag Teacher forcing forces the RNN to stay close to the ground-truth sequence by feeding the ground-truth token as the next input instead of the model's own prediction.\\
+
+\end{multicols}
+\end{document}
