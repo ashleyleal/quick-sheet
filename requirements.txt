@@ -3,3 +3,5 @@ pymupdf
 python-dotenv
 streamlit
 pdflatex
+pytesseract
+Pillow

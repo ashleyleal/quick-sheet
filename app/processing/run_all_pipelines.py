@@ -33,21 +33,79 @@ DEFAULT_CHUNK_SIZE = 300
 
 # ── PDF extraction (inline, no dependency on core/) ──────────────────────────
 
-def extract_pages(pdf_bytes: bytes) -> dict[int, str]:
+OCR_DPI      = 300   # render resolution for OCR
+OCR_LANG     = "eng" # tesseract language — change for other languages
+MIN_TEXT_CHARS = 50  # pages with fewer chars trigger OCR fallback
+
+
+def _ocr_page_image(pix) -> str:
+    """Run tesseract OCR on a PyMuPDF Pixmap. Returns extracted text or empty string."""
     try:
-        import fitz
-        doc = fitz.open(stream=pdf_bytes, filetype="pdf")
-        pages = {i + 1: page.get_text("text") for i, page in enumerate(doc)}
+        import pytesseract
+        from PIL import Image
+
+        mode = "RGBA" if pix.alpha else "RGB"
+        img  = Image.frombytes(mode, (pix.width, pix.height), pix.samples)
+        if img.mode == "RGBA":
+            img = img.convert("RGB")
+        return pytesseract.image_to_string(img, lang=OCR_LANG)
+    except ImportError:
+        return ""  # pytesseract/Pillow not installed — skip OCR silently
+
+
+def extract_pages(pdf_bytes: bytes) -> dict[int, str]:
+    """
+    Extract text from every page of a PDF.
+
+    Strategy:
+      1. PyMuPDF direct text extraction — fast, works for digital PDFs.
+      2. Per-page OCR fallback via pytesseract — fires when direct extraction
+         returns fewer than MIN_TEXT_CHARS (catches scanned/image pages).
+      3. pdfplumber — last resort if PyMuPDF is not installed (no OCR).
+
+    OCR requirements:
+        pip install pytesseract Pillow
+        Tesseract binary: https://github.com/UB-Mannheim/tesseract/wiki (Windows)
+    """
+    try:
+        import fitz  # PyMuPDF
+
+        doc   = fitz.open(stream=pdf_bytes, filetype="pdf")
+        pages = {}
+
+        for i, page in enumerate(doc, start=1):
+            text = page.get_text("text")
+
+            # Page looks empty or scanned — attempt OCR
+            if len(text.strip()) < MIN_TEXT_CHARS:
+                try:
+                    mat      = fitz.Matrix(OCR_DPI / 72, OCR_DPI / 72)
+                    pix      = page.get_pixmap(matrix=mat, colorspace=fitz.csRGB)
+                    ocr_text = _ocr_page_image(pix)
+                    if len(ocr_text.strip()) > len(text.strip()):
+                        text = ocr_text
+                        print(f"    [ocr] page {i}: OCR used ({len(text.strip())} chars)")
+                    else:
+                        print(f"    [ocr] page {i}: OCR yielded no improvement")
+                except Exception as e:
+                    print(f"    [ocr] page {i}: OCR failed — {e}")
+
+            pages[i] = text
+
         doc.close()
         return pages
+
     except ImportError:
         pass
+
+    # Fallback: pdfplumber (no OCR)
     try:
         import pdfplumber
         pages = {}
         with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
             for i, page in enumerate(pdf.pages, start=1):
                 pages[i] = page.extract_text() or ""
+        print("  [warn] PyMuPDF not installed — OCR unavailable, using pdfplumber")
         return pages
     except ImportError:
         print("  ERROR: install PyMuPDF: pip install PyMuPDF")
@@ -275,6 +333,8 @@ def main():
     folder_types = args.only or list(PROMPTS.keys())
     processed = 0
 
+    parsed_dir = course / "parsed"
+
     for folder_type in folder_types:
         folder = course / folder_type
         if not folder.is_dir():
@@ -286,12 +346,11 @@ def main():
 
         suffix = RESULT_SUFFIXES[folder_type]
 
-        # Skip if all PDFs already have results
-        if args.skip_existing:
-            existing = list(folder.glob(f"*_{suffix}.json"))
-            if existing:
-                print(f"\n  [{folder_type}] Skipping — result already exists: {existing[0].name}")
-                continue
+        # Skip if result already exists in parsed/
+        parsed_dir = course / "parsed"
+        if args.skip_existing and (parsed_dir / f"{course.name}_{suffix}.json").exists():
+            print(f"\n  [{folder_type}] Skipping — already parsed: {course.name}_{suffix}.json")
+            continue
 
         print(f"\n  [{folder_type}] {len(pdfs)} PDF(s)")
 
@@ -305,7 +364,6 @@ def main():
         combined = merge(folder_type, all_results)
 
         # Save to course/parsed/
-        parsed_dir = course / "parsed"
         parsed_dir.mkdir(exist_ok=True)
         out_name = f"{course.name}_{suffix}.json"
         out_path = parsed_dir / out_name
